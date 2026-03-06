@@ -1,0 +1,39 @@
+City and County Energy Profiles,Unnamed: 1,Unnamed: 2
+Dataset Completed: 12/3/2019,,
+,,
+"This City and County Energy Profiles data lookup table provides modeled electricity and natural gas consumption and expenditures, on-road vehicle fuel consumption, and vehicle miles traveled for each U.S. city and county. Please note this data is modeled and more precise data may be available from regional, state, or other sources. The modeling approach for electricity and natural gas is described in Sector-Specific Methodologies for Subnational Energy Modeling: https://www.nrel.gov/docs/fy19osti/72748.pdf. For feedback or questions please contact: slope@nrel.gov.",,
+,,
+Variable,Variable Description,Applicable Data Sources
+state_id,US Census identification for the state,
+state_abbr,State abbreviation.,
+city_id,US Census identification for the city based on the state code plus the 5-digit place code.,
+city_name,"City name. Cities are generally defined as incorporated places. However, in 12 states, including New England states, New Jersey, New York, and Pennsylvania, minor civil divisions are also included to capture coterminous towns and townships that also serve as general-purpose local governments that can perform the same governmental functions as incorporated places. In the state of Hawaii, which has only one incorporated place, counties are used in lieu of incorporated places.",
+county_id,US Census identification for the county based on the state code plus the 3-digit county code.,
+county_name,County name.,
+latitude,Centroid coordinates,U.S. Census 2016 Gazetteer Files
+longitude,,
+consolidated_city-county,Flag for cities and counties with overlapping boundaries,
+population,Total population,U.S. Census 2012-2016 5-yr American Community Survey
+population_cohort,Index for population bins,See Lookup tab for bin cutoff values
+employment,Total employment (county-only),U.S. Census 2016 County Business Patterns
+employment_cohort,Index for employment bins,See Lookup tab for bin cutoff values
+doe_climate_zone,DOE Building America Climate Zones,https://www.energycodes.gov/rescheck
+consumption,"Estimated total and per capita sector consumption of electricity or natural gas by residential buildings, commercial buildings, or industrial establishments; or gasoline or diesel fuel by on-road travel within jurisdictional boundaries.","Ma, Ookie, Ricardo Oliveira, Evan Rosenlieb, and Megan Day. 2019. Sector-Specific
+Methodologies for Subnational Energy Modeling. Golden, CO: National Renewable
+Energy Laboratory. NREL/TP-7A40-72748. https://www.nrel.gov/docs/fy19osti/72748.pdf."
+expenditures,"Estimated total and per capita sector expenditures on electricity or natural gas by residential buildings, commercial buildings, or industrial establishments",
+occupied housing units,Occupied housing units or households,U.S. Census 2012-2016 5-yr American Community Survey
+utility customers,Estimated electric utility or natural gas customers,NREL GIS mapping based on Ventyx/ABB Data and 2016 Energy Information Administration Survey Form 861
+vehicle miles traveled,Estimated vehicle miles in total and per capita for all on-road travel within the selected jurisdictional boundary.,See methodology posted at: www.eere.energy.gov/sled under transportation.
+on-road transportation fuel usage,Modeled gasoline and diesel consumption by on-road vehicles within the selected jurisdictional boundary.,See methodology posted at: www.eere.energy.gov/sled under transportation.
+GHG emissions,"Greenhouse gas emissions from electricity or natural gas in the residential, commercial, or industrial sectors; or from gasoline or diesel from on-road travel within jurisdictional boundaries.",National average GHG emissions factors were used to calculate GHG emissions for natural gas and for gasoline and diesel vehicle fuel use. http://www.epa.gov/climateleadership/center-corporate-climate-leadership-ghg-emission-factors-hub. GHG emissions for electricity use were estimated using 2016 GHG emissions rates developed for 26 subregions of the United States for the eGRID database. https://www.epa.gov/energy/emissions-generation-resource-integrated-database-egrid.
+egrid_primary_subregion,Subregions used average electricity emissions,U.S. Environmental Protection Agency 2016 eGRID
+CO2 equivalent total output emission rate,Average electricity emissions intensity,U.S. Environmental Protection Agency 2016 eGRID
+,,
+Authors,,
+"Ookie Ma, U.S. Department of Energy",,
+"Megan Day, Ricardo Oliveira, Evan Rosenlieb, Elaine Hale, National Renewable Energy Laboratory",,
+,,
+,,
+Acknowledgments,,
+"This work was authored in part by the National Renewable Energy Laboratory, operated by Alliance for Sustainable Energy, LLC, for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308. Funding provided by the U.S. Department of Energy Office of Energy Efficiency and Renewable Energy Strategic Priorities and Impact Analysis. The views expressed do not necessarily represent the views of the DOE or the U.S. Government. The U.S. Government retains and the publisher, by accepting the article for publication, acknowledges that the U.S. Government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this work, or allow others to do so, for U.S. Government purposes.",,
