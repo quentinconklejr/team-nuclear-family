@@ -214,3 +214,7 @@ data/county_boundaries_2025/tl_2025_us_county.shp
 data/county_boundaries_2025/tl_2025_us_county.shp.ea.iso.xml
 data/county_boundaries_2025/tl_2025_us_county.shp.iso.xml
 data/county_boundaries_2025/tl_2025_us_county.shx
+
+# Large data files
+*.xlsb
+raw_data/eia860_2024.zip
