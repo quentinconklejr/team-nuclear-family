@@ -1,0 +1,55 @@
+geo_id,county_name,plant_name,plant_count
+01069,Houston County,['Joseph M Farley'],1
+01083,Limestone County,['Browns Ferry'],1
+04013,Maricopa County,['Palo Verde'],1
+05115,Pope County,['Arkansas Nuclear One'],1
+06079,San Luis Obispo County,['Diablo Canyon'],1
+09180,Southeastern Connecticut Planning Region,['Millstone'],1
+12086,Miami-Dade County,['Turkey Point'],1
+12111,St. Lucie County,['St Lucie'],1
+13001,Appling County,['Edwin I Hatch'],1
+13033,Burke County,['Vogtle'],1
+17039,De Witt County,['Clinton Power Station'],1
+17063,Grundy County,['Dresden Generating Station'],1
+17099,LaSalle County,['LaSalle Generating Station'],1
+17141,Ogle County,['Byron Generating Station'],1
+17161,Rock Island County,['Quad Cities Generating Station'],1
+17197,Will County,['Braidwood Generation Station'],1
+20031,Coffey County,['Wolf Creek Generating Station'],1
+22089,St. Charles Parish,['Waterford 3'],1
+22125,West Feliciana Parish,['River Bend'],1
+24009,Calvert County,['Calvert Cliffs Nuclear Power Plant'],1
+26021,Berrien County,['Donald C Cook'],1
+26115,Monroe County,['Fermi'],1
+26159,Van Buren County,['Palisades'],1
+27049,Goodhue County,['Prairie Island'],1
+27171,Wright County,['Monticello Nuclear Facility'],1
+28021,Claiborne County,['Grand Gulf'],1
+29027,Callaway County,['Callaway'],1
+31127,Nemaha County,['Cooper Nuclear Station'],1
+33015,Rockingham County,['Seabrook'],1
+34033,Salem County,"['PSEG Salem Generating Station', 'PSEG Hope Creek Generating Station']",2
+36075,Oswego County,"['Nine Mile Point Nuclear Station', 'James A Fitzpatrick']",2
+36117,Wayne County,['R E Ginna Nuclear Power Plant'],1
+37019,Brunswick County,['Brunswick Nuclear'],1
+37119,Mecklenburg County,['McGuire'],1
+37183,Wake County,['Harris'],1
+39085,Lake County,['Perry'],1
+39123,Ottawa County,['Davis Besse'],1
+42007,Beaver County,['Beaver Valley'],1
+42043,Dauphin County,['Crane Clean Energy Center'],1
+42079,Luzerne County,['TalenEnergy Susquehanna'],1
+42091,Montgomery County,['Limerick'],1
+42133,York County,['Peach Bottom'],1
+45031,Darlington County,['H B Robinson'],1
+45039,Fairfield County,['V C Summer'],1
+45073,Oconee County,['Oconee'],1
+45091,York County,['Catawba'],1
+47065,Hamilton County,['Sequoyah'],1
+47143,Rhea County,['Watts Bar Nuclear Plant'],1
+48321,Matagorda County,['South Texas Project'],1
+48425,Somervell County,['Comanche Peak'],1
+51109,Louisa County,['North Anna'],1
+51181,Surry County,['Surry'],1
+53005,Benton County,['Columbia Generating Station'],1
+55071,Manitowoc County,['Point Beach Nuclear Plant'],1
