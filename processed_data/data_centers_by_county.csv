@@ -1,0 +1,245 @@
+,county_name,geoid,data_centers_count
+0,Ada County,16001,2
+1,Adams County,08001,1
+2,Aiken County,45003,1
+3,Alachua County,12001,2
+4,Alameda County,06001,5
+5,Albany County,36001,3
+6,Allegheny County,42003,2
+7,Anne Arundel County,24003,1
+8,Anoka County,27003,1
+9,Arapahoe County,08005,9
+10,Baltimore County,24005,1
+11,Baltimore city,24510,6
+12,Bartholomew County,18005,1
+13,Bear Lake County,16007,1
+14,Bergen County,34003,1
+15,Berkeley County,45015,10
+16,Bernalillo County,35001,7
+17,Bexar County,48029,30
+18,Boone County,29019,1
+19,Broomfield County,08014,1
+20,Broward County,12011,2
+21,Bryan County,40013,1
+22,Buffalo County,31019,1
+23,Butler County,39017,2
+24,Caldwell County,29025,1
+25,Calumet County,55015,1
+26,Campbell County,56005,1
+27,Capitol Planning Region,09110,1
+28,Carver County,27019,1
+29,Champaign County,17019,1
+30,Chelan County,53007,3
+31,Clackamas County,41005,1
+32,Clark County,32003,22
+33,Clark County,39023,1
+34,Clay County,29047,2
+35,Clearfield County,42033,1
+36,Cleveland County,37045,1
+37,Cobb County,13067,2
+38,Cochise County,04003,1
+39,Collin County,48085,13
+40,Columbia County,55021,1
+41,Contra Costa County,06013,1
+42,Cook County,17031,29
+43,Crook County,41013,11
+44,Culpeper County,51047,1
+45,Cumberland County,23005,2
+46,Custer County,30017,1
+47,Cuyahoga County,39035,5
+48,Dakota County,27037,2
+49,Dallas County,19049,9
+50,Dallas County,48113,25
+51,Dane County,55025,2
+52,Davidson County,47037,3
+53,DeKalb County,17037,3
+54,DeSoto County,28033,1
+55,Delaware County,39041,1
+56,Denton County,48121,2
+57,Denver County,08031,3
+58,Deschutes County,41017,1
+59,Dickey County,38021,1
+60,District of Columbia,11001,1
+61,Douglas County,08035,2
+62,Douglas County,13097,6
+63,Douglas County,31055,10
+64,Douglas County,53017,13
+65,Doña Ana County,35013,1
+66,DuPage County,17043,16
+67,Dunn County,55033,1
+68,Durham County,37063,3
+69,Duval County,12031,2
+70,East Baton Rouge Parish,22033,1
+71,Eaton County,26045,2
+72,El Paso County,08041,4
+73,Ellis County,20051,1
+74,Ellis County,48139,15
+75,Erie County,36029,2
+76,Erie County,39043,1
+77,Essex County,25009,1
+78,Essex County,34013,2
+79,Fairfax County,51059,25
+80,Fairfield County,39045,1
+81,Fauquier County,51061,3
+82,Fayette County,13113,2
+83,Floyd County,21071,1
+84,Forsyth County,13117,1
+85,Franklin County,39049,32
+86,Frederick County,24021,1
+87,Frederick County,51069,1
+88,Fulton County,13121,16
+89,Genesee County,26049,1
+90,Gloucester County,34015,1
+91,Grainger County,47057,1
+92,Granite County,30039,1
+93,Grant County,53025,29
+94,Greater Bridgeport Planning Region,09120,1
+95,Guaynabo Municipio,72061,1
+96,Gwinnett County,13135,4
+97,Hamilton County,39061,2
+98,Hancock County,18059,1
+99,Harris County,48201,6
+100,Harrisonburg city,51660,1
+101,Hennepin County,27053,3
+102,Henrico County,51087,6
+103,Henry County,47079,1
+104,Hillsborough County,12057,3
+105,Hood County,48221,1
+106,Hopkins County,21107,1
+107,Horry County,45051,1
+108,Houston County,01069,1
+109,Howard County,24027,1
+110,Hudson County,34017,13
+111,Jackson County,01071,3
+112,Jackson County,29095,2
+113,Jefferson County,01073,1
+114,Jefferson County,21111,2
+115,Johnson County,19103,1
+116,Johnson County,20091,6
+117,Josephine County,41033,1
+118,Kanawha County,54039,1
+119,King County,53033,15
+120,Kings County,36047,1
+121,Lake County,17097,1
+122,Lake County,18089,1
+123,Lane County,41039,1
+124,Laramie County,56021,17
+125,Lehigh County,42077,2
+126,Licking County,39089,33
+127,Linn County,41043,1
+128,Los Angeles County,06037,10
+129,Loudoun County,51107,207
+130,Lynchburg city,51680,1
+131,Macomb County,26099,1
+132,Madison County,01089,5
+133,Madison County,16065,1
+134,Madison County,17119,1
+135,Mahoning County,39099,1
+136,Manassas city,51683,1
+137,Maricopa County,04013,60
+138,Marion County,41047,2
+139,Marquette County,55077,1
+140,Mecklenburg County,37119,5
+141,Mecklenburg County,51117,1
+142,Medina County,48325,1
+143,Mercer County,34021,1
+144,Miami-Dade County,12086,4
+145,Middlesex County,25017,2
+146,Middlesex County,34023,12
+147,Milwaukee County,55079,3
+148,Minnehaha County,46099,2
+149,Monmouth County,34025,1
+150,Monroe County,18105,1
+151,Monroe County,26115,1
+152,Montgomery County,24031,1
+153,Montgomery County,42091,4
+154,Montgomery County,47125,5
+155,Montgomery County,48339,2
+156,Morgan County,54065,1
+157,Morrow County,41049,28
+158,Multnomah County,41051,2
+159,Muscogee County,13215,1
+160,Muskogee County,40101,1
+161,Napa County,06055,1
+162,New York County,36061,4
+163,Newton County,13217,4
+164,Niagara County,36063,2
+165,Oakland County,26125,1
+166,Oklahoma County,40109,1
+167,Olmsted County,27109,1
+168,Onondaga County,36067,1
+169,Orange County,06059,1
+170,Orange County,12095,2
+171,Passaic County,34031,3
+172,Philadelphia County,42101,1
+173,Pierce County,53053,1
+174,Pima County,04019,1
+175,Platte County,29165,5
+176,Polk County,12105,1
+177,Polk County,19153,24
+178,Pottawattamie County,19155,19
+179,Prince George's County,24033,1
+180,Prince William County,51153,61
+181,Pulaski County,05119,1
+182,Racine County,55101,1
+183,Ramsey County,27123,1
+184,Richmond County,36085,2
+185,Riverside County,06065,1
+186,Roane County,47145,1
+187,Rockingham County,33015,2
+188,Rockland County,36087,4
+189,Rutherford County,37161,4
+190,Sacramento County,06067,5
+191,Salt Lake County,49035,6
+192,San Diego County,06073,5
+193,San Francisco County,06075,4
+194,San Juan Municipio,72127,1
+195,San Luis Obispo County,06079,1
+196,Santa Clara County,06085,74
+197,Santa Fe County,35049,1
+198,Sarpy County,31153,12
+199,Scott County,19163,1
+200,Shelby County,47157,2
+201,Snohomish County,53061,3
+202,Solano County,06095,1
+203,Somerset County,34035,14
+204,South Central Connecticut Planning Region,09170,1
+205,Spokane County,53063,3
+206,St. Joseph County,18141,2
+207,St. Louis County,27137,1
+208,St. Louis city,29510,3
+209,Stanislaus County,06099,1
+210,Storey County,32029,4
+211,Strafford County,33017,1
+212,Suffolk County,36103,1
+213,Summit County,39153,1
+214,Sumner County,47165,4
+215,Tarrant County,48439,8
+216,Tippecanoe County,18157,2
+217,Travis County,48453,16
+218,Tulsa County,40143,3
+219,Uintah County,49047,1
+220,Umatilla County,41059,31
+221,Union County,37179,1
+222,Union County,39159,8
+223,Utah County,49049,6
+224,Valencia County,35061,6
+225,Wake County,37183,4
+226,Walworth County,55127,1
+227,Ward County,48475,1
+228,Warren County,19181,5
+229,Warren County,39165,2
+230,Wasco County,41065,2
+231,Washington County,41067,26
+232,Washington County,49053,1
+233,Washoe County,32031,11
+234,Waukesha County,55133,1
+235,Wayne County,26163,4
+236,Westchester County,36119,1
+237,Western Connecticut Planning Region,09190,2
+238,Whatcom County,53073,1
+239,White County,05145,1
+240,Wichita County,48485,1
+241,Williamson County,47187,5
+242,Yates County,36123,1
+243,Yellowstone County,30111,1
