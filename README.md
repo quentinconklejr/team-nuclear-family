@@ -1,72 +1,88 @@
-## Team Nuclear Family
+# Team Nuclear Family - Nuclear Reactor Siting in the United States
 
-# Nuclear Reactor Siting in the United States
-
-AI data centers are consuming more electricity than ever, and it is onlt increasing with new data centers being built often. Nuclear is one of the few clean energy sources that can actually keep up. But where should new reactors go?
+## Project Overview
+AI data centers are consuming more electricity than ever, and it is only increasing with new data centers being built often. Nuclear is one of the few clean energy sources that can actually keep up. But where should new reactors go?
 
 That’s what this project answers.
 
+We’re building a geospatial framework that scores every realistic location in the US based on two things: how suitable it is to physically build a reactor there, and how much energy demand exists in that area because nuclear energy can only be used locally. The final deliverable is a ranked map of optimal reactor sites framed as an actual policy recommendation.
+
+## Team Members 
+- Brian Lin
+- Kevin Xu
+- Khue Nguyen
+- Millie Chu 
+- Nina Schreiber 
+- Quentin Conkle 
+
+## Data Description
+This project integrates 13 datasets from various open sources that represent different factors constituting a good site for a nuclear reactor, such as population, energy consumption, seismic risks, etc. All of the original datasets are stored in `raw_data`, and all processed data go in `processed_data`.
+
+| Dataset | Source | Description |
+|---|---|---|
+| County boundaries | [U.S. Census Bureau TIGER/Line (2025)](https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/) | Geographic boundaries for all counties in the US, used for spatial joins |
+| US population in 2025 by county | [Census.gov](Census.gov) | Population of each county by the end of 2025 |
+| Housing units by county | [Census.gov](Census.gov) | Number of housing units and median household income in each county in 2024|
+| Energy consumption by county | [Find Energy](https://findenergy.com/) | Total energy consumption of each county in 2024 |
+| Data centers in the US | [Office of Scientific and Technical Information](https://www.osti.gov/biblio/2550666) and [OpenStreetMap](https://www.openstreetmap.org/about) | All data centers in the US, used as a proxy for energy demand|
+| Flood hazard | [National Flood Hazard Layer (NFHL) Database](https://msc.fema.gov/portal/advanceSearch) | **Regions** with high risk of flood by state|
+| Lakes in the US | [HydroSHEDS](https://www.hydrosheds.org/products/hydrolakes) | All lakes in the US |
+| Rivers | [ArcGIS](https://hub.arcgis.com/datasets/esri::usa-rivers-and-streams/explore?location=44.592478%2C-119.086063%2C3) and [National Weather Service](https://www.weather.gov/gis/Rivers)| All rivers and streams in the US |
+| Military areas | [U.S. Department of Transportation](https://geodata.bts.gov/datasets/usdot::military-bases/explore?location=42.326716%2C3.071733%2C1) | Military installations across the US|
+| Existing nuclear plants in the US | [U.S. Nuclear Regulatory Commission](https://www.nrc.gov/) | All nuclear power plants currently existing in the US (including ones not in-service) |
+| Seismic hazard by county | [United States Geological Survey (USGS)](https://www.usgs.gov/programs/earthquake-hazards/hazards) | County-level seismic hazard |
+| Transmission lines in the US | [ArcGIS](https://www.arcgis.com/home/item.html?id=d4090758322c4d32a4cd002ffaa0aa12) | All transmission lines in the US, each represented by a **point**|
+| Wetlands in the US | [U.S. Fish & Wildlife Service](https://www.fws.gov/program/national-wetlands-inventory/data-download) | Wetland areas in the US (mangrove, mud, marsh, etc.) |
+
+### Data Cleaning/Preprocessing
+
+Some of the major cleaning and preprocessing steps taken: 
+- Drop inaccurate/invalid observations in some datasets: 
+    - Military installations not currently in service
+    - Transmission lines not in service or with invalid voltage values
+    - Intermittent streams or rivers (they cannot support nuclear cooling due to being seasonal)
+- Spatial join datasets not originally in county unit using the county boundaries data as a backbone
+
+- For some datasets we used `geopandas.overlay()` to find the specific areas intersecting with the county (e.g. for the military dataset, we found the area of the installations intersecting with the county, not the whole military base)
+
+- Drop unused variables in the original datasets. We kept about 2 - 4 variables for each that might contribute meaningfully to our scoring framework later on
+
+- Feature engineering: we created new variables based on the existing ones, such as **number of nuclear plants in each county**, **proportion of a county that has high flood risks**, **total lakes area in a county**, etc.
+
+- Merging all datasets into a final one that contains all necessary variables on a county level. All of our merging steps go in `notebooks/merge.ipynb`.
 
 
-## What we’re doing
+### Key Variables
+Our final dataset `processed_data/final_dataset.csv` has **28 columns** and **3235 observations** corresponding to 3235 counties named by [Census.gov](Census.gov). Some key variables (not all of them): 
 
-We’re building a geospatial framework that scores every realistic location in the US based on two things: how suitable it is to physically build a reactor there, and how much energy demand exists in that area because nuclear energy can only be used locally. The output is a ranked map of optimal reactor sites framed as an actual policy recommendation.
-
-## Methodology
-
-**Step 1: Land suitability mask**
-
-Before scoring anything, we filter out land that’s never going to work. National parks, military zones, wetlands, floodplains, high seismic risk areas, dense urban cores. Whatever’s left is the eligible candidate set.
-
-**Step 2: Suitability scoring**
-
-Each eligible location gets scored on the factors the NRC actually uses to evaluate reactor sites: seismic stability, distance to cooling water, proximity to transmission infrastructure, and population density in the surrounding area.
-
-**Step 3: Demand scoring**
-
-Each location also gets scored on how much energy demand exists nearby, using county level consumption data and data center concentration as a proxy for AI infrastructure load.
-
-**Step 4: Composite ranking**
-
-Suitability and demand scores are combined into a final score. The map shows the top ranked sites across the country.
-
-**Step 5: Validation (if we have time)**
-
-We run existing NRC licensed reactor sites through our framework to see how they score. If they score well, great. If they don’t, that’s an interesting finding too since most were built in the 70s and 80s under very different data and standards.
+| Variable Name | Description | Unit |
+| :-- | :-- | :-- |
+| `population` | County population in 2025 | people |
+| `total_energy_consumption_mwh` | County total consumption in 2024 | $MWh$ |
+| `pct_sfha` | Proportion of the county marked as severe flood hazard area |
+| `total_lake_area` | Total lake areas in the county | ${km^2}$ |
+| `avg_discharge` | Average discharge of lakes in the county (discharge: the volume of water flowing out of it over a specific period) | ${m^3/s}$ |
+| `dist_to_lakes_km` | Distance to the county's centroid to the nearest lake | $km$ |
+| `dist_to_rivers_km` | Distance to the county's centroid to the nearest river | $km$ |
+| `pct_military` | Proportion of the county with military installations |
+| `plant_count` | Number of nuclear plants in the county | nuclear plants |
+| `pga_max` | Maximum peak ground acceleration of the county (seismic risk indicator) | $g$ (fraction of gravitational acceleration, 9.8 $m/s^2$)
+| `max_voltage` |  Maximum voltage of a transmission line in the county | $kV$ |
 
 
+## Methodology 
+### Exploratory Data Analysis
+Our main notebook for EDA is `notebooks/eda.ipynb`. Some of the EDA techniques we used were: 
+- Explore the correlation between all numerical variables with a correlation heatmap. We found high correlation between 
+    - `housing_units` and `median_household_income`
+    - `distance_to_lines_km` and `distance_to_rivers_km`
+    - `total_rivers_mile` and `rivers_count`
+    - `total_energy_consumption_mwh` and `population`
+    - `total_energy_consumption_mwh` and `housing_units`
 
-## Data we are using 
+- Explore the distributions of some numerical variables using boxplots
 
-All data is county level or finer and covers the contiguous US.
-
-|File                           |What it is                                       |
-|-------------------------------|-------------------------------------------------|
-|`nuclear_plants_cleaned.csv`   |Existing NRC licensed reactor locations          |
-|`seismic_hazard.csv`           |USGS ASCE 7-22 peak ground acceleration by county|
-|`transmission_lines_coords.csv`|HIFLD electric power transmission lines          |
-|`demand_counties.csv`          |EIA energy consumption by county                 |
-|`data_centers.csv`             |US data center locations (AI demand proxy)       |
-|`population_2024.csv`          |Census 2024 population by county                 |
-|`county_boundaries.geojson`    |Census TIGER county boundaries                   |
-|`protected_areas.csv`          |USGS PAD-US 4.0 protected areas for land mask    |
-|`military_boundaries.geojson`  |Military zone boundaries for land mask           |
-|`fema_claims_county.csv`       |FEMA NFIP flood claims by county                 |
-|`fema_community_status.csv`    |FEMA community flood status                      |
-|`flood_by_counties.csv`        |Flood risk by county                             |
-|`rivers_usa.geojson`           |US river network (cooling water access)          |
-|`lakes_usa.geojson`            |US lakes (cooling water access)                  |
-|`lakes_by_county.csv`          |Lake coverage by county                          |
-|`wetlands_cleaned.csv`         |Wetland polygons for land mask                   |
-|`land_use.csv`                 |Land use proxy by county                         |
-|`census_income_housing.csv`    |Census ACS income and housing data               |
-|`decommissioned_plants.csv`    |Decommissioned nuclear plant locations           |
-|`wiki_decommissioned_coal.csv` |Decommissioned coal plant locations              |
-
-The seismic hazard data tells us where the ground is stable enough to build on. Rivers, lakes, and water coverage tell us where reactors can actually get the cooling water they need to operate. Transmission lines tell us where grid infrastructure already exists so a new reactor can connect without needing to build out entirely new power lines. Population data tells us two things where demand is high, and where we need "buffer" zones since you can’t put a reactor in someone’s backyard or in the middle of a big city like in downtown Chicago. The protected areas, military boundaries, wetlands, and flood data are all about ruling places out.
-The demand and data center files are about finding where the energy is actually needed, since reactors only serve the local area. The decommissioned nuclear and coal plant locations are interesting because those sites already have transmission hookups, cooling infrastructure, and community familiarity with industrial energy facilities, so they might actually be strong candidate locations even if the original plant is gone. 
-
-**limitation:** County energy consumption data is from 2016, we could not find anything newer.
-
-
-
+- Compare counties with and without a nuclear reactor to see the differences in some variables such as population, energy consumption, and seismic or flood risks. Some key findings: 
+    - Counties with nuclear plants consistently have lower seismic and flood risk, stronger access to rivers and water bodies
+    - Counties with plants tend to cluster around lower population density but consume more energy in general compared to counties without one.
+    - Counties with plants have an average maximum voltage around 300 - 500kV with a moderate number of lines, which suggests that higher-voltage grid access is preferred rather than dense grid with lower voltage. 
