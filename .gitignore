@@ -205,3 +205,17 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+raw_data/county_boundaries_2025/tl_2025_us_county.cpg
+.gitignore
+raw_data/county_boundaries_2025/tl_2025_us_county.dbf
+.gitignore
+raw_data/county_boundaries_2025/tl_2025_us_county.prj
+raw_data/county_boundaries_2025/tl_2025_us_county.shp
+raw_data/county_boundaries_2025/tl_2025_us_county.shp.ea.iso.xml
+raw_data/county_boundaries_2025/tl_2025_us_county.shp.iso.xml
+raw_data/county_boundaries_2025/tl_2025_us_county.shx
+
+# Large data files
+*.xlsb
+raw_data/eia860_2024.zip
+.DS_Store

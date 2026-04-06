@@ -1,0 +1,1564 @@
+geo_id,county_name,named_wetlands,wetland_count
+01001,Autauga County,['Jacobs Swamp'],1
+01003,Baldwin County,[],213
+01007,Bibb County,[],60
+01009,Blount County,[],1
+01011,Bullock County,[],2
+01015,Calhoun County,[],6
+01017,Chambers County,[],44
+01019,Cherokee County,[],170
+01023,Choctaw County,[],17
+01025,Clarke County,[],3
+01027,Clay County,[],2
+01029,Cleburne County,[],19
+01031,Coffee County,[],14
+01033,Colbert County,[],3
+01035,Conecuh County,[],4
+01039,Covington County,[],35
+01041,Crenshaw County,[],1
+01045,Dale County,[],43
+01047,Dallas County,['Beech Creek Swamp'],4
+01049,DeKalb County,[],2
+01053,Escambia County,[],4
+01055,Etowah County,[],31
+01057,Fayette County,[],6
+01061,Geneva County,[],81
+01063,Greene County,"['Charleston Swamp', 'Boligee Creek Swamp', 'Dollarhide Swamp']",824
+01065,Hale County,['Mason Swamp'],467
+01067,Henry County,[],1
+01069,Houston County,"['Coopers Bay', 'Moates Bay', 'Still Pond', 'The Turnpike Swamp']",470
+01071,Jackson County,[],5
+01073,Jefferson County,[],10
+01075,Lamar County,[],9
+01077,Lauderdale County,[],8
+01081,Lee County,['Lake Jacobs'],24
+01083,Limestone County,[],13
+01085,Lowndes County,['Duck Pond'],1
+01087,Macon County,[],7
+01089,Madison County,"['Cooper Marsh', 'Poison Ivy Swamp']",52
+01091,Marengo County,[],12
+01093,Marion County,[],1
+01097,Mobile County,"['Optimist Lake', 'Pinto Pass', 'Twelvemile Island']",168
+01101,Montgomery County,[],4
+01105,Perry County,[],170
+01107,Pickens County,[],32
+01111,Randolph County,[],9
+01115,St. Clair County,[],4
+01117,Shelby County,[],6
+01119,Sumter County,['Cypress Swamp'],708
+01121,Talladega County,[],1
+01125,Tuscaloosa County,"['Reed Swamp', 'Englewood Swamp']",202
+01127,Walker County,[],6
+01129,Washington County,[],8
+01131,Wilcox County,[],3
+04001,Apache County,"['CC Lake', 'The Cienega']",31
+04005,Coconino County,['Dry Lake'],10
+04007,Gila County,[],3
+04012,La Paz County,[],2
+04013,Maricopa County,"['South Overbank Wetlands', 'North Overbank Wetlands', 'Tres Rios Wetlands Hayfield Environmental Restoration Area', 'Rio Salado Habitat Restoration Area']",161
+04017,Navajo County,"['Redhead Marsh', 'Bosque Mojado']",14
+04021,Pinal County,[],3
+04025,Yavapai County,[],9
+04027,Yuma County,[],13
+05001,Arkansas County,[],44
+05003,Ashley County,[],1
+05007,Benton County,[],17
+05013,Calhoun County,['Harrell Brake'],1
+05017,Chicot County,[],3
+05019,Clark County,[],372
+05021,Clay County,[],18
+05027,Columbia County,[],1
+05029,Conway County,['Kuhn Bayou'],5
+05031,Craighead County,[],11
+05035,Crittenden County,[],56
+05037,Cross County,[],37
+05039,Dallas County,[],7
+05041,Desha County,[],4
+05043,Drew County,[],1
+05045,Faulkner County,['Bell Slough Moist-soil Unit'],8
+05047,Franklin County,[],5
+05049,Fulton County,[],1
+05051,Garland County,[],3
+05055,Greene County,[],52
+05057,Hempstead County,[],6
+05059,Hot Spring County,[],30
+05061,Howard County,[],3
+05063,Independence County,[],1
+05065,Izard County,[],2
+05067,Jackson County,[],47
+05069,Jefferson County,[],96
+05071,Johnson County,[],14
+05073,Lafayette County,[],3
+05075,Lawrence County,[],11
+05077,Lee County,[],40
+05079,Lincoln County,[],5
+05081,Little River County,[],8
+05083,Logan County,[],9
+05085,Lonoke County,[],27
+05091,Miller County,['Bradley Lake'],5
+05093,Mississippi County,['Bear Bayou'],38
+05095,Monroe County,[],21
+05097,Montgomery County,[],16
+05099,Nevada County,[],8
+05103,Ouachita County,[],2
+05105,Perry County,[],1
+05107,Phillips County,[],34
+05109,Pike County,[],16
+05111,Poinsett County,[],9
+05115,Pope County,[],28
+05117,Prairie County,[],14
+05119,Pulaski County,"['William E. ""Bill"" Clark Wetlands', 'Forty Point Lake']",73
+05121,Randolph County,[],18
+05123,St. Francis County,[],54
+05125,Saline County,[],4
+05127,Scott County,[],3
+05135,Sharp County,[],3
+05139,Union County,[],1
+05145,White County,[],59
+05147,Woodruff County,[],24
+05149,Yell County,[],27
+06001,Alameda County,"['Main Marsh', 'South Marsh', 'Oro Loma Marsh', 'D.U.S.T. Marsh', 'H.A.R.D. Marsh', 'Hayward Marsh', 'Cogswell Marsh', 'Cull Canyon Lake', 'M3', 'M4', 'M6', 'A21', 'M5', 'A20', 'A19', 'Stivers Lagoon Nature Area', 'Tule Ponds at Tyson Lagoon']",121
+06003,Alpine County,['Lower Beebe Lake'],46
+06007,Butte County,[],52
+06009,Calaveras County,[],3
+06011,Colusa County,[],19
+06013,Contra Costa County,"['Wildcat Creek Marsh', 'San Pablo Creek Marsh', 'Stege Marsh', 'Hoffman Marsh', 'Lake Lasalle', 'Breuner Marsh', 'Hazard Pond']",370
+06015,Del Norte County,[],2
+06017,El Dorado County,"['Bryan Meadow', 'Benwood Meadow', 'Osgood Swamp', 'Hell Hole']",80
+06019,Fresno County,"['Gloria Meadow', 'Mill Creek Meadow', 'Cow Meadow', 'Crater Lake Meadow', 'Fawn Meadow', 'Bear Meadow', 'Lakecamp Meadow', 'Darwin Meadow', 'Warm Creek Meadow', 'Boggy Meadow', 'Fox Meadow', 'Horse Heaven']",136
+06021,Glenn County,[],7
+06023,Humboldt County,"['The Basin', 'Bell Swamps']",53
+06025,Imperial County,[],19
+06027,Inyo County,"['Rocky Bottom Lake', 'High Meadows']",15
+06033,Lake County,['Thurston Lake'],6
+06035,Lassen County,"['Cameron Meadow', 'Cooper Swamp', 'Hole in the Ground']",165
+06037,Los Angeles County,"['Gardena Willows Wetland Preserve', 'Ballona Wetlands Ecological Reserve', 'Wetland Park', 'Oxford Retention Basin', 'Golden Shore Marine Biological Reserve', 'Marketplace Marsh', 'Zedler Marsh', 'Bixby Ranch Wetlands', 'Steamshovel Slough', 'Bryant Retained', 'Dominguez Gap']",38
+06039,Madera County,"['Gordon Meadow', 'Nichols Meadow', 'Poison Meadow', 'Chipmunk Meadow', 'Stevenson Meadow', 'Corral Meadow', 'Naked Lady Meadow', 'Spano Meadow', 'Cargyle Meadow', 'Stairway Meadow', 'Lower Lyell Fork Meadow', 'Upper Lyell Fork Meadow', 'Crater Meadow', 'Upper Crater Meadow', 'Soda Springs', 'Johnston Meadow']",142
+06041,Marin County,"['Horseshoe Pond', 'Rodeo Lake', 'Mono Street Marsh', 'Azalea Flat', 'Hidden Lake', 'Beach Drive Wetlands', 'Olema Marsh', 'Scottsdale Marsh', 'Deer Island Basin', 'Rush Creek Marsh Wildlife Area', 'Baccaglio Basin', 'West Deer Island Basin', 'Lynwood Stormwater Basin', 'Farmers Basin']",207
+06043,Mariposa County,"['Turner Meadow', 'Ribbon Meadow', 'Eagle Peak Meadows', 'The Fen', 'Starr King Meadow', 'Lost Lake']",144
+06045,Mendocino County,[],54
+06047,Merced County,"['C. E. Van Atta Interpretive Marsh and walking trail', 'Lower Ruth Lake', 'Duck Pond', 'Mud Slough', 'Olson Pond']",897
+06049,Modoc County,['Dismal Swamp'],256
+06051,Mono County,"['Spooky Meadow', ""Tatum's Hole"", 'Upper Horse Meadow', 'Lower Horse Meadow', 'Mormon Meadow', 'Sky Meadows', 'Yost Meadow', 'Glass Creek Meadow', 'Adobe Reservoir Wetland', 'River Spring Lakes', 'Lower Piute Meadows', 'Tule Lake', 'Topaz Lake']",110
+06055,Napa County,[],38
+06057,Nevada County,"['Middle Lake', 'Lytton Lake', 'Buck Meadow']",173
+06059,Orange County,"['Upper Newport Bay State Marine Conservation Area', 'Fairview Wetlands', 'Warner Pond', 'Bolsa Chica Wetlands', 'Bubbles Lake']",32
+06061,Placer County,"['Scott Meadow', 'Olympic Meadow']",215
+06063,Plumas County,"['Stump Ranch', 'Cameron Meadows', 'Deer Meadow', 'Hay Meadow', 'Indian Meadow', 'Bear Wallow', 'Summit Marsh', 'Crocker Meadows']",362
+06065,Riverside County,['Skunk Hollow Vernal Pool'],110
+06067,Sacramento County,"['River Otter', 'Flamingos', 'American Alligator', 'Iron Point Wetlands']",109
+06071,San Bernardino County,[],1
+06073,San Diego County,"['Rain Water Catchment', 'Vernal Pool', 'Sentenac Cienega', 'Loma Alta Marsh', 'Ecological Reserve', 'Middle Willows']",153
+06075,San Francisco County,['Quartermaster Reach'],19
+06077,San Joaquin County,['Devils Isle'],458
+06081,San Mateo County,"['Lake Mathilda', 'Bat Ray Island']",50
+06085,Santa Clara County,"['Palo Alto Flood Basin', 'Emily Renzel Wetlands', 'Casey Forebay', 'Harriet Mundy Marsh', 'Knapp Tract', 'Harvey Marsh', 'Gold Street Ponds', 'A12', 'A13', 'A15', 'Triangle Marsh']",48
+06087,Santa Cruz County,"['Scott Creek Marsh', ""White's Lagoon"", 'Amaya Pond']",13
+06089,Shasta County,"['South Volonte Wetlands', 'Lower Kings Creek Meadow', 'Paradise Meadows', 'Corral Meadow', 'Mud Lake']",319
+06091,Sierra County,['Anderson Meadow'],67
+06093,Siskiyou County,"['Dale Meadows', 'Clear Creek Springs', 'Elk Meadow', 'Grass Lake', 'Shovel Creek Meadows', 'Deep Lake', 'Laird Lake', 'Lower Klamath Lake Sump', 'Summit Lake', 'Crumes Lake', 'Gillem Lakes', 'Lake One', 'Tule Lake']",587
+06095,Solano County,"['Southampton Bay Wetland Natural Preserve', 'Freeman Island', 'Point Buckler Island']",137
+06097,Sonoma County,"['Tolay Lake', 'Laguna Preserve', 'Ledson Marsh']",34
+06099,Stanislaus County,"['Richie Slough', 'Lake Ramona', 'Brush Lake']",337
+06101,Sutter County,[],7
+06103,Tehama County,['Spencer Meadow'],59
+06105,Trinity County,"['The Frying Pan', 'Keystone Flat', 'Bear Valley Meadows', 'Chipmunk Meadow', 'Upper Deadfall Meadows', 'Horse Heaven Meadows']",403
+06109,Tuolumne County,"['Cottonwood Meadow', 'Smith Meadow', 'Beehive', 'Horse Meadow']",191
+06113,Yolo County,[],12
+06115,Yuba County,[],64
+08001,Adams County,"['Badding Reservoir', 'Ranch Creek Wetlands Open Space', 'Todd Reservoir']",72
+08003,Alamosa County,[],69
+08005,Arapahoe County,['Englewood Reservoir'],165
+08007,Archuleta County,[],2
+08009,Baca County,['John L Jones Reservoir'],2
+08011,Bent County,['Muddy Creek Reservoir'],9
+08013,Boulder County,"['Sombrero Marsh', 'Saint Joe Reservoir']",52
+08014,Broomfield County,['Envirionmental Sensative Area'],7
+08015,Chaffee County,['Holywater Beaver Ponds'],32
+08017,Cheyenne County,[],1
+08019,Clear Creek County,['Geneva Creek Iron Fens'],5
+08021,Conejos County,[],55
+08023,Costilla County,[],11
+08025,Crowley County,[],9
+08027,Custer County,[],19
+08029,Delta County,['Trickle Reservoir'],61
+08031,Denver County,[],91
+08033,Dolores County,"['Cold Reservoir', 'Dunton Meadows']",42
+08035,Douglas County,"['Cantrill Reservoir', 'Stevens Reservoir Number 2 and 3', 'Spring Gulch Reservoir']",38
+08037,Eagle County,[],158
+08039,Elbert County,"['Kiowa Creek Watershed 2-K-10 Reservoir', 'Kiowa Creek Watershed 2-G-10 Reservoir']",6
+08041,El Paso County,"['Stanley Reservoir', 'River Otter', 'West Cherry Creek Detention Number 2 Reservoir', 'Big Sandy Creek-Antelope Reservoir']",39
+08043,Fremont County,[],6
+08045,Garfield County,[],300
+08047,Gilpin County,[],1
+08049,Grand County,[],215
+08051,Gunnison County,"['Powderhorn Swamp', 'Porphyry Park']",105
+08053,Hinsdale County,[],160
+08057,Jackson County,[],241
+08059,Jefferson County,['Wetland Hazard on 6th hole'],153
+08063,Kit Carson County,[],2
+08065,Lake County,[],155
+08067,La Plata County,[],4
+08069,Larimer County,"['Rawah Bog', 'Cub Creek Beaver Ponds', 'Hollowell Park', 'Hidden Valley Beaver Wetlands', 'Cirque Meadow', 'Nancy Grey Wetlands']",195
+08071,Las Animas County,['Mike Gagliardi Reservoir'],10
+08073,Lincoln County,[],7
+08075,Logan County,[],61
+08077,Mesa County,"['Wastewater Reclamation Facility', 'Burckhalter Reservoir Number 1', 'Spring Creek Reservoir Number 1']",170
+08079,Mineral County,[],29
+08081,Moffat County,[],61
+08083,Montezuma County,[],9
+08085,Montrose County,[],38
+08087,Morgan County,['Morgan Game and Fish Conservation Club Pond'],10
+08089,Otero County,[],21
+08091,Ouray County,[],5
+08093,Park County,[],14
+08095,Phillips County,[],4
+08097,Pitkin County,[],101
+08099,Prowers County,[],12
+08101,Pueblo County,[],45
+08103,Rio Blanco County,['White Springs'],83
+08105,Rio Grande County,[],31
+08107,Routt County,[],26
+08109,Saguache County,['Willow Creek Park'],235
+08111,San Juan County,[],24
+08113,San Miguel County,[],48
+08115,Sedgwick County,[],3
+08117,Summit County,[],126
+08119,Teller County,['East Beaver Creek'],11
+08121,Washington County,[],11
+08123,Weld County,"['Coal Bank Watershed CB-1 Reservoir', 'Faber Reservoir']",126
+08125,Yuma County,[],10
+09110,Capitol Planning Region,"['Hog Swamp', 'Bryant Pond', 'Fagnoni Pond', 'Orchard Hill Detention Pond', 'Glastonbury Meadows', 'Addison Bog', 'Phantom Pond', 'Chapman Pond', 'Hart Meadow', 'Talcott Reservoir', 'Welles Pond', 'Swamp', 'vernal pool', 'Bugbee Reservoir', 'Cold Spring Reservoir', 'Bear Swamp', 'Miller Pond', 'Blackledge River Dam', 'Merrow Swamp', 'Warner Swamp', 'Eatons Pond', 'CCC fire pool?', 'Cedar Swamp', 'Star Pond', 'Upper Storrs Pumping Station Pond', 'Goose Reef', 'Converse Pond', 'Beaverdam Marsh', 'Great Marsh', 'Haas Pond', 'Taylor Pond', 'beaver swamp']",1223
+09120,Greater Bridgeport Planning Region,"['Old Dam Road Marsh Open Space', 'Pin Oak Swamp', 'Old Field Marsh Open Space', 'Pine Creek Marsh', 'Welch Terrace Marsh Open Space', 'Wolves Swamp', 'Garden Marsh', 'Monroe/Easton Inland Wetland (Ce)', 'Town of Monroe Inland Wetland (Rd)']",126
+09130,Lower Connecticut River Valley Planning Region,"['Kelsey Pond', 'Pequot Swamp', 'Great Island Marshes', 'Marvin Island', 'Calves Island', 'Cedar Swamp', 'Turtle Creek Preserve', 'Rat Island', 'Sheepskin Hollow Pond', 'Pecks Meadow', 'Wilcox Pond', 'Pecausett Meadows', 'Wangunk Meadows', 'Hales Pond', 'Webb Swamp']",555
+09140,Naugatuck Valley Planning Region,"['Tri-Lake', 'Parkers Pond', 'Grape Swamp', 'Spring Lake', 'Long Meadow', 'Beer Pond', 'Hills Pond No 2', 'Manville Kettle', 'Ash Swamp', 'Cedar Swamp', 'Satans Meditation', 'Pecks Swamp', 'Tamarack Swamp', 'Evers Pond']",302
+09150,Northeastern Connecticut Planning Region,"['Mansure Pond', 'Cedar Swamp', 'Erickson Wildlife Marsh', 'Douglas Swamp', 'Peg Mill Pond', 'Catden Swamp', 'Hale Marsh', 'Maple Swamp', 'Dickinson Pond', 'Prentise Pond', 'Thompson Meadows', 'Vintons Mill Pond', 'Dark Swamp', 'Jerrys Swamp']",301
+09160,Northwest Hills Planning Region,"['Whitten Swamp', 'Pine Swamp', 'Poplar Swamp', 'Ash Swamp', 'Meeker Swamp', 'Romford Pond', 'No Mans Land Swamp', 'Cat Swamp', 'Ripley Swamp', 'slough', 'Spruce Swamp', 'The Cranberry Bog', 'Popple Swamp', 'Black Spruce Bog', 'Bear Swamp', 'Peat Swamp', 'Balsam Fir Swamp', 'Wildcat Swamp', 'Great Bear Swamp', 'Beckley Bog', 'Grant Swamp', 'Indian Meadow', 'Cedar Swamp', 'Robbins Swamp', 'Lime Pond', 'Red Spruce Swamp', 'Tobey Bog', 'Westside Reservoir', 'Norfolk Meadow', 'Goose Pond', 'Whigville Brook']",466
+09170,South Central Connecticut Planning Region,"['Billberry Swamp', 'Dismal Swamp', 'Black Swamp', 'Baldwin Swamp', 'Farley Swamp', 'Old Town Landing', 'Morris Creek Nature Preserve', 'Maturo Drive Playground', 'Caroline Creek Marsh', 'Beaver Pond Meadows', 'East Haven Marsh Wildlife Area', 'The Cove', 'Towner Swamp', 'Wolf Swamp', 'Mill Pasture Preserve', 'Fence Creek Meadow', 'Borg Meadow', ""Meadow's Edge"", 'Stevens School Pond', 'Borrelli Farm Pond', 'Tamarac Swamp', 'Fresh Meadows', 'Beaver Head Swamp', 'Foster Hole', 'Coan Pond', 'Hog Pond', 'Cedar Swamp', 'Eckerts Pond']",621
+09180,Southeastern Connecticut Planning Region,"['Bride Brook', 'Perry Pond', 'Great Swamp', 'Whittlesey Swamp', 'Dark Swamp', 'Trails Pond', 'Birch Plain Creek Tidal Marsh', 'Lambs Pond', 'Latham Bog', 'Pine Swamp', 'Bindloss Pond', 'The Nature Conservancy Gallup Salt Marsh', 'Johnson Pond', 'Poquetanuck Sedge Beds', 'Fords Pond', 'Holdridge Pond', 'Bates Pond', 'Cooks Pond', 'Voluntown Road Pond', 'Bell Cedar Swamp', 'Oats Pond', 'Hetchel Swamp', 'Dutton Swamp', 'McDonald Swamp', 'Pigeon Swamp', 'Lake Marie', 'Taftville Reservoir Number 2']",924
+09190,Western Connecticut Planning Region,"['Canfield Island Marsh', 'Hoyts Swamp', 'Silver Springs Swamp', 'Georgetown Ponds', 'Pine Pond', 'Bell Pond', 'East Swamp', 'Bound Swamp', 'Pine Swamp', 'Gilberts Pond', 'Quipy Swamp', 'Ferris Pond', 'Tamarack Swamp', 'Levys Pond']",293
+12003,Baker County,[],5923
+12005,Bay County,[],6331
+12007,Bradford County,[],819
+12013,Calhoun County,[],4178
+12019,Clay County,[],1659
+12023,Columbia County,[],6628
+12031,Duval County,['Gum Swamp'],444
+12033,Escambia County,[],2552
+12037,Franklin County,[],352
+12039,Gadsden County,[],2247
+12045,Gulf County,[],1504
+12047,Hamilton County,"['Bottom Bay', 'Top Bay', 'Long Branch Swamp']",5134
+12059,Holmes County,[],5776
+12063,Jackson County,['Pittman Bay'],7281
+12065,Jefferson County,['Anderson Bay'],6435
+12067,Lafayette County,[],3132
+12073,Leon County,"['Cascade Lake', 'Black Swamp', 'Gum Swamp']",4586
+12077,Liberty County,[],8645
+12079,Madison County,[],9068
+12089,Nassau County,"['Mills Creek', 'Alligator Creek']",6667
+12091,Okaloosa County,[],3025
+12109,St. Johns County,[],1068
+12113,Santa Rosa County,[],4572
+12121,Suwannee County,"['Flamingo Bay', 'Caney Hammock', 'Tiger Bay', 'Greens Prairie']",2142
+12123,Taylor County,[],13925
+12125,Union County,[],1846
+12129,Wakulla County,"['Austreng Island', 'Little Austreng Island']",7056
+12131,Walton County,"['s', 'Wilson Pond']",5289
+12133,Washington County,['Gap Lake Swamp'],5375
+13001,Appling County,['Big Pond'],6
+13003,Atkinson County,['Ricketson Bay'],7
+13005,Bacon County,[],2
+13007,Baker County,"['Perry Pond', '42nd Street Swamp', '23rd Street Swamp']",50
+13009,Baldwin County,['Furman Shoals'],42
+13011,Banks County,[],8
+13013,Barrow County,[],51
+13015,Bartow County,['Drummond Swamp'],59
+13017,Ben Hill County,[],149
+13019,Berrien County,['Purvis Lake'],66
+13021,Bibb County,"['Bond Swamp', 'Walnut Creek Wetlands']",63
+13023,Bleckley County,[],355
+13025,Brantley County,[],1
+13027,Brooks County,"['Piscola Creek', 'Stanley Bay', 'Bowen Millpond', 'Pope Millpond']",206
+13029,Bryan County,['Alligator Bay'],72
+13031,Bulloch County,[],22
+13033,Burke County,[],51
+13035,Butts County,[],26
+13037,Calhoun County,[],45
+13039,Camden County,"['McCall Pond', 'Johnson Pond']",107
+13043,Candler County,[],4
+13045,Carroll County,[],91
+13047,Catoosa County,[],11
+13049,Charlton County,['Charlton County Lake'],14
+13051,Chatham County,"['Harveys Island', 'Ella Island', 'Raccoon Key', 'Little Don Island', 'Marsh Island', 'Walthour Swamp', 'Coldbrook Swamp', 'Hog Island']",165
+13053,Chattahoochee County,[],6
+13055,Chattooga County,[],19
+13057,Cherokee County,[],16
+13059,Clarke County,[],14
+13061,Clay County,[],2
+13063,Clayton County,['Pates Creek'],20
+13065,Clinch County,"['Green Bay', 'Saw Bay', 'Arabia Swamp']",13
+13067,Cobb County,[],18
+13069,Coffee County,[],52
+13071,Colquitt County,[],11
+13073,Columbia County,"['Retention Pond', 'County Access Wetland']",13
+13075,Cook County,[],8
+13077,Coweta County,[],58
+13079,Crawford County,[],90
+13081,Crisp County,[],14
+13083,Dade County,[],2
+13085,Dawson County,[],6
+13087,Decatur County,"['Fowlstown Swamp', 'The Level']",84
+13089,DeKalb County,"['Beaver Pond', 'Howell Wetland']",22
+13091,Dodge County,[],597
+13093,Dooly County,['Cypress Pond'],173
+13095,Dougherty County,[],11
+13097,Douglas County,"['Upper Beaver Pond', 'Lower Beaver Pond', 'Geltner Swamp']",41
+13099,Early County,"['Wamble Creek', 'Cypress Pond']",190
+13101,Echols County,[],5
+13103,Effingham County,['Coldbrook Swamp'],20
+13105,Elbert County,[],8
+13107,Emanuel County,[],5
+13109,Evans County,[],41
+13113,Fayette County,['Flat Creek Nature Area'],30
+13115,Floyd County,[],29
+13117,Forsyth County,[],54
+13119,Franklin County,['Pritchett Swamp'],42
+13121,Fulton County,[],40
+13127,Glynn County,"['Turtle River Swamp', 'Buffalo Swamp', 'Turkey Swamp']",161
+13129,Gordon County,[],5
+13131,Grady County,"['Big Bay Swamp', 'Pritchard Pond']",62
+13133,Greene County,[],19
+13135,Gwinnett County,['Norman Downes Wetland'],75
+13139,Hall County,[],6
+13141,Hancock County,[],24
+13143,Haralson County,[],19
+13145,Harris County,[],7
+13147,Hart County,[],5
+13149,Heard County,[],5
+13151,Henry County,['Southern States Lake'],84
+13153,Houston County,['Hackney Lake'],298
+13155,Irwin County,"['Sand Creek', 'Boggy Branch']",90
+13157,Jackson County,[],35
+13159,Jasper County,['Wetlands'],99
+13161,Jeff Davis County,[],142
+13163,Jefferson County,[],12
+13165,Jenkins County,[],12
+13167,Johnson County,[],46
+13169,Jones County,[],26
+13171,Lamar County,[],39
+13173,Lanier County,"['Banks Lake', 'Grand Bay', 'Monk Pond', 'Fish Pond Bay']",26
+13175,Laurens County,[],762
+13177,Lee County,[],30
+13179,Liberty County,"['Big Swamp', 'Goshen Swamp', 'Cedar Bay', 'Strum Bay']",192
+13181,Lincoln County,[],3
+13183,Long County,[],46
+13185,Lowndes County,"['Zeigler Lake', 'Tylers Pond', 'Becky Bay']",109
+13187,Lumpkin County,[],3
+13189,McDuffie County,[],1
+13191,McIntosh County,"['Little Broughton Island', 'Rabbit Island', 'Cottonbox Island', 'Piney Island']",68
+13193,Macon County,[],119
+13195,Madison County,[],20
+13199,Meriwether County,[],32
+13201,Miller County,"['Cook Pond', 'Davis Pond']",39
+13205,Mitchell County,[],4
+13207,Monroe County,[],53
+13209,Montgomery County,[],83
+13211,Morgan County,[],95
+13213,Murray County,[],17
+13215,Muscogee County,[],16
+13217,Newton County,[],42
+13219,Oconee County,[],16
+13221,Oglethorpe County,[],30
+13223,Paulding County,['Hannah Swamp'],49
+13225,Peach County,[],48
+13229,Pierce County,[],3
+13231,Pike County,[],61
+13233,Polk County,[],28
+13235,Pulaski County,[],519
+13237,Putnam County,[],30
+13243,Randolph County,[],3
+13245,Richmond County,[],37
+13247,Rockdale County,[],22
+13249,Schley County,[],4
+13251,Screven County,[],33
+13253,Seminole County,['Lewis Pond'],27
+13255,Spalding County,[],34
+13257,Stephens County,['Hicks Swamp'],12
+13259,Stewart County,[],3
+13261,Sumter County,['Bear Branch'],39
+13263,Talbot County,[],15
+13265,Taliaferro County,[],3
+13267,Tattnall County,[],9
+13269,Taylor County,[],96
+13271,Telfair County,"['Scott Bay', 'Buzzard Bay']",574
+13273,Terrell County,[],1
+13275,Thomas County,['Murphys Pond'],51
+13277,Tift County,['Little Creek'],28
+13279,Toombs County,[],7
+13281,Towns County,[],1
+13283,Treutlen County,[],24
+13285,Troup County,[],16
+13287,Turner County,"['Deep Creek', 'Bussey Pond', 'West Fork Deep Creek']",37
+13289,Twiggs County,"['Denson Marsh', 'Rays Swamp']",217
+13293,Upson County,[],42
+13295,Walker County,[],12
+13297,Walton County,[],30
+13299,Ware County,[],5
+13303,Washington County,[],144
+13305,Wayne County,"['Piney Bay', 'Little Buffalo Swamp']",9
+13309,Wheeler County,[],186
+13311,White County,[],10
+13313,Whitfield County,[],22
+13315,Wilcox County,"['Gator Slide', 'Buzzard Roost']",679
+13317,Wilkes County,[],18
+13319,Wilkinson County,[],100
+13321,Worth County,[],9
+16001,Ada County,[],22
+16003,Adams County,['Bear Basin'],1
+16005,Bannock County,[],1
+16007,Bear Lake County,['Dingle Swamp'],13
+16009,Benewah County,['Hnmiln Meadow'],20
+16011,Bingham County,[],3
+16013,Blaine County,['Carey Lake'],2
+16015,Boise County,[],5
+16017,Bonner County,['Mountain Meadow'],86
+16019,Bonneville County,[],2
+16021,Boundary County,['Bonner Swamp'],46
+16025,Camas County,[],3
+16027,Canyon County,['Lakeview Park Pond'],6
+16029,Caribou County,['Goose Lake/Pelican Slough'],2
+16031,Cassia County,['Almo Creek Wetland'],2
+16035,Clearwater County,[],1
+16037,Custer County,[],94
+16039,Elmore County,[],2
+16041,Franklin County,['Gibson Basin'],40
+16043,Fremont County,"['Swan Lake', 'Robinson Lake']",69
+16047,Gooding County,[],4
+16049,Idaho County,"['Round Bottom Meadows', 'Wind River Meadows', 'Porcupine Meadow', 'Long Meadow', 'Goodwin Meadows', 'Lost Meadows', 'Bear Springs', 'Boundary Meadows', 'Wet Meadows', 'White Bird Meadow', 'Canteen Meadows', 'Bimerick Meadows', 'Heslip Lake', 'Greystone Lake', 'Lost Knife Meadows', 'Chain Meadows', 'Wag Meadows', 'Kooskooskia Meadows', 'Marion Meadows', 'Star Meadows']",110
+16051,Jefferson County,[],3
+16053,Jerome County,[],1
+16055,Kootenai County,[],1737
+16057,Latah County,[],5
+16059,Lemhi County,[],27
+16061,Lewis County,[],2
+16067,Minidoka County,[],2
+16071,Oneida County,['Billy Snipe Reservoir'],2
+16073,Owyhee County,"[""Three Fork / Te'akate""]",98
+16079,Shoshone County,[],92
+16081,Teton County,[],1
+16083,Twin Falls County,[],1
+16085,Valley County,"['Caton Meadow', 'Lily Marsh', 'Meadow Marsh']",41
+16087,Washington County,[],38
+17001,Adams County,"['Polly Island', 'Blue Goose Island', 'Mud Island']",92
+17067,Hancock County,"['Hardy Bar Island', 'Hunt Island', 'Old Lock']",29
+17071,Henderson County,"['Moore Bar', 'Willow Bar']",21
+17149,Pike County,"['Browns Island', 'Jim Young Island', 'Denmark Island', 'Taylor Island', 'Saverton Island']",15
+19005,Allamakee County,[],7
+19033,Cerro Gordo County,[],99
+19041,Clay County,[],115
+19051,Davis County,[],3
+19057,Des Moines County,"[""O'connell Island"", 'Rush Island', 'Fetter Island', 'Baby Rush Island']",36
+19059,Dickinson County,['McClelland Slough'],331
+19063,Emmet County,[],130
+19071,Fremont County,[],3
+19081,Hancock County,[],93
+19089,Howard County,[],1
+19109,Kossuth County,['Dismal Swamp'],81
+19111,Lee County,[],16
+19117,Lucas County,[],2
+19119,Lyon County,[],1
+19129,Mills County,[],12
+19143,Osceola County,[],21
+19147,Palo Alto County,[],125
+19167,Sioux County,[],2
+19175,Union County,[],1
+19179,Wapello County,[],16
+19189,Winnebago County,[],63
+19191,Winneshiek County,[],2
+20023,Cheyenne County,[],11
+20027,Clay County,[],12
+20029,Cloud County,[],4
+20039,Decatur County,[],1
+20055,Finney County,[],1
+20075,Hamilton County,[],4
+20087,Jefferson County,"['Sunset Ridge Marsh', 'Rucker Marsh', 'Island Marsh', 'Lower Ferguson Marsh']",9
+20089,Jewell County,[],10
+20101,Lane County,[],2
+20103,Leavenworth County,[],7
+20105,Lincoln County,[],8
+20123,Mitchell County,[],8
+20131,Nemaha County,[],2
+20137,Norton County,[],1
+20141,Osborne County,[],3
+20143,Ottawa County,[],2
+20149,Pottawatomie County,[],15
+20157,Republic County,[],11
+20161,Riley County,[],28
+20171,Scott County,[],1
+20181,Sherman County,[],50
+20199,Wallace County,[],1
+20201,Washington County,[],1
+20203,Wichita County,[],4
+20209,Wyandotte County,[],4
+21007,Ballard County,[],9
+21035,Calloway County,[],1
+21039,Carlisle County,['Winford Pond'],7
+21047,Christian County,[],2
+21075,Fulton County,[],24
+21083,Graves County,[],15
+21095,Harlan County,[],1
+21105,Hickman County,[],7
+21145,McCracken County,[],5
+21147,McCreary County,[],1
+21157,Marshall County,[],1
+21219,Todd County,[],4
+21221,Trigg County,[],8
+21227,Warren County,[],14
+21231,Wayne County,[],1
+21235,Whitley County,[],1
+22001,Acadia Parish,[],1
+22003,Allen Parish,[],222
+22005,Ascension Parish,[],57
+22007,Assumption Parish,[],30
+22009,Avoyelles Parish,"['Smith Bay', 'Jeff Lake', 'Red River Bay']",875
+22011,Beauregard Parish,[],35
+22013,Bienville Parish,[],3
+22015,Bossier Parish,[],29
+22017,Caddo Parish,[],16
+22019,Calcasieu Parish,"['Tupelo Swamp', 'Coon Island']",281
+22023,Cameron Parish,[],51
+22025,Catahoula Parish,"['Mitten Lake', 'Cypress Brake']",388
+22029,Concordia Parish,['Lower Sunk Lake'],46
+22031,De Soto Parish,[],14
+22033,East Baton Rouge Parish,[],9
+22035,East Carroll Parish,[],1
+22039,Evangeline Parish,[],58
+22041,Franklin Parish,[],3
+22043,Grant Parish,"['Long Brake', 'Devils Brake', 'Nugent Brake']",188
+22045,Iberia Parish,[],90
+22047,Iberville Parish,[],4
+22051,Jefferson Parish,[],1
+22053,Jefferson Davis Parish,[],61
+22055,Lafayette Parish,[],1
+22059,LaSalle Parish,[],245
+22061,Lincoln Parish,[],3
+22063,Livingston Parish,[],12
+22065,Madison Parish,"['Alligator Lake', 'Bell Island']",20
+22069,Natchitoches Parish,"['Devil Swamp', 'Cunningham Brake', 'Bird Lake', 'Clear Lake', 'Pierson Lake', 'Bayou Grande Lake', 'Blague Lake', 'Lake Chicot', 'Oil Well Lake', 'Vercher Lake', 'Blue Lake', 'Lake Cocodrie', 'Jim Young Lake', 'Lee Lake']",169
+22071,Orleans Parish,[],563
+22073,Ouachita Parish,"['Prairion Brake', 'Watson Brake', 'Lapine Brake']",8
+22077,Pointe Coupee Parish,['St Maurice Towhead'],3
+22079,Rapides Parish,"['Gourney Lake', 'Crane Lake', 'Boyce Lake', 'Clear Lake', 'Long Bridge Lake', 'Hog Lake', 'Tarkill Lake', 'Davis Nature Preserve']",349
+22081,Red River Parish,[],1
+22083,Richland Parish,[],8
+22085,Sabine Parish,[],4
+22087,St. Bernard Parish,['Mink Island'],114
+22089,St. Charles Parish,[],161
+22093,St. James Parish,[],25
+22095,St. John the Baptist Parish,[],9
+22097,St. Landry Parish,[],325
+22099,St. Martin Parish,[],87
+22101,St. Mary Parish,[],658
+22103,St. Tammany Parish,"['Gum Swamp', 'Boggy Bay', 'Cowpen Bay', 'Louie Reed Brake', 'Talisheek Swamp', 'Mud Swamp', 'Fritchie Marsh']",1232
+22105,Tangipahoa Parish,"['Bedico Swamp', 'Mile Marsh']",11
+22109,Terrebonne Parish,[],16
+22113,Vermilion Parish,[],14
+22115,Vernon Parish,['Castor Lake'],41
+22117,Washington Parish,[],316
+22119,Webster Parish,[],1
+22121,West Baton Rouge Parish,[],19
+22125,West Feliciana Parish,[],14
+22127,Winn Parish,['Quinn Brake'],13
+23001,Androscoggin County,[],178
+23003,Aroostook County,"['Thousand Acre Bog', 'Rosies Rock', 'Ketcham Bog', 'Mill Pond']",496
+23005,Cumberland County,"['Mud City Bog', 'The Heath', 'Scottow Bog', 'Ludlow Pond', 'The Swamp', 'Cranberry Swamp', 'Farwell Bog']",639
+23007,Franklin County,"['Witham Bog', 'Geneva Bog', 'Upper Hathan Bog']",82
+23009,Hancock County,"['Lily Pond', 'Bass Harbor Marsh', 'Gilmore Meadow', 'Jones Marsh', 'Long Heath', 'Sunken Heath', 'The Heath', 'Schoodic Bog', 'Beaver Marsh', 'Georges Heath', 'Ash Bog', 'Tucker Branch Swamp', 'Dog Brook Swamp', 'Alf Sproul Swamp', 'Downing Bog', 'Denbow Heath']",585
+23011,Kennebec County,"['Horseshoe Bog', 'Great Sidney Bog', 'Outlet Stream']",102
+23013,Knox County,"['Pond Swamp', 'Purgatory Swamp', 'Great Meadow']",197
+23015,Lincoln County,"['Joes Bog', 'Labrador Meadow', 'Heafitz Wetland', 'Penny Lake', 'Verney-Leighton Marsh']",224
+23017,Oxford County,"['Quint Bog', 'Bald Bog', 'Big Goose Pond', 'Little Goose Pond', 'Bean Bog', 'Swimming Bog', 'Witt Swamp', 'Santiago Bog', 'Beaver Bog', 'Cedar Bog']",428
+23019,Penobscot County,"['Vernal pool', 'Orono Bog', 'Number Twenty-six Swamp', 'Number Thirty-two Swamp', 'Whitten Bog', 'Alton Bog', 'Number Sixteen Swamp', 'Patterson Bog', 'Rocky Bog', 'Quakish Bog', 'Miner Brook Bog', 'Billy Doe Bog']",1018
+23021,Piscataquis County,"['West Shirley Bog', 'Ham Bog', 'Fourth Pond Bog', 'House Bog', 'Fourth Mountain Bog', 'Horseshoe Bog', 'Black Spruce Bog', 'Wadleigh Bog', 'Carry Bog', 'Snake Bog']",139
+23023,Sagadahoc County,[],58
+23025,Somerset County,"['East Pond Bog', 'Robbers Bog', 'Chase Pond', 'Whipple Bog', 'Johnson Bog', 'Elbow Bog', 'Scribner Bog', 'Little Indian Bog', 'Twelvemile Bog']",351
+23027,Waldo County,[],79
+23029,Washington County,"['Denbow Heath', 'Upper Heath', 'Great Heath', 'Brandy Heath', 'Taylor Branch Swamp', 'Big Heath', 'Crane Mill Brook Reservoir', 'Hollowell', 'Stanhope Meadow', 'Dudley Swamp', 'Lower Barn Meadow', 'Lower Magurrewock Marsh', 'Middle Magurrewock Marsh', 'Upper Magurrewock Marsh', 'Popple Flowage', 'MacDougall', 'Anvil Meadow']",556
+23031,York County,"['Cranberry Swamp', 'Cefalo Swamp', 'Hooper Swamp', 'Braceys Swamp', 'Rush Swamp', 'Cranberry Meadow', 'Beaver Dam Heath', 'Hoopers Swamp', 'The Marshes', 'Long Swamp', 'Webhannet River Marsh', 'The Heath', 'Punky Swamp', 'Arundel Swamp', 'Round Swamps', 'Saco Heath', 'Pickpole Swamp', 'Crow Swamp', 'Cow Island Ledge']",2080
+25001,Barnstable County,"['Little Sippewissett Marsh', 'Shallow Pond', 'Flat Pond Marshes', 'Five Islands', 'Martha Pond', 'Washburn Pond', 'Beaton Bog', 'Lily Pond Bog', 'Raccoon Swamp', 'Spruce Swamp', 'Cranberry bog', 'craigs bog #2', 'craigs bogs', 'craigs bog #3', 'craigs bogs #4', 'Cranberry Bog', 'Marsh', ""Old Man Jenkin's Pond"", 'Huckins Island', 'High Island', 'Little Thatch Island', 'Buttonbush Swamp', 'Blizzard Land', 'Island Pond', 'Black Pond', 'Billingsgate Shoal', 'Duane Pond', 'Morris Island Marshes', 'Kiddies Pond', 'Mud Pond', 'Strong Island Marshes', 'Sipson Island Meadow', 'West Namequoit Road Pond', 'Quail Acres Bog', 'Pochet Island Marshes', ""Penny's Pond"", ""Baker's Pond"", 'Higgins Pond', ""Uncle Dan's Pond"", 'Fresh Brook', 'Willow Pond', 'Grass Pond', 'Clapps Round Pond', 'Pasture Pond', 'Bennett Pond', ""Jimmy's Pond"", 'Little Pamet River Marshes', 'Pamet River Marshes', 'Grassy Pond', 'Featherbed Swamp']",6845
+25003,Berkshire County,"['Marsh Pond', 'Barnum Street Swamp', 'Wolf Swamp', 'Horseshoe Wetland', 'Parsons Marsh', 'Phelps Swamp', 'Geisler Swamp', 'The Black Swamp', 'Tyler Swamp', 'Tower Swamp', 'Bear Swamp']",353
+25005,Bristol County,"['Allens Pond Marshes', 'Sweedens Swamp', 'Wetland-North', 'Vernal Pool', 'Cranberry Bog', 'Miller Bird Sanctuary', 'Palmer River Conservation Area', 'Fox Lea', 'Cushing Family Marsh', 'Winthrop Street Conservation Area', 'Little Squannakonk Swamp', 'Tax Title Land', 'Bear Swamp', 'Three Mile River Floodplain', 'Pine Swamp', 'Mill Pond Estates Conservation Area', 'Foundry Street Conservation Area', 'Flyaway Pond', 'Little Cedar Swamp']",4729
+25007,Dukes County,"['Sengekontacket Pond Marshes', 'Farm Pond Marshes']",150
+25009,Essex County,"['Long Swamp', ""Ramsdell's Swamp"", 'Collins Cove', 'Pine Hole Bog', 'Rubbish Meadow', 'Mars Swamp', 'Cat Swamp', 'James Swamp', 'West Meadows', 'Pond Meadow', 'Crooked Pond', 'Cedar Pond', 'Cedar Swamp', 'Purgatory Swamp', 'Quaking Bog', 'Stiles Meadow', 'Long Meadow', 'Bunker Meadows', 'Sperry Pond', 'Sorag Pond', 'Field C', 'Moat', 'Maple Swamp', 'Old Crane Cranberry Bog', 'Fox Creek Marshes', 'Dolliver Beach Neck Marshes', 'Upper Banjo Pond', 'The Bars', 'Club Head Point', 'Club Head Sands', 'Lower Shad', ""Lord's Cape"", 'Roaring Bull', 'Ipswitch Great Flats', 'Thatch Bank', 'Richard Grounds', 'Spindle', 'Eel Run', 'Applerun', 'Nighway', 'Flatground', 'Strawberry Bed', 'Browns Flat', 'Middle Ground Sandbar', 'Rowley Inner-Outer Middle Ground', 'Rowley Middle Ground', 'Knobbs Reef Bar', ""Hog's Island Creek Point Clam Flats"", 'Rowley Reef Bar', 'Sand Spit', 'Nelson Island Marshes', ""Floyd's Creek"", 'Jacques High Sands', 'Line Creek Clam Flat', 'Hog Island Spit', 'Sand Creek Clam Flat', 'Jacques Creek Clam Flat', 'Point Peter', 'Hole In the Wall Clam Flat', 'Labor In Vain', 'Clay Bed', 'Jerry Lot Salt Marsh', 'Little River Marshes', 'Adams Salt Marsh', 'Kent Lot Salt Marsh', 'Newman Road Marshes', 'North Bank Clam Flat', 'Wet Meadow', 'The Mire', 'Hay Street Marshes', 'The Horseshoe', 'Dole Island Flat', 'Reef Island', ""Hale's Cove Clam Flat"", 'Ollwise Flats', 'Allweis Island', ""Tony's Clam Flat"", 'Cranberry Bog', 'Nearshore Bars', 'Duck Pond', 'Orchard Swamp', 'Beaver Swamp', 'Briar Swamp', 'Sargent Millpond', 'Azalea Swamp', 'Detention Basin', 'Pine Swamp', 'Humpsand Flat', 'Salisbury Flat', 'Floating Island', 'Coffins Point', 'Middle Ground', 'Port Arthur Flat', 'Northeast Sands', 'Flat Grounds', 'Ball Flats', 'Old Point Flats', 'South Breakers', 'Landward-Migrating Bars', 'North Breakers', 'Terminal Lobe']",5511
+25011,Franklin County,"['Bear Swamp', 'Keyes Swamp', 'Williams', 'Greene Swamp', 'Catamount Swamp', 'Shingle Swamp', 'Stevens Swamp']",138
+25013,Hampden County,"['Beaver pond', 'Beaver Swamp', 'Cedar Swamp']",312
+25015,Hampshire County,"['Tucker Adam Swamp', 'Hampton Ponds State Park', 'Pitchawam Swamp', 'Porter Swamp', 'Lawrence Swamp', 'Longely Swamp', 'The Swamp', 'the oxbow', 'Arcadia Bog', 'Hawley Swamp']",242
+25017,Middlesex County,"['Flagg Swamp', 'Broad Meadow Swamp', 'Old Bog', 'Muskee Bog', 'Bannister Meadows', ""Indian William's Meadow"", 'Pod Meadow', 'Chapels Swamp', 'Bare Pond', 'Sunrise Island', ""Hell's Half Acre"", 'Longfellow Bridge Wetland', 'Charles River Floating Wetland', 'Wolf Swamp', 'Tophet Chasm', 'Browns Swamp', 'Vernal Pool', 'Iron Ore Bog', 'South Acton Swamp', 'Cold Brook Meadow', 'Beaver Bog', 'Ministerial Swamp', ""Haywood's Meadow"", 'Wyman Meadow', 'Frog Pond', 'Gowings Swamp', ""Holden's Meadow"", 'Tadmuck Swamp', 'Boaz Brown Meadow', 'Nonesuch Meadow', 'Turtle Pond', 'grassy spot', 'White Cedar Swamp', 'Iron Ore Swamp', 'April Lane', 'Dead Swamp', 'Hauk Swamp', 'Keyes Brook', 'Stony Brook Reservoir', 'Tyngs Swamp', 'Clarks Pond', 'Chester Meadow', ""Shady's Pond"", 'Chandler Swamp', 'Lusitania Meadow', 'Bulfinch Marsh', 'Shady Hill Conservation Land', 'The Fields', 'Hemlock Pool', 'Mill Meadow', 'Great Swamp']",5688
+25019,Nantucket County,['Weweeder Ponds'],48
+25021,Norfolk County,"['Crystal Lake', 'Lily Hole', 'Dinglehole', 'Samoset Lane Cedar Swamp Brook', 'Stetson Pond', 'Asrboro Dr Wetlands', 'Fowl Meadows', 'Fowl Meadows Conservation Land', 'Spring Valley Cc', 'Fowl Meadow Wildlife Sanctuary', 'Traphole Brook Land', 'Bear Swamp', 'Brookfield Marsh', 'Purgatory Swamp', 'Great Cedar Swamp', 'Broad Meadow', 'Arnold Meadow', 'Hobart & Sherman St Peat Bog', 'Princess Eve Marsh', 'Weymouth Fore River Marshes', 'Squantum Marshes', 'Albert Golden Memorial Swamp', 'Ellms Meadow', 'Spring Street Marsh', 'Mohawk Salt Marsh', 'The Flats']",4787
+25023,Plymouth County,"['Cranberry Bog', 'Harwich Bogs', 'Bumpus Bog', 'Grady Pond', 'Prospect Bog Reservoir', 'Pond Street Pond', 'Torrey Pond', 'Weeks Pond', 'Horse Pond', 'Hedges Cranberry Bog', 'Little College Pond', 'Lost Pond', 'Hooper Pond', 'Turtle Pond', 'The Arm Pond', 'Poor Meadow Brook', 'Peat Hole Pond', 'Bear Swamp', 'Turkey Swamp', 'Stump Pond', 'Wildlands Trust - The Nook', 'Little Cedar Swamp', 'Dead Swamp', 'English Salt Marsh', 'Saquish Neck Marshes', 'Long Island', 'Little Harry Foot Island', 'Great Harry Foot Island', 'Scat Island', 'Valley Swamp', 'Weir River Marshes', 'Wildcat Pond', 'Flat Swamp', 'Black Pond Swamp', 'Ice Pond', 'WBZ Wetlands']",7975
+25025,Suffolk County,"['Duck Pool', 'The Meadow', 'West Salt Marsh', 'Diamond Creek Marshes']",302
+25027,Worcester County,"['Lamberton Brook Reservoir', 'Albee Meadow', 'Wolf Swamp', 'Cedar Swamp', 'Owl Swamp', 'Thompson Pond', 'Schoolhouse Pond', 'Sibley Reservoir', 'Morgan Swamp', 'Hall Swamp', 'Heron Marsh', 'Jamesville Pond', 'Williams Millpond', 'Mud Pond', 'Pine Swamp', 'Sawmill Pond', 'Scotland Swamp', 'Travers Pond', 'Tophet Swamp', 'Beaver Wetland', 'Beaver Pond', 'Flurcum Swamp']",7814
+26063,Huron County,[],55
+26147,St. Clair County,[],9
+26151,Sanilac County,['Minden Bog'],19
+27001,Aitkin County,[],1
+27005,Becker County,"['Old Tamerack Swamp', 'Big Swamp', 'Deer Swamp', 'Bear Swamp', 'Beaver Pond']",40
+27007,Beltrami County,[],307
+27013,Blue Earth County,"['Keech Slough', 'Cottonwood Lake', 'Thompson Slough Bottom', 'Perch Lake']",152
+27015,Brown County,['Emerson Sloughbed'],116
+27019,Carver County,"['Hoeffken Lake', 'Lake Patterson']",149
+27021,Cass County,[],15
+27023,Chippewa County,[],1
+27027,Clay County,[],16
+27029,Clearwater County,[],35
+27033,Cottonwood County,"['Lakebed', 'Berry Lake (Drained)', 'Zorn Lake (Drained)', 'Skanby Slough', 'The Back Slough', 'Mountain Lake (Drained)', 'Mountain Lake North Marsh (Drained)', 'Mountain Lake WPA', 'Regehr WMA']",288
+27037,Dakota County,"['Kettle Hole Marsh', 'Dutch Marsh', 'Russ Wahl Wetland']",728
+27039,Dodge County,[],5
+27043,Faribault County,[],62
+27045,Fillmore County,[],1
+27047,Freeborn County,[],85
+27049,Goodhue County,[],24
+27053,Hennepin County,"['Swamp/Marshland', 'Burns Marsh', 'Bass Lake', 'Cedar Meadows Wetland', 'Quaking Bog', 'Schaper Ballfield Pond']",600
+27055,Houston County,[],6
+27057,Hubbard County,[],12
+27061,Itasca County,['Rice Lake Bog'],403
+27063,Jackson County,"['Quevli/Kepstadt Slough Bottom', 'Goose Lakebed', 'Northwest Bay (Heron Lake)', 'Duck Lake']",437
+27069,Kittson County,[],35
+27071,Koochiching County,[],399
+27073,Lac qui Parle County,[],144
+27075,Lake County,['Floating Bog Bay'],50
+27077,Lake of the Woods County,[],39
+27079,Le Sueur County,['Harkridge Lake'],35
+27081,Lincoln County,[],234
+27083,Lyon County,"['Manguson Slough', 'Island Lake 20 Fen', 'KMHL Marshland', 'Sham Lake']",92
+27085,McLeod County,"['Bakers Lake', 'Bear Lakebed']",200
+27087,Mahnomen County,[],106
+27089,Marshall County,[],4
+27091,Martin County,"['East Holmes Lakebed', 'Mud Slough', ""King's Slough"", 'Fox Lake WMA', 'McGowan Slough']",216
+27093,Meeker County,[],1
+27099,Mower County,[],11
+27101,Murray County,"['Mde Chaŋ Naxmadaŋ (Little Hidden Wood Lake)', 'Big Slough', 'Elsie Marsh', 'Field Slough', 'Berry Slough']",195
+27103,Nicollet County,"['Mud Lakebed', 'Mud Lake', 'Little Lake', 'Goose Lakebed', 'Lakebed', 'Fox Lakebed']",118
+27105,Nobles County,[],135
+27107,Norman County,[],13
+27109,Olmsted County,[],75
+27113,Pennington County,[],5
+27117,Pipestone County,[],1
+27119,Polk County,['Sundew Bog'],164
+27123,Ramsey County,['Macalester Prairie'],76
+27125,Red Lake County,[],78
+27127,Redwood County,[],54
+27129,Renville County,[],91
+27131,Rice County,"['Eaves Pond South', 'Eaves Pond North', 'James Farm Marsh']",266
+27133,Rock County,[],22
+27135,Roseau County,[],8
+27137,St. Louis County,[],573
+27139,Scott County,"['Diddle De Woddle Lake', 'Louisville Swamp']",365
+27143,Sibley County,"[""Gus' Slough""]",23
+27147,Steele County,[],117
+27157,Wabasha County,[],10
+27161,Waseca County,['Gaiter Lake'],22
+27163,Washington County,[],198
+27165,Watonwan County,"['100-Acre Slough', ""Grogan's Slough"", 'Goose Slough', 'Nelson Slough (Drained)', 'Emerson Sloughbed', 'Bergdahl Lake']",134
+27169,Winona County,[],4
+27173,Yellow Medicine County,[],207
+28011,Bolivar County,[],9
+28019,Choctaw County,[],2
+28027,Coahoma County,[],21
+28029,Copiah County,[],18
+28031,Covington County,[],6
+28033,DeSoto County,[],2
+28035,Forrest County,[],5
+28039,George County,[],9
+28041,Greene County,[],1
+28043,Grenada County,[],4
+28045,Hancock County,[],114
+28047,Harrison County,[],32
+28049,Hinds County,[],7
+28051,Holmes County,[],1
+28055,Issaquena County,[],3
+28059,Jackson County,[],238
+28061,Jasper County,[],1
+28065,Jefferson Davis County,[],7
+28067,Jones County,[],62
+28069,Kemper County,[],4
+28071,Lafayette County,[],33
+28073,Lamar County,[],22
+28075,Lauderdale County,[],1
+28077,Lawrence County,[],172
+28083,Leflore County,[],1
+28085,Lincoln County,[],8
+28087,Lowndes County,[],1
+28089,Madison County,[],3
+28091,Marion County,['Rawls Bay'],264
+28093,Marshall County,[],2
+28103,Noxubee County,[],9
+28109,Pearl River County,"['Wheat Swamp', 'Old Mud Swamp']",310
+28111,Perry County,[],5
+28113,Pike County,[],1
+28117,Prentiss County,[],2
+28119,Quitman County,[],8
+28121,Rankin County,"['Harris Lake', 'Cresote Slough']",6
+28127,Simpson County,[],31
+28129,Smith County,[],1
+28131,Stone County,['India Bay'],9
+28133,Sunflower County,['Marshland'],10
+28135,Tallahatchie County,[],2
+28137,Tate County,[],8
+28143,Tunica County,[],78
+28147,Walthall County,[],11
+28149,Warren County,[],26
+28151,Washington County,[],3
+28153,Wayne County,[],1
+28155,Webster County,[],2
+28163,Yazoo County,[],1
+29005,Atchison County,[],3
+29007,Audrain County,['Teal Lake Wetland'],1
+29019,Boone County,[],1
+29021,Buchanan County,[],7
+29023,Butler County,[],39
+29033,Carroll County,[],84
+29045,Clark County,[],2
+29047,Clay County,[],16
+29061,Daviess County,[],1
+29069,Dunklin County,[],8
+29087,Holt County,[],16
+29089,Howard County,[],3
+29095,Jackson County,[],23
+29107,Lafayette County,[],8
+29111,Lewis County,[],27
+29115,Linn County,[],1
+29117,Livingston County,[],2
+29121,Macon County,[],13
+29127,Marion County,[],38
+29133,Mississippi County,[],7
+29137,Monroe County,[],13
+29143,New Madrid County,[],5
+29147,Nodaway County,[],1
+29149,Oregon County,[],1
+29155,Pemiscot County,[],5
+29163,Pike County,['Gilbert Island'],5
+29165,Platte County,[],13
+29171,Putnam County,"['Pool 1', 'Pool 2', 'Pool 4', 'Pool 5', 'Pool 3']",10
+29173,Ralls County,[],10
+29175,Randolph County,[],1
+29177,Ray County,[],18
+29181,Ripley County,[],1
+29195,Saline County,[],4
+29197,Schuyler County,"['Pool 6', 'Pool 7']",2
+29201,Scott County,[],1
+29207,Stoddard County,[],45
+29211,Sullivan County,"['Pool 4', 'Pool 5', 'Pool 2', 'Pool 3', 'Pool 1']",5
+29213,Taney County,[],7
+29223,Wayne County,['Mingo Swamp'],5
+30001,Beaverhead County,[],2
+30003,Big Horn County,['Muddy Lake'],2
+30005,Blaine County,['Fifteen Mile Lake'],23
+30007,Broadwater County,[],32
+30009,Carbon County,"['Broadwater Lake', 'Slough Lake']",25
+30011,Carter County,[],2
+30013,Cascade County,['Black Horse Lake'],7
+30015,Chouteau County,[],46
+30017,Custer County,[],4
+30023,Deer Lodge County,[],12
+30025,Fallon County,[],1
+30027,Fergus County,[],11
+30029,Flathead County,"['Lewis Meadows', 'Oasis Pond', 'McGee Meadow']",346
+30031,Gallatin County,[],73
+30033,Garfield County,[],1
+30035,Glacier County,[],84
+30039,Granite County,[],13
+30041,Hill County,[],8
+30043,Jefferson County,[],2
+30047,Lake County,"['Red Lake', 'Grants Meadow', 'Woodward Meadows']",102
+30049,Lewis and Clark County,['Keep Cool Lakes'],35
+30051,Liberty County,[],25
+30053,Lincoln County,"['Standard Lake', 'Pete Creek Meadows', 'La Foe Lake', 'Homes Lake', 'Dry Meadow', 'Arnolds Pond', 'Hagadore Lake']",436
+30055,McCone County,[],2
+30057,Madison County,"['Bow Basin', 'Willow Swamp']",23
+30059,Meagher County,[],9
+30061,Mineral County,[],3
+30063,Missoula County,"['Shoofly Meadows', 'Pasture Lake', 'Glacier Sloughs']",269
+30067,Park County,"['Casey Lake', 'Hellroaring Meadows', 'Pruitt Park']",54
+30071,Phillips County,"['McNeil Slough', 'Big McNeil Slough']",73
+30073,Pondera County,[],41
+30075,Powder River County,[],1
+30077,Powell County,[],47
+30081,Ravalli County,[],30
+30085,Roosevelt County,[],2
+30087,Rosebud County,[],95
+30089,Sanders County,"['Swamp Lake', 'Banana Lake']",37
+30091,Sheridan County,[],1
+30095,Stillwater County,['Heart Lake'],21
+30097,Sweet Grass County,[],35
+30099,Teton County,[],7
+30101,Toole County,[],40
+30103,Treasure County,[],7
+30105,Valley County,[],1
+30107,Wheatland County,[],22
+30111,Yellowstone County,[],10
+31005,Arthur County,[],5
+31017,Brown County,"['Clapper Marsh', 'Moon Lake Marsh']",2
+31019,Buffalo County,[],6
+31025,Cass County,[],8
+31031,Cherry County,['Murphy Swamp'],8
+31033,Cheyenne County,[],4
+31035,Clay County,[],2
+31045,Dawes County,[],1
+31047,Dawson County,[],36
+31057,Dundy County,[],6
+31063,Frontier County,[],4
+31069,Garden County,['H Lotspeich Lake'],201
+31073,Gosper County,[],1
+31075,Grant County,[],13
+31079,Hall County,[],23
+31081,Hamilton County,[],1
+31087,Hitchcock County,[],31
+31101,Keith County,[],1
+31109,Lancaster County,"['Muskrat Wetlands', 'Heron Wetlands', 'Wood Duck Wetlands']",92
+31111,Lincoln County,[],8
+31117,McPherson County,[],9
+31121,Merrick County,[],3
+31123,Morrill County,"['Rush Lake', 'Carver Lake', 'Grubny Lake', 'Bignell Lake']",99
+31127,Nemaha County,['Lincoln Bend Wetland'],2
+31131,Otoe County,[],17
+31135,Perkins County,[],3
+31147,Richardson County,[],2
+31157,Scotts Bluff County,[],6
+31161,Sheridan County,[],353
+31165,Sioux County,[],1
+31185,York County,[],1
+32001,Churchill County,[],2
+32005,Douglas County,[],17
+32007,Elko County,"['Ruby Lake North Marsh', 'Ruby Lake East Marsh', 'Ruby Lake', 'Franklin Lake', 'Wild Horse Wetland Area', 'Willis Meadow']",55
+32013,Humboldt County,['Mud Meadow'],131
+32015,Lander County,[],6
+32017,Lincoln County,"['Middle Pahranagat Lake', 'Schroeder Lake (drained)']",5
+32019,Lyon County,[],7
+32021,Mineral County,[],4
+32023,Nye County,"['Main Lake', 'Lower Dacey Slough', 'Upper Dacey Slough', 'Scoter Slough', 'Ibis Marsh', 'Metcalf Marsh', 'Old Place Reservoir']",18
+32027,Pershing County,[],7
+32031,Washoe County,"['Tahoe Meadow', 'Lower Price Lake', 'Damonte Ranch Wetlands', 'Dutch Louie Flat']",179
+32033,White Pine County,"['Shoshone Ponds', 'Ruby Lake']",4
+32510,Carson City,['Fulstone Wetlands'],12
+33001,Belknap County,['Merrymeeting Marsh'],397
+33003,Carroll County,"['Ryefield Marsh', 'Twentymile Brook Wetlands']",376
+33005,Cheshire County,"['Horseshoe Pond', 'Ice Pond', 'Taggart Meadows', 'Hodge Pond', 'McGregor Pond', 'Cummings Meadow']",1390
+33007,Coos County,"['Nash Stream Bog', 'Blueberry Swamp', 'No Ketchum Pond', 'Goose Pond', 'The Bog', 'Sweat Meadows', 'Hurlbert Swamp', 'Bear Rock Bog', 'Coon Brook Bog', 'Perry Stream Swamp']",169
+33009,Grafton County,"['Reeds Marsh', 'Horseshoe Pond Wetland', 'Little Rocky Pond', 'Quincy Bog', 'Ice Pond']",200
+33011,Hillsborough County,"['Carpenter Marsh', 'Mud Pond', 'Perkins Pond Marsh', 'Squamscot Bog', 'Binney Swamp', 'Beaver Brook Association', 'Haydens Millpond', 'The Cove', '2nd Beaver Pond', '5th Beaver Pond', '4th Beaver Pond', '2nd Beaver pond', '1st Beaver pond', '3rd Beaver Pond', 'Swamp', 'Dublin Road Wetland', 'Casalis Pond', 'Spruce Swamp', 'Colby Pond', 'Ponemah Bog', 'White Pine Swamp', 'Grassy Pond', 'Great Cohas Swamp']",786
+33013,Merrimack County,"['Marsh', 'Great Meadows', 'Six Acre Swamp', 'The Meadow', 'Stumpfield Marsh', 'Stark Pond Marsh', 'Elm Brook Marsh', 'South End Marsh', 'South Bow Road Parcel', 'Hornbeam Swamp', 'Cascade Marsh', 'Chadwick Meadows Marsh', 'Chandler Brook Wetlands', 'Hoyt Brook Pond']",1015
+33015,Rockingham County,"['Spruce Swamp', 'Abe Emerson Marsh', 'Bunker Pond', 'Betty Meadows', 'North Marsh', 'Black Rock Creek', 'Awcomin Marsh', 'Packer Bog', 'Belly Hack Bog', 'Goose Island', 'Fairhill Swamp', 'Little Cohas Marsh', 'Musquash Swamp', 'Geremonty Drive Wetland', 'Taylor Reservoir', 'Ballard Pond', 'Sawmill Swamp', 'Colby Brook', 'Hog Hill Swamp', 'Wetland', 'The Cove', 'Doles Island', 'Knowles Island', 'Commons Islet', 'Nilus Brook', 'Line Swamp']",2930
+33017,Strafford County,"[""Hull's Meadow"", 'Broad Marsh', 'Colby Marsh', 'The Bog', 'Creek Pond', ""Hill's Marsh"", ""Sallie's Fen"", ""Footman's Marsh"", 'Spruce Hole', ""Follet's Marsh"", 'Little Hale Pond', 'Bellamy River Reservoir', 'Gate Swamp', 'Heath Bog', 'Former Granite Quary', 'Ten Rod Marsh']",910
+33019,Sullivan County,['Beaver Pond'],683
+34001,Atlantic County,"['Tuckahoe River Island', 'Atlantic Heights Bird Conservatory', 'Mankiller Island']",1028
+34003,Bergen County,"['Azaela Swamp', 'Tamarack Swamp', 'Sanders Pond', 'Havemeyer Reservoir Basin', 'Bear Swamp', 'Spruce Swamp', 'Cat Swamp', 'Allendale Wetlands', 'Lehrer Tract', ""Macfadden's Wetlands""]",330
+34005,Burlington County,['Lower Schafer Bog'],1412
+34007,Camden County,[],208
+34009,Cape May County,"['Wishbone Island', 'Firman Island', 'Beach Creek Meadow', 'Buck Island', 'Sedge Island', 'Upper Island']",504
+34011,Cumberland County,[],243
+34013,Essex County,[],102
+34015,Gloucester County,[],73
+34017,Hudson County,"['Caven Point', 'Bergen Arches', 'Anderson Creek Marsh', 'Secaucus High School Marsh']",169
+34019,Hunterdon County,[],139
+34021,Mercer County,[],240
+34023,Middlesex County,"['Burnet Swamp', ""Weequahela's Pond""]",502
+34025,Monmouth County,[],815
+34027,Morris County,"['Marsh Meadow', 'Black Meadows Preserve', 'Forge Pond', 'Little Cat Swamp', 'Bear Swamp', 'Big Cat Swamp', 'Bog and Vly Meadows', 'Valley Spring Lake']",373
+34029,Ocean County,"['Mordecai Island', 'Shelter Island', 'Sand Island', 'Woods Island', 'Florence T. Allen Conservation Area']",1086
+34031,Passaic County,"['Catnest Swamp', 'saturated swamp', 'Jennings Hollow', 'Walker Avenue Wetlands', 'Two Sisters Wetland Preserve Property', 'Purgatory Swamp', 'Moon Lake', 'Fort Swamp', 'Sasquatch Swamp']",203
+34035,Somerset County,[],291
+34037,Sussex County,"['Quicks Island', 'Cedar Swamp', 'Pine Swamp', 'Kazmar Pond', 'Brighton Lake', 'Andover Ponds']",798
+34039,Union County,[],71
+34041,Warren County,"['Willever Lake', ""Bob's Bog""]",164
+35001,Bernalillo County,"['Rio Grande Bosque', 'Cienega Meadow']",22
+35003,Catron County,[],9
+35007,Colfax County,['La Grulla Lake'],16
+35009,Curry County,[],1
+35027,Lincoln County,[],6
+35028,Los Alamos County,[],1
+35031,McKinley County,[],6
+35033,Mora County,[],1
+35039,Rio Arriba County,"['Laguna de la Grulla', 'Vega Redonda', 'Cienega Redonda', 'Cienega del Oso']",18
+35043,Sandoval County,[],7
+35045,San Juan County,[],56
+35047,San Miguel County,[],1
+35049,Santa Fe County,[],21
+35053,Socorro County,[],23
+35055,Taos County,[],13
+35057,Torrance County,[],9
+35061,Valencia County,['Whitfield Wildlife Conservation Area'],1
+36001,Albany County,[],307
+36005,Bronx County,['Cattail Marsh'],39
+36011,Cayuga County,"['Loosestrife Pond', 'Hickory Pond', 'Breeder Pond', 'Coot Pond', 'Lost Pond', 'Gander Pond', 'Black Duck Pond', 'Wood Duck Pond', 'Cook Pond', 'Buttonbush Marsh']",55
+36019,Clinton County,[],18
+36021,Columbia County,['Cheviot Marsh'],51
+36025,Delaware County,[],26
+36027,Dutchess County,"['Greenfly Wetland', 'North Bay', 'Tamarack Swamp', 'Ryder Pond']",240
+36029,Erie County,['Grass Island'],32
+36031,Essex County,"['Bailey Pond', 'Big Marsh', 'Marcy Dam Pond', 'Marcy Swamp', 'South Meadow', 'North Meadow', 'Little Meadows', 'Beaver Meadow Marsh', 'Desolate Swamp', 'Haymarsh', 'Cranberry Marsh', 'Carey Marsh', 'Tubmill Marsh', 'Sawmill Pond', 'Merriam Swamp']",700
+36033,Franklin County,[],62
+36035,Fulton County,"['West Millpond', 'Tamarack Swamp']",71
+36037,Genesee County,['Onondaga Pool'],185
+36039,Greene County,"['Hidden Marsh', 'Vosburgh Swamp']",138
+36041,Hamilton County,"['Carter Mudhole', 'Priests Vly', 'Johnson Swamp', 'Sampson Bog', 'McGinn Meadows']",195
+36043,Herkimer County,"['Desert Swamp', 'Lyons Marsh', 'Maumee Swamp']",47
+36045,Jefferson County,[],170
+36047,Kings County,"['Gowanus Canal Sponge Park', 'Vale of Cashmere', 'Stony Creek Marsh', 'Yellow Bar Hassock', 'Tidal Marsh at John Street']",42
+36049,Lewis County,[],11
+36053,Madison County,[],11
+36055,Monroe County,"['Wetlands preservation site', 'Kennedy Bog', 'Thousand Acre Swamp', 'Cranberry Pond', 'Tamarack Swamp']",167
+36057,Montgomery County,[],60
+36059,Nassau County,"[""Udall's Cove""]",191
+36061,New York County,"['Pier 1 Salt Marsh', 'Estuarium']",12
+36063,Niagara County,[],120
+36065,Oneida County,[],99
+36067,Onondaga County,[],73
+36069,Ontario County,[],4
+36071,Orange County,"['Long Swamp', 'Round Swamp', 'Steeny Kill Swamp', 'shrub swamp', 'shrub swamp & marsh', 'evergreen & deciduous tree swamp', 'tree swamp', 'rhododendron swamp', 'deciduous tree swamp', 'deciduous shrub swamp', 'evergreen acidic shrub swamp', 'deciduous & evergreen tree swamp', 'New York Department of Environmental Conservation lands', 'Mud Hole', 'Manayunk Swamp', 'Bog Meadow', 'Black Ash Swamp', 'Pine Swamp', 'Bockey Swamp', 'Bird Wooded Wetland']",1166
+36073,Orleans County,[],121
+36075,Oswego County,[],63
+36077,Otsego County,[],5
+36079,Putnam County,"['Manitou Marsh', 'Constitution Marsh', 'Blueberry Swamp', 'Cranberry Bog', 'Peeper Pond']",117
+36081,Queens County,"['Little Egg Marsh', 'Big Egg Marsh', 'Black Bank Marsh', 'Black Wall', 'South Marsh', 'Silver Hole Marsh', 'East High Meadow', 'Broad Creek Marsh', 'John Riedl Wildflower Meadow']",142
+36083,Rensselaer County,"['Black Swamp', ""Z's wetlands"", 'Big Beaver Bog', 'Moose Meadow', 'Blueberry Swamp', 'Beaver Marsh']",179
+36085,Richmond County,"['Lemon Creek - Sandy Brook Bluebelt', 'Pocket Wetland']",187
+36087,Rockland County,"['Squirrel Swamp', 'Grape Swamp', 'Lower Pound Swamp', 'Salisbury Meadow']",263
+36089,St. Lawrence County,['Chaumont Swamp'],279
+36091,Saratoga County,"['Ludlow Swamp', 'Tamarack Vly', 'Niffin Vly', 'Loon Vly', 'Bear Swamp', 'Miner Mill Vly']",221
+36093,Schenectady County,[],201
+36095,Schoharie County,[],35
+36099,Seneca County,['Puddler Marsh'],54
+36103,Suffolk County,"['North Haven Tidal Wetlands Area', 'Edwards Island Sanctuary', 'Crab Meadow', 'Scuttle Hole', 'kettle pond', 'Sag Harbor Tidal Wetlands Area']",1722
+36105,Sullivan County,"['acidic evergreen swamp', 'rhododendron swamp', 'beaver swamp', 'Ash Swamp', 'Bear Swamp', 'Black Ash Swamp', 'Froschs Swamp', 'Cow Swale Swamp', 'Decker Swamp', 'Big Brady Swamp', 'Gimlet Hole', 'Mud Pond Swamp', 'Smith Mill Swamp', 'beaver area', 'Forest Glen Lake', 'Schillings Lake', 'Pine Swamp', 'PSS3/1Ba', 'PSS3Ba']",348
+36111,Ulster County,"['Pine Swamp', 'Cedar Swamp', 'Red Cedar Swamp', 'Vly Swamp', 'Balsam Swamp', 'Wet Willy Swamp', 'Hesitation Marsh', 'Beaver Meadow', ""Ayer's Swamp""]",327
+36113,Warren County,"['Buck Meadow Flow', 'Big Hollow Reservoir', 'The Marsher']",228
+36115,Washington County,"['Finch Marsh', 'Negro Marsh', 'Charter Marsh']",101
+36117,Wayne County,[],102
+36119,Westchester County,"['Shrub Oak Wetlands', 'Gedney Swamp', 'Pitch Swamp', 'Michigan Road Marsh', 'Boutonville Swamp', 'Levy wetland', 'Pryer Manor Marsh', 'Pine Brook Wetlands']",323
+37001,Alamance County,[],11
+37005,Alleghany County,[],4
+37007,Anson County,['Buck Swamp'],31
+37009,Ashe County,[],5
+37011,Avery County,[],37
+37013,Beaufort County,['Rumley Marsh'],952
+37015,Bertie County,"['Wood Island', 'Louse Island']",329
+37017,Bladen County,"['Paris Millpond', 'Round Pond Bay', 'Cotton Head Bay', 'Beaver Dam Swamp', 'Mccall Swamp', 'Tatum Millpond Bay', 'Bloody Branch Bay', 'Dickenson Meadow', 'Charlie Long Millpond', 'Big Bay', 'Corson Bay', 'Big Slough', 'Raccoon Swamp', 'Big Galberry Bay', 'Round Pond', 'Flat Pond', 'Cypress Pond']",623
+37019,Brunswick County,"['Gold Mine Creek', 'Bald Head Island Natural Area', 'Snows Marsh', 'Redwater Bay', 'Buckhorn Savanna', 'Long Bay', 'Big Bay']",2038
+37021,Buncombe County,[],6
+37023,Burke County,['Johns River Game Land (Permit Only)'],18
+37025,Cabarrus County,[],8
+37027,Caldwell County,['NC Land and Water Fund Conservation Agreement'],4
+37029,Camden County,[],77
+37031,Carteret County,"['White Shoal Marsh', 'Big Shoal Marsh', 'Morgan Island', 'Sheep Island', 'Whitehurst Island', 'Chain Shot Island']",1445
+37033,Caswell County,[],23
+37035,Catawba County,[],6
+37037,Chatham County,['Il Penseroso Acres Lake'],35
+37039,Cherokee County,[],23
+37041,Chowan County,['Holiday Island'],198
+37043,Clay County,[],3
+37045,Cleveland County,[],4
+37047,Columbus County,[],573
+37049,Craven County,"['Baybush Swamp', 'Trent Marsh', 'Jack Smith Creek Wetlands', 'Wrc- Neuse River Island', 'Neuse River Game Land', 'Mill Swamp']",343
+37051,Cumberland County,"['Bushy Lake', 'White Pond Bay', 'Black Ground Bay', 'Duck Pond Swamp', 'Brace Pocosin', 'Rhodes Pond']",400
+37053,Currituck County,"['Mary Island', 'Swan Island Tract']",187
+37055,Dare County,"['Smith Island', 'Bells Island', 'No Ache Island', 'Aunt Phoebes Marsh']",567
+37057,Davidson County,[],49
+37059,Davie County,[],16
+37061,Duplin County,['Maxwell Millpond'],246
+37063,Durham County,['Wetlands Pond'],61
+37065,Edgecombe County,[],178
+37067,Forsyth County,['Lake Katherine'],32
+37069,Franklin County,[],35
+37071,Gaston County,[],13
+37073,Gates County,"['Run Of Swamp', 'Horsepen Pocosin', 'Jones Swamps', 'Duke Swamp']",259
+37075,Graham County,[],1
+37077,Granville County,[],21
+37079,Greene County,[],56
+37081,Guilford County,['Philadelphia Lake'],65
+37083,Halifax County,[],415
+37085,Harnett County,"['Macdonald Swamp', 'Reedys Swamp', 'Black Swamp', 'Byrd Mill Pond']",236
+37089,Henderson County,[],6
+37091,Hertford County,['Hoggard Swamp'],188
+37093,Hoke County,['Black Branch'],583
+37095,Hyde County,['New Lake'],479
+37097,Iredell County,[],14
+37099,Jackson County,[],6
+37101,Johnston County,"['Whitley Pond Number One', 'Johnson Pond', 'Swan Pond', 'Holts Pond']",260
+37103,Jones County,[],46
+37105,Lee County,[],48
+37107,Lenoir County,[],74
+37109,Lincoln County,['Mosquito Den Swamp'],13
+37111,McDowell County,[],16
+37113,Macon County,[],5
+37117,Martin County,[],110
+37119,Mecklenburg County,[],140
+37121,Mitchell County,[],1
+37123,Montgomery County,[],4
+37125,Moore County,[],130
+37127,Nash County,[],151
+37129,New Hanover County,[],344
+37131,Northampton County,[],265
+37133,Onslow County,"['Great Sandy Run Pocosin', 'Horse Swamp', 'Juniper Swamp']",712
+37135,Orange County,[],54
+37137,Pamlico County,['Light Ground Pocosin'],1129
+37139,Pasquotank County,[],132
+37141,Pender County,"['Raccoon Island', 'Lee Hugh Bay', 'Long Bay', 'Hawes Marsh', 'Curve Of The Railroad Bay', 'Two Pond Bay', 'Holly Shelter Swamp']",726
+37143,Perquimans County,[],290
+37145,Person County,[],24
+37147,Pitt County,[],124
+37149,Polk County,[],3
+37151,Randolph County,[],14
+37153,Richmond County,[],92
+37155,Robeson County,"['Contrary Swamp', 'Juniper Bay Wetland Research Area', 'Cypress Bay']",1460
+37157,Rockingham County,[],50
+37159,Rowan County,[],22
+37161,Rutherford County,[],14
+37163,Sampson County,"['Eb Bay', 'Dismal Bay']",411
+37165,Scotland County,[],423
+37167,Stanly County,[],12
+37169,Stokes County,[],28
+37171,Surry County,[],2
+37177,Tyrrell County,"['Hollow Ground Swamp', 'Crane Island']",174
+37179,Union County,[],32
+37181,Vance County,[],7
+37183,Wake County,"['Lake Betz Wetlands', 'Alston Ridge Wetland', 'Panther Lake', 'AXIS Community Pool', 'Lake Myra', 'Baker Pond', 'Efland Millpond', 'Robertsons Pond']",156
+37185,Warren County,[],54
+37187,Washington County,['Indian Swamp'],110
+37189,Watauga County,[],59
+37191,Wayne County,"['Cogdells Pond', 'Juniper Pond']",174
+37193,Wilkes County,[],6
+37195,Wilson County,[],177
+37197,Yadkin County,[],4
+37199,Yancey County,[],1
+38001,Adams County,[],2
+38003,Barnes County,['Orner Slough'],480
+38005,Benson County,[],4543
+38009,Bottineau County,[],1202
+38013,Burke County,['Paradise Meadow'],1
+38015,Burleigh County,['McKenzie Slough'],8
+38017,Cass County,[],109
+38019,Cavalier County,[],3076
+38023,Divide County,[],14
+38025,Dunn County,[],60
+38027,Eddy County,[],1037
+38029,Emmons County,[],6
+38031,Foster County,[],119
+38035,Grand Forks County,[],363
+38039,Griggs County,['Rush Lake'],449
+38049,McHenry County,[],132
+38053,McKenzie County,[],5
+38055,McLean County,[],16
+38057,Mercer County,[],39
+38059,Morton County,[],29
+38061,Mountrail County,[],3
+38063,Nelson County,[],771
+38065,Oliver County,[],5
+38067,Pembina County,[],274
+38069,Pierce County,[],468
+38071,Ramsey County,[],2784
+38075,Renville County,[],17
+38079,Rolette County,['Pass Lake'],598
+38083,Sheridan County,[],1238
+38085,Sioux County,[],9
+38087,Slope County,[],1
+38089,Stark County,[],22
+38091,Steele County,[],1678
+38093,Stutsman County,['Dollar Slough'],17
+38095,Towner County,[],1233
+38097,Traill County,[],94
+38099,Walsh County,[],246
+38101,Ward County,[],12
+38103,Wells County,[],171
+38105,Williams County,[],10
+40003,Alfalfa County,['Great Salt Plains'],1
+40005,Atoka County,[],3
+40007,Beaver County,[],2
+40011,Blaine County,[],58
+40013,Bryan County,[],4
+40015,Caddo County,['Cowden Laterals Site 13 Reservoir'],1
+40017,Canadian County,[],13
+40019,Carter County,[],2
+40021,Cherokee County,[],8
+40023,Choctaw County,[],40
+40027,Cleveland County,[],11
+40031,Comanche County,[],1
+40037,Creek County,[],98
+40039,Custer County,[],14
+40041,Delaware County,[],6
+40043,Dewey County,[],10
+40045,Ellis County,[],2
+40047,Garfield County,[],2
+40059,Harper County,[],3
+40061,Haskell County,[],47
+40063,Hughes County,[],18
+40071,Kay County,[],3
+40073,Kingfisher County,[],7
+40077,Latimer County,[],6
+40079,Le Flore County,[],4
+40081,Lincoln County,[],1
+40083,Logan County,[],13
+40085,Love County,[],4
+40087,McClain County,[],20
+40089,McCurtain County,[],12
+40091,McIntosh County,[],81
+40093,Major County,[],3
+40095,Marshall County,[],2
+40097,Mayes County,[],11
+40101,Muskogee County,[],38
+40103,Noble County,['Upper Red Rock Creek Site 50 Reservoir'],4
+40107,Okfuskee County,[],45
+40109,Oklahoma County,[],21
+40111,Okmulgee County,['Oknoname 111058 Reservoir'],90
+40113,Osage County,[],7
+40115,Ottawa County,[],1
+40117,Pawnee County,[],7
+40119,Payne County,[],11
+40121,Pittsburg County,[],77
+40125,Pottawatomie County,[],19
+40127,Pushmataha County,[],4
+40129,Roger Mills County,['Upper Washita Site 53 Reservoir'],3
+40131,Rogers County,[],4
+40133,Seminole County,[],34
+40135,Sequoyah County,[],19
+40143,Tulsa County,[],6
+40145,Wagoner County,[],18
+40147,Washington County,[],2
+40151,Woods County,[],2
+40153,Woodward County,[],9
+41001,Baker County,"['Mayflower Meadow', 'Dutch Flat']",19
+41003,Benton County,"['Mitigation Wetland', 'Cabell Marsh', 'Finger Ponds', 'Brown Swamp', 'Cheadle Marsh', 'Dunawi Wetlands', 'Jackson Frazier Wetland']",77
+41005,Clackamas County,"['Peach Cove Fen', 'Sevcik Pond', 'Pennywood Pond Open Space', 'Minthorn Springs', 'Gawley Meadow', 'Lost Creek Meadow', 'Wards Meadow', 'Lemiti Meadow', 'Salmon River Meadows', 'Red Top Meadow', 'Summit Meadows', 'Deer Meadows']",380
+41007,Clatsop County,"['Little Pompey Wetland', 'Cullaby Slough', 'Jeffers Slough', 'Cooperage Slough', 'Swash Lake', 'Jetty Sands']",218
+41009,Columbia County,[],111
+41013,Crook County,['Little Summit Prairie'],52
+41015,Curry County,[],3
+41017,Deschutes County,"['Poverty Meadows', 'Round Meadow', 'Dilman Meadows', 'Wire Meadow', 'Long Prairie', 'Paulina Prairie', 'Swampy Lakes', 'Trout Creek Swamp', 'Black Butte Swamp', 'Bearwallows Spring', 'Indian Ford Meadow', 'Zell Pond']",258
+41019,Douglas County,"['Beaver Swamp', 'Duck Pond Park', 'Toolbox Meadows', 'Big Swamp']",41
+41021,Gilliam County,[],4
+41023,Grant County,"['Big Flat', 'Riley Creek Meadow', 'Tamarack Swamp', 'Geary Meadow', 'Canyon Meadows Lake', 'Crawfish Meadow']",47
+41025,Harney County,"['Lily Lake', 'Whorehouse Meadow']",22
+41027,Hood River County,"['Hood River Meadow', 'Eden Park', ""Wy'east Basin""]",20
+41029,Jackson County,"['Sediment Pond', 'Sharon Fen', 'Parsnip Lakes', 'Big Elk Meadow', 'Willow Prairie']",377
+41031,Jefferson County,['Rimrock Springs'],27
+41033,Josephine County,"['Whiskey Creek Fen', 'Darlingtonia Fen', 'Golden Coyote Wetland, historic mining area']",80
+41035,Klamath County,"['Cherry Glade', 'Buck Lake', 'Furber Marsh', 'Long Lake', 'Sesti Tgawaals Marsh', 'Hanks Marsh', 'Buckmaster Flat', 'Fishhole Flat', 'Little Fishhole Flat', 'Bull Swamp', 'McKie Meadow', 'Shoalwater Bay Marsh', 'Big Marsh']",731
+41037,Lake County,"['Sycan Marsh', 'Silver Creek Marsh', 'Paulina Marsh', 'Tule Swamp', 'Wool Lake', 'Squib Waterhole', 'Reservoir Lake', 'Moss Flat']",141
+41039,Lane County,"['Swale Wetlands', 'Swale runoff', 'West Eugene Wetlands', 'Bertelsen Slough', 'Mirror Pond', 'Mule Prairie', 'Rankin Horse Pasture', 'Gold Lake Bog', 'Black Meadows', 'Beaver Marsh', 'Cedar Swamp', 'Quaking Aspen Swamp']",329
+41041,Lincoln County,"['Beaver Pond', 'Jeeter Prairie']",25
+41043,Linn County,"['Beaver Marsh', 'Fish Lake', 'Lava Lake']",53
+41045,Malheur County,[],36
+41047,Marion County,"['Pintail Marsh', 'Mohoff Pond', 'Egret Marsh', 'Mallard Marsh', 'Eagle Marsh', 'Waldo Lake Reservoir', 'Cornpatch Meadow', 'Case Creek Reservoir']",102
+41049,Morrow County,[],33
+41051,Multnomah County,"['Heron Pointe Wetland', 'Foster Floodplain Natural Area', 'Sia Sellu Circle', 'Holgate Lake', 'Alsop/Brownwood', 'Harborton Wetlands', 'Virginia Lake', 'Shwakuk Wetland', 'Blue Heron Wetlands', 'Flyway Wetlands Natural Area', 'Jewit Lake', 'Fairview Creek Headwaters', 'Mitchell Creek Wetland Area']",523
+41053,Polk County,['Baskett Slough'],22
+41055,Sherman County,[],3
+41057,Tillamook County,['Doris Davis Beaver Marsh'],89
+41059,Umatilla County,[],29
+41061,Union County,['West Eagle Meadow'],9
+41063,Wallowa County,[],12
+41065,Wasco County,"['Camas Prairie', 'Tule Lake']",8
+41067,Washington County,"['Coffee Creek Wetlands', 'Wapato Lake', 'Graham Reservoir', 'Bobcat Marsh', 'Kingfisher Marsh', 'Hillwood', 'Brookwood Crossing', 'Candlewood', 'Talwood', 'Reedville Meadows', 'Killin Wetlands', 'Sunset Log Pond', 'Koller Wetland Park', 'Hedges Creek Marsh', 'Nyberg Creek Preserve', 'Scholls Wetlands', 'Southwest 135th and Scholls Ferry Property', 'Hart Wetland', 'Hunters Glen', 'Winter Lake Drive Property', 'McKenna Terrace Wetlands', 'Lily Pond', 'Cattail Marsh', 'Merlo Station Open Space', 'C.E. Mason Wetlands Natural Area', 'Peppertree Wetlands Natural Area', 'Johnson Creek Wetlands Area', 'Knez Wetland', 'Moshofsky Swamp', 'Boomscooter Pond']",1452
+41069,Wheeler County,[],2
+41071,Yamhill County,['Aders Sump'],39
+42017,Bucks County,[],11
+42101,Philadelphia County,[],1
+42103,Pike County,"['Long Swamp', 'Nicks Swamp', 'Bear Rock Swamp', 'DuBois Swamp', 'Laurel Swamp', 'PEM1A']",49
+44001,Bristol County,[],96
+44003,Kent County,"['Great Cedar Swamp', 'Mud Bottom Creek', 'Dead Swamp', 'Bear Swamp']",363
+44005,Newport County,[],318
+44007,Providence County,"['Dark Swamp', 'White Cedar Swamp', 'New Pond', 'Town Line Swamp', 'Ash Swamp', 'Pine Swamp']",223
+44009,Washington County,"['Rossis Swamp', 'Mill Tail Swamp', 'Ambrose Swamp', 'Sandy Hill Tug Swamp', 'Niles Swamp', 'Clayhead Swamp', 'Arrow Swamp', 'Crying Bog', 'Metcalf Wildlife Marsh', 'Money Swamp']",727
+45001,Abbeville County,[],19
+45003,Aiken County,['Robinson Pond'],16
+45005,Allendale County,[],317
+45007,Anderson County,[],38
+45009,Bamberg County,"['Chitty Pond', 'Cypress Pond']",386
+45011,Barnwell County,['Ditch Pond'],9
+45013,Beaufort County,"['White Ibis Pond', 'Pocosin', 'Pine Flatwoods', 'Barker Pond', 'Drydock 1']",4427
+45015,Berkeley County,"['Sandy Run', 'Rox Pond', 'Daisy Swamp', 'Laurel Swamp', 'Tillmans Bay', 'Vanilla Bay', 'Smith Swamp', 'Chipper Swamp', 'Long Pond Savannah', 'Rock Hole', 'Caton Bay', 'Bee Tree Bay', 'Simmons Bay', 'Chinquapin Bay', 'Todd Bay', 'Bulltown Bay', 'Spring Grove Swamp', 'Middle Bay', 'Mill Bay', 'Graveyard Bay', 'Little Ocean Bay', 'Boggy Swamp', 'Kirk Swamp']",3041
+45017,Calhoun County,[],173
+45019,Charleston County,"['Isinglass Swamp', 'Goat Island', 'East Marsh Island', 'Goldbug Island', 'Big Hill Marsh']",3082
+45021,Cherokee County,[],27
+45023,Chester County,[],16
+45025,Chesterfield County,"['Campbell Lake', 'Eureka Lake']",408
+45027,Clarendon County,[],17
+45029,Colleton County,"['Green Meadow', 'Burden Swamp']",2716
+45031,Darlington County,"['Prestwood Lake', 'Muldrow Mill Pond']",385
+45033,Dillon County,"['Pigeon Bay', 'Buck Swamp', 'Ben Pond', 'Kelly Bay', 'Cypress Ponds', 'Manning Bay', 'Indigo Bay', 'Betsy Jackson Bay']",520
+45035,Dorchester County,"['Spooler Swamp', 'Buck Dam Swamp']",1302
+45037,Edgefield County,[],16
+45039,Fairfield County,[],8
+45041,Florence County,"['Tans Bay', 'Great Pee Dee River Swamp']",418
+45043,Georgetown County,"['Canaan Bay', 'Mackey Bay', 'White Oak Bay', 'Flat Bay', 'Boety Bay', 'Horse Swamp', 'Wraggs Bay', 'Camp Bay', 'Butler Island', 'Joe Bay', 'Broton Lake', 'Pee Dee Swamp']",692
+45045,Greenville County,['Reedy River Wetlands Preserve'],89
+45047,Greenwood County,[],33
+45049,Hampton County,[],1186
+45051,Horry County,"['Pawleys Swamp', 'Dead Bone Swamp', 'Gross Swamp', 'Folly Swamp', 'Tuckahoe Bay', 'Cottonpatch Bay', 'Michael Hole Bay', 'Kudge Bay', 'Lake Busbee', 'Dawsey Swamp', 'Tredwell Swamp', 'Wildcat Swamp', 'Loosing Swamp', 'Mill Swamp', 'Turf Camp Bay', 'Joiner Swamp', 'Bullit Bay', 'Wolf Pit Bay', 'Hannah Bay', 'Fifteenmile Bay', 'Black Creek Bay', 'Cartwheel Bay', 'Gray Bay', 'Mossy Bay', 'Doe Bay', 'Stick Bay', 'Grass Bay', 'Reedy Bay', 'Bogue Bay', 'Sand Hill Bay', 'High Hill Bay', 'Watts Bay', 'Prices Swamp']",1563
+45053,Jasper County,['Kingfisher Pond'],1641
+45055,Kershaw County,[],11
+45057,Lancaster County,[],37
+45059,Laurens County,[],32
+45061,Lee County,[],3
+45063,Lexington County,[],32
+45065,McCormick County,[],26
+45067,Marion County,"['Maple Swamp', 'Bear Swamp', 'Cane Swamp', 'Catfish Swamp', 'Mill Bay', 'Middle Bay', 'Fox Bay', 'Little Horsepen Bay', 'Reedy Creek Bay', 'Tenmile Bay', 'Rabbit Bay', 'Piney Bay', 'Boggy Bay']",536
+45069,Marlboro County,"['Goose Marsh', 'Burnt Bay', 'Mossy Bay', 'Hilson Bay', 'Sandy Ocean', 'Juniper Bay']",1063
+45071,Newberry County,[],36
+45073,Oconee County,[],11
+45075,Orangeburg County,['Polk Swamp'],1141
+45077,Pickens County,[],7
+45079,Richland County,['Lotts Mill Pond'],45
+45081,Saluda County,[],57
+45083,Spartanburg County,[],47
+45085,Sumter County,"['Big Bay', 'Carolina Bay', 'carolina bay', 'Cypress Bay', 'Green Swamp', 'Woods Bay']",89
+45087,Union County,[],50
+45089,Williamsburg County,[],106
+45091,York County,[],31
+46003,Aurora County,[],25
+46011,Brookings County,[],75
+46015,Brule County,['Snow Lake'],13
+46017,Buffalo County,[],2
+46019,Butte County,[],5
+46023,Charles Mix County,['Lake George'],22
+46029,Codington County,[],52
+46031,Corson County,[],1
+46035,Davison County,[],10
+46039,Deuel County,[],842
+46043,Douglas County,[],1
+46049,Faulk County,[],1
+46051,Grant County,[],48
+46053,Gregory County,[],1
+46055,Haakon County,[],1
+46057,Hamlin County,[],3
+46059,Hand County,[],5
+46061,Hanson County,[],5
+46067,Hutchinson County,[],4
+46069,Hyde County,[],5
+46071,Jackson County,[],3
+46075,Jones County,[],3
+46077,Kingsbury County,[],1
+46079,Lake County,"['Reynolds Slough', 'Fods Slough']",10
+46081,Lawrence County,['Dry Lake Pond'],16
+46083,Lincoln County,['Atkins Waterfowl Production Area'],33
+46085,Lyman County,[],4
+46087,McCook County,[],2
+46093,Meade County,[],10
+46099,Minnehaha County,[],48
+46102,Oglala Lakota County,[],10
+46103,Pennington County,[],16
+46111,Sanborn County,['Rifle Lake'],1
+46115,Spink County,[],1
+46117,Stanley County,[],2
+46119,Sully County,[],1
+46123,Tripp County,[],2
+46125,Turner County,[],5
+46127,Union County,[],2
+46135,Yankton County,[],1
+47003,Bedford County,[],1
+47005,Benton County,[],1
+47009,Blount County,[],6
+47011,Bradley County,[],8
+47013,Campbell County,[],1
+47017,Carroll County,[],9
+47021,Cheatham County,[],16
+47023,Chester County,[],10
+47027,Clay County,[],1
+47029,Cocke County,[],6
+47033,Crockett County,[],2
+47037,Davidson County,[],11
+47045,Dyer County,[],46
+47047,Fayette County,['Lily Lake'],1
+47049,Fentress County,[],1
+47059,Greene County,['Susong Island'],29
+47063,Hamblen County,[],3
+47065,Hamilton County,['Constructed Wetland'],58
+47069,Hardeman County,[],2
+47075,Haywood County,[],7
+47077,Henderson County,[],1
+47079,Henry County,[],21
+47085,Humphreys County,[],1
+47089,Jefferson County,[],3
+47091,Johnson County,[],1
+47093,Knox County,[],11
+47095,Lake County,[],7
+47097,Lauderdale County,['King Pond'],4
+47107,McMinn County,[],8
+47109,McNairy County,['Dismal Swamp'],1
+47113,Madison County,[],101
+47115,Marion County,['Burns Island'],2
+47117,Marshall County,[],3
+47119,Maury County,[],1
+47121,Meigs County,[],3
+47123,Monroe County,[],11
+47125,Montgomery County,[],2
+47129,Morgan County,[],1
+47131,Obion County,['Shelby Lake'],10
+47135,Perry County,[],1
+47141,Putnam County,[],9
+47145,Roane County,[],1
+47149,Rutherford County,['Discovery Center Wetlands'],17
+47155,Sevier County,[],1
+47157,Shelby County,['Treasure Island'],29
+47161,Stewart County,[],22
+47165,Sumner County,[],2
+47167,Tipton County,[],31
+47179,Washington County,[],11
+47187,Williamson County,[],1
+47189,Wilson County,[],2
+48001,Anderson County,['Evergreen Marsh'],288
+48007,Aransas County,[],5
+48009,Archer County,[],3
+48011,Armstrong County,[],2
+48015,Austin County,[],1
+48021,Bastrop County,[],2
+48023,Baylor County,[],2
+48027,Bell County,[],8
+48029,Bexar County,['Scott Lake'],11
+48037,Bowie County,[],13
+48039,Brazoria County,"['Old Ocean Swamp', 'Big Pond', 'Blue Pond', 'Camp Pond', 'Carson Pond']",110
+48041,Brazos County,[],6
+48045,Briscoe County,[],16
+48049,Brown County,[],1
+48051,Burleson County,[],3
+48053,Burnet County,[],3
+48057,Calhoun County,['Vanderveer Island'],104
+48063,Camp County,[],1
+48065,Carson County,[],6
+48067,Cass County,[],2
+48071,Chambers County,['Horse Island'],18
+48073,Cherokee County,[],5
+48085,Collin County,[],25
+48097,Cooke County,[],4
+48099,Coryell County,[],12
+48101,Cottle County,[],5
+48113,Dallas County,[],19
+48119,Delta County,[],1
+48121,Denton County,['Bittern Marsh'],57
+48139,Ellis County,['Buffalo Creek Wetland'],2
+48149,Fayette County,[],1
+48153,Floyd County,[],4
+48157,Fort Bend County,[],21
+48159,Franklin County,[],4
+48161,Freestone County,[],7
+48163,Frio County,[],1
+48167,Galveston County,"['Submarine Island', 'Destroyer Island']",84
+48179,Gray County,[],1
+48181,Grayson County,[],11
+48183,Gregg County,[],134
+48187,Guadalupe County,['Flycatcher Delta'],4
+48189,Hale County,[],3
+48191,Hall County,[],1
+48199,Hardin County,['Bass Baygall'],6
+48201,Harris County,"['League Ponds', 'Herndon Pond', 'Kathrine G. McGovern Texas Wetlands', 'Wetlands', 'Pine Brook South Wetlands', 'Pine Brook North Wetlands', 'Little Cypress Creek Preserve']",75
+48203,Harrison County,[],29
+48209,Hays County,[],1
+48213,Henderson County,[],6
+48217,Hill County,[],2
+48221,Hood County,[],2
+48225,Houston County,[],3
+48231,Hunt County,[],6
+48239,Jackson County,[],11
+48241,Jasper County,"['Potato Pond Slough', 'Ellis Pond Slough', 'Gum Slough', 'Grass Pond Slough']",12
+48245,Jefferson County,[],107
+48251,Johnson County,[],23
+48257,Kaufman County,['Lower East Fork Lateral Site Number Five'],3
+48259,Kendall County,[],1
+48271,Kinney County,[],1
+48277,Lamar County,[],1
+48287,Lee County,['Molty Smith Lake'],16
+48289,Leon County,['Beaver Dam Marsh'],1
+48291,Liberty County,"['Turkey Creek Marsh', 'Beards Marsh', 'Long Marsh', 'Striplin Marsh']",30
+48299,Llano County,[],1
+48309,McLennan County,[],4
+48315,Marion County,"['Little Green Brake', 'Big Green Break']",21
+48319,Mason County,[],2
+48321,Matagorda County,['Ash Flat'],65
+48327,Menard County,[],1
+48331,Milam County,['Hobson Lake'],1
+48339,Montgomery County,"['Halfway Pond', 'Grove Pond', 'Frog Pond', 'Sage Pond', 'Collins Pond', 'Outlaw Pond', 'Breed Pond', 'Sour Pine Pond', 'Viney Pond', 'Whiskey Still Pond', 'Creed Pond', 'Casey Pond', 'Deep White Pond', 'Smith Pond', 'Yonkey Pond', 'Pilgreen Pond', 'Grange Pond', 'Island Pond', 'Section Pond', 'Button Willow Pond', 'Ward Pond']",82
+48341,Moore County,[],3
+48343,Morris County,[],9
+48345,Motley County,[],12
+48347,Nacogdoches County,[],18
+48349,Navarro County,[],1
+48351,Newton County,['Mayhaw Marsh'],1
+48355,Nueces County,['Oso Creek Wetland Demonstration Project'],15
+48361,Orange County,[],31
+48365,Panola County,[],1
+48367,Parker County,[],2
+48373,Polk County,[],1
+48375,Potter County,"['Amarillo Lake', 'T-Anchor Lake']",2
+48381,Randall County,[],6
+48387,Red River County,[],5
+48391,Refugio County,[],20
+48393,Roberts County,[],2
+48397,Rockwall County,[],4
+48401,Rusk County,"['County Lake', 'Round Pond']",18
+48405,San Augustine County,[],1
+48407,San Jacinto County,[],3
+48409,San Patricio County,['Dagger Island'],3
+48419,Shelby County,[],2
+48423,Smith County,[],32
+48439,Tarrant County,[],23
+48441,Taylor County,[],2
+48453,Travis County,"['Blowing Sink', 'Great Northern Reservoir']",55
+48457,Tyler County,[],5
+48459,Upshur County,[],29
+48467,Van Zandt County,[],1
+48469,Victoria County,[],4
+48471,Walker County,[],2
+48479,Webb County,[],8
+48481,Wharton County,[],2
+48483,Wheeler County,[],1
+48485,Wichita County,['Old Electra City Lake'],2
+48487,Wilbarger County,[],3
+48491,Williamson County,[],15
+48493,Wilson County,['Grass Ponds'],5
+48497,Wise County,[],3
+48499,Wood County,"[""Grandpa's Pond"", 'Warren Swamp', 'Floating Glade']",42
+48503,Young County,[],9
+48505,Zapata County,[],1
+49001,Beaver County,[],8
+49003,Box Elder County,"['West Marsh', 'The Meadows', 'Widgeon Marsh', 'Pintail Marsh', 'Crocker Marsh']",105
+49005,Cache County,"['Selman Reservoir', 'Mud Flat']",91
+49007,Carbon County,[],3
+49009,Daggett County,[],3
+49011,Davis County,[],96
+49013,Duchesne County,['Brinton Meadow'],13
+49015,Emery County,[],3
+49017,Garfield County,[],18
+49021,Iron County,[],6
+49023,Juab County,[],5
+49025,Kane County,[],3
+49027,Millard County,[],5
+49029,Morgan County,[],29
+49031,Piute County,['Little Meadows'],2
+49033,Rich County,[],5
+49035,Salt Lake County,['Pond Park'],267
+49037,San Juan County,[],4
+49039,Sanpete County,[],7
+49041,Sevier County,"['Little Crater Lake', 'Crater Lake']",28
+49043,Summit County,"[""Reid's Meadow"", 'Ball and Moore Reservoir', 'Broadbent Meadow', 'China Meadows']",326
+49047,Uintah County,['Hog Island'],99
+49049,Utah County,['Hidden Pond'],140
+49051,Wasatch County,['Silver Meadow'],39
+49053,Washington County,[],25
+49055,Wayne County,"['Grass Lake', 'Bicknell Bottoms']",5
+49057,Weber County,['Blackbird Pond'],282
+50001,Addison County,['Cedar Swamp'],86
+50003,Bennington County,"['Bear Swamp', 'Yaw Pond', 'Castle Meadow']",391
+50005,Caledonia County,"['The ""Calf Pasture""', 'Kirby Pond']",78
+50007,Chittenden County,['Delta Island'],262
+50009,Essex County,[],341
+50011,Franklin County,"['Marshland', 'Mill Pond']",184
+50013,Grand Isle County,['The Marsh'],90
+50015,Lamoille County,['Mud Pond'],88
+50017,Orange County,"['Zebedee Wetland', 'Conant Swamp', 'Gillette Swamp']",47
+50019,Orleans County,"['Mud Pond', 'Underpass Pond']",126
+50021,Rutland County,"['Cranberry Swamp', 'Loves Marsh', 'Walker Swamp', 'Sugar Hollow Pond', 'Elbow Swamp', 'Lost Pond', 'Black Swamp', 'Beaver Pond']",174
+50023,Washington County,"['Goose Pond', 'Bear Swamp', 'Smith Pond', 'Marfell Swamp']",73
+50025,Windham County,"['Shep Meadow', 'Atherton Meadow']",640
+50027,Windsor County,"['Lower Hurricane Reservoir', 'Schmidt Bog']",100
+51025,Brunswick County,[],57
+51035,Carroll County,[],2
+51037,Charlotte County,[],24
+51053,Dinwiddie County,[],10
+51063,Floyd County,[],3
+51081,Greensville County,[],291
+51083,Halifax County,[],88
+51089,Henry County,[],4
+51093,Isle of Wight County,[],289
+51105,Lee County,[],2
+51111,Lunenburg County,[],15
+51117,Mecklenburg County,[],50
+51135,Nottoway County,[],3
+51141,Patrick County,[],2
+51143,Pittsylvania County,[],120
+51149,Prince George County,[],2
+51167,Russell County,[],1
+51173,Smyth County,[],1
+51175,Southampton County,['Lightwood Swamp'],921
+51181,Surry County,[],11
+51183,Sussex County,"['Galley Swamp', 'Mush Pond Swamp', 'Mussel Swamp']",785
+51191,Washington County,[],2
+51197,Wythe County,[],7
+51520,Bristol city,[],1
+51550,Chesapeake city,[],67
+51590,Danville city,"[""Angler's Park Wetlands""]",1
+51595,Emporia city,[],1
+51620,Franklin city,[],1
+51650,Hampton city,[],1
+51710,Norfolk city,[],12
+51740,Portsmouth city,[],62
+51800,Suffolk city,"['Moss Swamp', 'Daughtrey Pocoson']",157
+51810,Virginia Beach city,['Shell Island'],48
+53001,Adams County,['Deep Lake'],9
+53003,Asotin County,[],6
+53005,Benton County,[],100
+53007,Chelan County,"['Mad Meadow', 'East Blue Creek Meadow', 'Cow Creek Meadows']",51
+53009,Clallam County,"['Bogachiel Park', 'Big Boy Pond']",23
+53011,Clark County,"['Parcel 1A Wetland', 'Stormwater Bio-filtration System', 'Salmon Creek Greenway', 'Water Quality Filter', 'Mimsi Marsh', 'Rain Garden', 'Clark County Runoff Shed', 'Padden Parkway at Andresen Road Stormwater Facility', 'Gaddis Wetland Natural Area', 'Stormwater Facility', 'Pintail Marsh', 'Sora Marsh', 'Teal Marsh', 'Middle Lake', 'Ruddy Lake', 'Schwartz Lake', 'South Quigley Lake', 'North Quigley Lake', 'North Man Trap Lake', 'South East Lake', 'Tree Lake', 'West Lake', 'Millet Lake', 'Patterson Swale', 'Campen Creek Wetland - Kerr Acquisition']",285
+53013,Columbia County,[],1
+53015,Cowlitz County,"['Grass Lake', 'McBride Lake']",69
+53017,Douglas County,[],8
+53019,Ferry County,['Finley Meadows'],58
+53021,Franklin County,[],65
+53023,Garfield County,[],2
+53025,Grant County,['Meadow Lake'],92
+53027,Grays Harbor County,['Moores Lake'],147
+53029,Island County,"['Double Bluff', 'DeDuck Harbor', 'Beaver Marsh']",32
+53031,Jefferson County,"['Larson Lake', 'Buckmans Lake', 'Winona Wetlands', 'Levinski Wetland', 'Happy Valley', 'Froggy Bottoms']",94
+53033,King County,"['Mooney Swamp', 'M Street Marsh', 'Shadow Lake Bog', 'Cranberry Slough', 'Olallie Meadow', 'Duwamish River', 'Salmon Pond', 'Chinook Wind', 'Webster Street Detention Pond', 'Southwest Yard Habitat Project', 'Cattail Marsh', 'Taylor Creek Headwaters', 'North Wetland', 'Wallace Pond', 'Long Marsh', 'Shy Bear Marsh', 'Klondike Marsh', 'Tibbetts Marsh', 'Utah Wetlands', '24th Avenue Northwest Street End', 'Montlake Waterfront Park', 'Marsh Island', 'Duck Bay', 'Broken Island', 'Birch Island', 'Number 2 Island', 'Beaver Pond', 'Forest Park Wetland', 'Wetlands West', 'Wetlands Central', 'Wetlands East', 'Hazen Hills Creek', 'North Creek Wetland', 'Woodland Wetlands', 'Oxbow Wetland', 'Metcalf Marsh', 'Harts Swamp', 'Alturas Lake']",908
+53035,Kitsap County,"['Wildwood Lake', 'Mace Lake', ""Charlie's Bog"", 'Cattail Marsh', 'Reitan Road Public Road End', 'South Beaver Pond']",556
+53037,Kittitas County,"['Milk Pond', 'Devils Slide Lake', 'Lily Pond Lake', 'Big Lake', 'Delate Meadow', 'Spinola Meadow', 'Upper Naneum Meadow']",52
+53039,Klickitat County,"['Carp Lake', 'Pretty Swamp']",10
+53041,Lewis County,"['Miller Swamp', 'Frog Heaven', 'Mosquito Lake']",220
+53043,Lincoln County,[],160
+53045,Mason County,"['Cranberry Marsh', 'Morrow Lake', 'Mud Lakes', 'Catfish Lake', 'Boundary Lakes', 'Keene Lake', 'Deer Meadow', 'Lilliwaup Swamp', 'Mint Marsh', 'The Peat Bog', 'Long Marsh']",808
+53047,Okanogan County,"['Lamotte Pond', 'Brown Meadows', 'Long Swamp', 'Snowshoe Meadow', 'Myers Creek Fen']",160
+53049,Pacific County,[],128
+53051,Pend Oreille County,"['Rufus Meadows', 'Granite Meadows', 'Ridge Lake', 'Sema Meadows']",149
+53053,Pierce County,"['Lake Sellers', 'Shannon Marsh', 'Wright Marsh', 'Kennedy Marsh', 'Edmond Marsh', 'MacKay Marsh', 'Hanner Marsh', 'Elliot Marsh', 'Park Marsh', 'Apple Flats', 'Lynn Lake', 'Crawford Marsh', 'Lost Lake', 'Leach Creek Holding Basin', 'Winchester Swamp', 'National Mill Pond', 'Longmire Meadow Springs', 'Elysian Fields', 'Stony Lake', 'Westward Duryea Marsh', 'Far Duryea Marsh', 'Gog-Le-Hi-Te II', 'Gog-Le-Hi-Te I', 'Pickhandle Basin', 'Bullion Basin']",422
+53055,San Juan County,"[""Nell's Marsh"", 'Beaverton Marsh', 'Fragile salt marsh habitat', 'Lower Marsh']",452
+53057,Skagit County,"['Telegraph Slough', 'Stella Swamp', 'Little Beaver Pond', '32nd Street Swamp', 'Happy Valley Protected Marshland', 'Beaver Swamp', 'Marsh Muir', 'Minkler Lake']",499
+53059,Skamania County,"['Carpenter Meadow', 'Wapiti Meadow', 'Spencer Meadow', 'Snyder Pasture', 'Bear Meadow', 'South Mosquito Meadow', 'North Mosquito Meadow', 'Cedar Swamp', 'Stadleman Swamp']",81
+53061,Snohomish County,"['Chase Lake Bog', 'Trestle Swamp', 'Swamp Creek', 'Narbeck Wetlands & Bird Sanctuary', 'Batt Slough', 'Wetlands', 'Maulsby Marsh', 'Priest Point Marsh', 'Blind Slough', 'Qwuloolt Estuary']",647
+53063,Spokane County,"['Stubblefield Lake', 'Moreland Meadow', 'Turtle Hole', 'Big Swamp', 'Wetland ( PEM1C / PSS1F) #6', 'Wetland (PEM1C) #3', 'Muskrat Lake', 'Froggy Pond']",1862
+53065,Stevens County,"['McDowell Lake Marsh', 'Dry Lake']",116
+53067,Thurston County,['Parsnip Swamp'],527
+53069,Wahkiakum County,[],6
+53071,Walla Walla County,"['West Woodland Pond', 'East Woodland Pond', 'East Millet Pond', 'Cottonwood Pond']",10
+53073,Whatcom County,"[""Alicia's Pond"", ""Beaver's Pond"", 'Falls Marsh', 'Frost Marsh', 'Athearns Ponds', ""Scudder's Pond"", 'Beaver Pond', 'Bug Lake', 'Green Lake']",138
+53075,Whitman County,['Wurgler Marsh'],59
+53077,Yakima County,"['Holdaway Meadow', 'Huckleberry Swamp', 'Minnie Meadow', 'Fish Lake', 'Sleepy Park Meadow', 'Long Lake', 'Mal Lake', 'Ty Lake', 'Lynne Lake', 'Boundary Lake', 'Angel Lake', 'Mud Lake']",43
+55011,Buffalo County,['Bear Creek Swamp'],286
+55017,Chippewa County,[],17
+55023,Crawford County,[],1
+55033,Dunn County,[],536
+55035,Eau Claire County,[],30
+55063,La Crosse County,[],39
+55091,Pepin County,[],24
+55093,Pierce County,['Pine Creek Fishery Area'],34
+55109,St. Croix County,['St. Croix County Waterfowl Production Area'],11
+55121,Trempealeau County,[],33
+55123,Vernon County,[],3
+56001,Albany County,[],28
+56003,Big Horn County,['Red Spires Reservoir'],192
+56005,Campbell County,[],7
+56007,Carbon County,[],251
+56011,Crook County,[],4
+56013,Fremont County,"['Lizard Head Meadow', 'The Meadows']",615
+56015,Goshen County,['Gross Reservoir'],7
+56019,Johnson County,[],97
+56021,Laramie County,[],1
+56023,Lincoln County,"['Forgen Slough', 'Lunch Creek Meadows', 'Roosevelt Meadows']",127
+56025,Natrona County,[],6
+56029,Park County,['Bath Lake'],571
+56033,Sheridan County,[],20
+56035,Sublette County,"['North Piney Meadows', 'Elizabeth Lake', 'Bluff Park']",47
+56037,Sweetwater County,[],6
+56039,Teton County,[],341
+56043,Washakie County,[],1
