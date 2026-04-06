@@ -218,3 +218,4 @@ raw_data/county_boundaries_2025/tl_2025_us_county.shx
 # Large data files
 *.xlsb
 raw_data/eia860_2024.zip
+.DS_Store
