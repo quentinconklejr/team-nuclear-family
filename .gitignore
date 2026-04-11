@@ -219,3 +219,5 @@ raw_data/county_boundaries_2025/tl_2025_us_county.shx
 *.xlsb
 raw_data/eia860_2024.zip
 .DS_Store
+raw_data/protected_areas_database/PADUS4_1VectorAnalysis_PADUS_Only.gdb/
+raw_data/census_population_county_boundaries/tl_2023_us_county/
