@@ -9,7 +9,6 @@ We’re building a geospatial framework that scores every realistic location in 
 
 ## Team Members 
 - Brian Lin
-- Kevin Xu
 - Khue Nguyen
 - Millie Chu 
 - Nina Schreiber 
