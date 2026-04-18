@@ -18,11 +18,10 @@ from pymoo.operators.sampling.rnd import FloatRandomSampling
 from pymoo.operators.crossover.sbx import SBX
 from pymoo.operators.mutation.pm import PM
 from pymoo.optimize import minimize
-from pymoo.termination import get_termination
+from pymoo.termination.max_gen import MaximumGenerationTermination
 
 # ─────────────────────────────────────────────
 # CONFIG: map objectives to your column names
-# Adjust these if your columns are named differently
 # ─────────────────────────────────────────────
 COLUMN_MAP = {
     "seismic_risk":     "pga_max",
@@ -34,10 +33,11 @@ COLUMN_MAP = {
 }
 
 # Columns that are "higher is better" — we negate them so pymoo minimizes
+# grid_connectivity is distance (lower=better), so NOT in this set
 MAXIMIZE_COLS = {"water_access", "energy_demand"}
 
 # Optional: column with MCDA suitability score from Step 2
-SUITABILITY_COL = None  # set to None if not present
+SUITABILITY_COL = None
 
 # Input / output paths
 CANDIDATES_PATH = "processed_data/candidates.csv"
@@ -149,7 +149,7 @@ algorithm = NSGA2(
     mutation=PM(eta=20),
     eliminate_duplicates=True,
 )
-termination = get_termination("n_gen", N_GEN)
+termination = MaximumGenerationTermination(N_GEN)
 
 res = minimize(
     problem,
@@ -263,23 +263,27 @@ ax.set_ylabel("Flood Risk (norm)")
 ax.set_title("Seismic vs Flood Risk")
 ax.legend(fontsize=8)
 
-# Plot 2: Pop density vs Energy demand
+# Plot 2: Pop density vs Energy demand (log scale to handle outliers)
 ax = axes[1]
+pop_log = np.log1p(df["population_density"].fillna(df["population_density"].median()).values)
+energy_log = np.log1p(df["total_energy_consumption_mwh"].fillna(df["total_energy_consumption_mwh"].median()).values)
+pop_plot = (pop_log - pop_log.min()) / (pop_log.max() - pop_log.min())
+energy_plot = (energy_log - energy_log.min()) / (energy_log.max() - energy_log.min())
+
 sc2 = ax.scatter(
-    X_norm[:, obj_names.index("pop_density")],
-    X_norm[:, obj_names.index("energy_demand")],
+    pop_plot,
+    energy_plot,
     c=robustness_pct,
     cmap="YlOrRd_r",
     s=15,
     alpha=0.6,
 )
-pareto_x2 = X_norm[pareto_mask, obj_names.index("pop_density")]
-pareto_y2 = X_norm[pareto_mask, obj_names.index("energy_demand")]
-ax.scatter(pareto_x2, pareto_y2, s=40, facecolors="none", edgecolors="blue",
+ax.scatter(pop_plot[pareto_mask], energy_plot[pareto_mask],
+           s=40, facecolors="none", edgecolors="blue",
            linewidths=1.2, label="Pareto front", zorder=5)
 plt.colorbar(sc2, ax=ax, label="Robustness score")
-ax.set_xlabel("Population Density (norm, lower=better)")
-ax.set_ylabel("Energy Demand cost (norm, lower=more demand)")
+ax.set_xlabel("Population Density (log-norm, lower=better)")
+ax.set_ylabel("Energy Demand (log-norm, higher=more demand)")
 ax.set_title("Pop Density vs Energy Demand")
 ax.legend(fontsize=8)
 
