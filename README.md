@@ -1,6 +1,6 @@
 # Team Nuclear Family - Nuclear Reactor Siting in the United States
 
-## Project Overview
+##  Project Overview
 AI data centers are consuming more electricity than ever, and it is only increasing with new data centers being built often. Nuclear is one of the few clean energy sources that can actually keep up. But where should new reactors go?
 
 That’s what this project answers.
@@ -71,7 +71,7 @@ Our final dataset `processed_data/final_dataset.csv` has **28 columns** and **32
 
 ## Methodology 
 ### Exploratory Data Analysis
-Our main notebook for EDA is `notebooks/eda.ipynb`. Some of the EDA techniques we used were: 
+Our main notebook for EDA is `notebooks/eda/eda.ipynb`. Some of the EDA techniques we used were: 
 - Explore the correlation between all numerical variables with a correlation heatmap. We found high correlation between 
     - `housing_units` and `median_household_income`
     - `distance_to_lines_km` and `distance_to_rivers_km`
@@ -85,3 +85,31 @@ Our main notebook for EDA is `notebooks/eda.ipynb`. Some of the EDA techniques w
     - Counties with nuclear plants consistently have lower seismic and flood risk, stronger access to rivers and water bodies
     - Counties with plants tend to cluster around lower population density but consume more energy in general compared to counties without one.
     - Counties with plants have an average maximum voltage around 300 - 500kV with a moderate number of lines, which suggests that higher-voltage grid access is preferred rather than dense grid with lower voltage. 
+
+### Modeling
+Our modeling notebooks go in `notebooks/modeling`. The modeling process follows this order:
+1. `mask.ipynb`
+2. `scoring.ipynb`
+3. `logistic_regression.ipynb`
+4. `validation.ipynb`
+5. `moo.ipynb`
+#### Step 1: Masking
+We start by hard-excluding any counties that do not meet the minimum safety regulations to be a nuclear reactor site. We exclude a county if:
+- `pga_max` exceeds 0.3 
+- `pct_sfha` exceeds 0.2 
+- `pct_military` exceeds 0.1 
+- `pct_protected` exceeds 0.1 
+
+All of these thresholds are based on regulatory guidelines of the [Nuclear Regulatory Commission](https://www.nrc.gov/docs/ml1218/ml12188a053.pdf), [Next Generation Nuclear Plant (NGNP)](https://inldigitallibrary.inl.gov/sites/sti/sti/5144360.pdf), and [Executive Orders from the Office of the Federal Register](https://www.archives.gov/federal-register/codification/executive-order/11988.html)
+
+Our dataset was reduced from 3235 to **2161 counties** after this hard exclusion.
+#### Step 2: Scoring
+Our scoring framework uses the [Multi-Criteria Decision Analysis (MCDA)](https://www.1000minds.com/decision-making/what-is-mcdm-mcda) technique, assigning weights to 12 variables to compute a suitability score per county.
+
+Since most existing nuclear plants were built in the 70-80s under outdated criteria, we want to define a modern framework driven by expert knowledge and the NRC guidelines. We talked with professor [Caleb Brooks](https://npre.illinois.edu/people/profile/csbrooks) from The Grainger College of Engineering to figure out the importance level of our variables.
+
+We ranked our variables by importance - top 3 being `pga_max`, `pct_sfha`, and `population_density` (all safety criteria), and applied the [Rank Order Centroid (ROC)](https://www.nature.com/articles/s41598-024-61945-z) method to convert our discrete ranking into weights. 
+
+To validate robustness, we ran a **sensitivity analysis** with random ±20% weight perturbations across 1,000 simulations to see if our ranking remains stable. On average, **18.8 counties** in the top 20 remain the same, with a **95% CI of [18.744, 18.847]**. This confirms that our recommendations are reliable even if the weights aren't perfect. 
+#### Step 3: Validation and Comparison
+#### Step 4: Recommendations
