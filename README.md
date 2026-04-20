@@ -46,7 +46,7 @@ Some of the major cleaning and preprocessing steps taken:
 
 - Drop unused variables in the original datasets. We kept about 2 - 4 variables for each that might contribute meaningfully to our scoring framework later on
 
-- Feature engineering: we created new variables based on the existing ones, such as **number of nuclear plants in each county**, **proportion of a county that has high flood risks**, **total lakes area in a county**, etc.
+- Feature engineering: we created new variables based on the existing ones, such as **number of nuclear plants in each county**, **proportion of a county that has high flood risks**, etc.
 
 - Merging all datasets into a final one that contains all necessary variables on a county level. All of our merging steps go in `notebooks/merge.ipynb`.
 
@@ -60,11 +60,9 @@ Our final dataset `processed_data/final_dataset.csv` has **28 columns** and **32
 | `total_energy_consumption_mwh` | County total consumption in 2024 | $MWh$ |
 | `pct_sfha` | Proportion of the county marked as severe flood hazard area |
 | `total_lake_area` | Total lake areas in the county | ${km^2}$ |
-| `avg_discharge` | Average discharge of lakes in the county (discharge: the volume of water flowing out of it over a specific period) | ${m^3/s}$ |
 | `dist_to_lakes_km` | Distance to the county's centroid to the nearest lake | $km$ |
 | `dist_to_rivers_km` | Distance to the county's centroid to the nearest river | $km$ |
 | `pct_military` | Proportion of the county with military installations |
-| `plant_count` | Number of nuclear plants in the county | nuclear plants |
 | `pga_max` | Maximum peak ground acceleration of the county (seismic risk indicator) | $g$ (fraction of gravitational acceleration, 9.8 $m/s^2$)
 | `max_voltage` |  Maximum voltage of a transmission line in the county | $kV$ |
 
@@ -77,11 +75,10 @@ Our main notebook for EDA is `notebooks/eda/eda.ipynb`. Some of the EDA techniqu
     - `distance_to_lines_km` and `distance_to_rivers_km`
     - `total_rivers_mile` and `rivers_count`
     - `total_energy_consumption_mwh` and `population`
-    - `total_energy_consumption_mwh` and `housing_units`
 
 - Explore the distributions of some numerical variables using boxplots
 
-- Compare counties with and without a nuclear reactor to see the differences in some variables such as population, energy consumption, and seismic or flood risks. Some key findings: 
+- Compare counties with and without a nuclear reactor to see the differences. Some key findings: 
     - Counties with nuclear plants consistently have lower seismic and flood risk, stronger access to rivers and water bodies
     - Counties with plants tend to cluster around lower population density but consume more energy in general compared to counties without one.
     - Counties with plants have an average maximum voltage around 300 - 500kV with a moderate number of lines, which suggests that higher-voltage grid access is preferred rather than dense grid with lower voltage. 
@@ -93,7 +90,7 @@ Our modeling notebooks go in `notebooks/modeling`. The modeling process follows 
 3. `logistic_regression.ipynb`
 4. `validation.ipynb`
 5. `moo.ipynb`
-#### Step 1: Masking
+#### Step 1: Masking - `mask.ipynb`
 We start by hard-excluding any counties that do not meet the minimum safety regulations to be a nuclear reactor site. We exclude a county if:
 - `pga_max` exceeds 0.3 
 - `pct_sfha` exceeds 0.2 
@@ -103,13 +100,23 @@ We start by hard-excluding any counties that do not meet the minimum safety regu
 All of these thresholds are based on regulatory guidelines of the [Nuclear Regulatory Commission](https://www.nrc.gov/docs/ml1218/ml12188a053.pdf), [Next Generation Nuclear Plant (NGNP)](https://inldigitallibrary.inl.gov/sites/sti/sti/5144360.pdf), and [Executive Orders from the Office of the Federal Register](https://www.archives.gov/federal-register/codification/executive-order/11988.html)
 
 Our dataset was reduced from 3235 to **2161 counties** after this hard exclusion.
-#### Step 2: Scoring
+#### Step 2: Scoring - `scoring.ipynb`
 Our scoring framework uses the [Multi-Criteria Decision Analysis (MCDA)](https://www.1000minds.com/decision-making/what-is-mcdm-mcda) technique, assigning weights to 12 variables to compute a suitability score per county.
 
-Since most existing nuclear plants were built in the 70-80s under outdated criteria, we want to define a modern framework driven by expert knowledge and the NRC guidelines. We talked with professor [Caleb Brooks](https://npre.illinois.edu/people/profile/csbrooks) from The Grainger College of Engineering to figure out the importance level of our variables.
+Since most existing plants were built in the 70-80s under outdated criteria, we want to define a modern framework driven by expert knowledge and the NRC guidelines. We talked with professor [Caleb Brooks](https://npre.illinois.edu/people/profile/csbrooks) from Grainger Engineering to figure out the variables' importance
 
 We ranked our variables by importance - top 3 being `pga_max`, `pct_sfha`, and `population_density` (all safety criteria), and applied the [Rank Order Centroid (ROC)](https://www.nature.com/articles/s41598-024-61945-z) method to convert our discrete ranking into weights. 
 
-To validate robustness, we ran a **sensitivity analysis** with random ±20% weight perturbations across 1,000 simulations to see if our ranking remains stable. On average, **18.8 counties** in the top 20 remain the same, with a **95% CI of [18.744, 18.847]**. This confirms that our recommendations are reliable even if the weights aren't perfect. 
+To validate robustness, we ran a **sensitivity analysis** with random ±20% weight perturbations across 1,000 simulations to see if our ranking remains stable. On average, **18.8 counties** in the top 20 remain the same, with a **95% CI of [18.744, 18.847]**. 
+
+This confirms that our recommendations are reliable even if the weights aren't perfect. 
+
 #### Step 3: Validation and Comparison
+When ranking our MCDA scores, the highest-scoring counties are ones that currently don't have any nuclear reactors. We expected this to happen, as the old criteria might not match our modern scoring frameworks
+
+We want to investigate this difference to see how policies have changed, by fitting **supervised ML models** on our dataset (which consist of "old" plants) and extracting feature importance to see priorities in the past. 
+
+Key results:
+
+
 #### Step 4: Recommendations
