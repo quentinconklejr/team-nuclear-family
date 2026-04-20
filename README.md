@@ -90,7 +90,7 @@ Our modeling notebooks go in `notebooks/modeling`. The modeling process follows 
 3. `logistic_regression.ipynb`
 4. `validation.ipynb`
 5. `moo.ipynb`
-#### Step 1: Masking - `mask.ipynb`
+### Step 1: Masking - `mask.ipynb`
 We start by hard-excluding any counties that do not meet the minimum safety regulations to be a nuclear reactor site. We exclude a county if:
 - `pga_max` exceeds 0.3 
 - `pct_sfha` exceeds 0.2 
@@ -100,7 +100,7 @@ We start by hard-excluding any counties that do not meet the minimum safety regu
 All of these thresholds are based on regulatory guidelines of the [Nuclear Regulatory Commission](https://www.nrc.gov/docs/ml1218/ml12188a053.pdf), [Next Generation Nuclear Plant (NGNP)](https://inldigitallibrary.inl.gov/sites/sti/sti/5144360.pdf), and [Executive Orders from the Office of the Federal Register](https://www.archives.gov/federal-register/codification/executive-order/11988.html)
 
 Our dataset was reduced from 3235 to **2161 counties** after this hard exclusion.
-#### Step 2: Scoring - `scoring.ipynb`
+### Step 2: Scoring - `scoring.ipynb`
 Our scoring framework uses the [Multi-Criteria Decision Analysis (MCDA)](https://www.1000minds.com/decision-making/what-is-mcdm-mcda) technique, assigning weights to 12 variables to compute a suitability score per county.
 
 Since most existing plants were built in the 70-80s under outdated criteria, we want to define a modern framework driven by expert knowledge and the NRC guidelines. We talked with professor [Caleb Brooks](https://npre.illinois.edu/people/profile/csbrooks) from Grainger Engineering to figure out the variables' importance
@@ -111,12 +111,29 @@ To validate robustness, we ran a **sensitivity analysis** with random ±20% weig
 
 This confirms that our recommendations are reliable even if the weights aren't perfect. 
 
-#### Step 3: Validation and Comparison
-When ranking our MCDA scores, the highest-scoring counties are ones that currently don't have any nuclear reactors. We expected this to happen, as the old criteria might not match our modern scoring frameworks
+### Step 3: Validation and Comparison
+When ranking our MCDA scores, the highest-scoring counties are ones that currently don't have any nuclear reactors. We expected this to happen, as the old criteria might not match our modern frameworks
 
-We want to investigate this difference to see how policies have changed, by fitting **supervised ML models** on our dataset (which consist of "old" plants) and extracting feature importance to see priorities in the past. 
+We  investigate this difference to see how policies have changed, by fitting **supervised ML models** on our dataset (which consist of "old" plants) and extracting feature importance to see priorities in the past. 
 
 Key results:
 
 
-#### Step 4: Recommendations
+### Step 4: Recommendations - `moo.ipynb`
+
+We used non-dominated sorting (`pymoo`'s `NonDominatedSorting`) across 6 key objectives.
+
+We run MOO twice — on the **full dataset** and on the **MCDA top 10%** — to quantify how much our weights narrow the candidate space. Each MOO returns a pareto front - a subset of counties that are not dominated by other counties in any criteria.
+
+Counties are assigned to tiers based on their Pareto front membership:
+
+- **Tier 1** (175 counties): appear on both fronts
+- **Tier 2** (1 county): MCDA Pareto only 
+- **Tier 3** (569 counties): global Pareto only
+
+Key metrics comparing the two fronts:
+- Our MCDA scoring excludes candidates quite aggressively, as it overlooked 569 non-dominated counties
+- **Hypervolume ratio**: MCDA top 10% captures **91.6%** of the global Pareto front's trade-off coverage
+- Top 20 candidates return by MCDA alone and MOO have 18 in common, confirming the consistency of our framework.
+
+Most optimal counties are in the Great Lakes area, e.g. Michigan or Wisconsin.
