@@ -114,10 +114,19 @@ This confirms that our recommendations are reliable even if the weights aren't p
 ### Step 3: Validation and Comparison
 When ranking our MCDA scores, the highest-scoring counties are ones that currently don't have any nuclear reactors. We expected this to happen, as the old criteria might not match our modern frameworks
 
-We  investigate this difference to see how policies have changed, by fitting **supervised ML models** on our dataset (which consist of "old" plants) and extracting feature importance to see priorities in the past. 
+We investigate this difference to see how policies have changed, by fitting **supervised ML models** on our dataset (which consist of "old" plants) and extracting feature importance to see priorities in the past. 
 
-Key results:
+**Key results:**
 
+- Models used: Logistic Regression, Decision Tree, XGBoost
+
+- Because of heavy class imbalance (41:2000), we applied several class imbalance technique (SMOTE, `scale_pos_weight`, RandomOverSampler). However, minority class F1 remains low across all models:
+    - Logistic Regression: 0.12
+    - Decision Tree: 0.08 - 0.15
+    - XGBoost: 0.1 - 0.18
+
+- This suggests that predictive difficulty isn't only because of class imbalance, but possibly from historical siting decisions being influenced by factors outside our dataset (politics, public consent, economics, etc.)
+- Despite limited predictive performance, feature importance ranks are quite consistent across all models (reinforced by SHAP analysis): `total_energy_consumption_mwh`, `max_voltage`, and `max_voltage` rank highest. This partly supports a shift from infrastructure- and demand-driven to safety-first nuclear siting.
 
 ### Step 4: Recommendations - `moo.ipynb`
 
@@ -131,7 +140,7 @@ Counties are assigned to tiers based on their Pareto front membership:
 - **Tier 2** (1 county): MCDA Pareto only 
 - **Tier 3** (569 counties): global Pareto only
 
-Key metrics comparing the two fronts:
+**Key metrics**:
 - Our MCDA scoring excludes candidates quite aggressively, as it overlooked 569 non-dominated counties
 - **Hypervolume ratio**: MCDA top 10% captures **91.6%** of the global Pareto front's trade-off coverage
 - Top 20 candidates return by MCDA alone and MOO have 18 in common, confirming the consistency of our framework.
