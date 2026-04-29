@@ -1,148 +1,156 @@
 # Team Nuclear Family - Nuclear Reactor Siting in the United States
 
-##  Project Overview
-AI data centers are consuming more electricity than ever, and it is only increasing with new data centers being built often. Nuclear is one of the few clean energy sources that can actually keep up. But where should new reactors go?
+## Project Overview
+AI data centers are consuming more electricity than ever, and demand keeps climbing as new ones come online. Nuclear is one of the few clean energy sources that can actually keep up. But where should new reactors go?
 
-That’s what this project answers.
+That's what this project answers.
 
-We’re building a geospatial framework that scores every realistic location in the US based on two things: how suitable it is to physically build a reactor there, and how much energy demand exists in that area because nuclear energy can only be used locally. The final deliverable is a ranked map of optimal reactor sites framed as an actual policy recommendation.
+We built a geospatial framework that scores every realistic location in the US based on two things: how suitable it is to physically build a reactor there, and how much energy demand exists nearby (since nuclear energy can only be used locally). The final deliverable is a ranked map of optimal reactor sites framed as an actual policy recommendation.
 
-## Team Members 
+## Team Members
 - Brian Lin
 - Khue Nguyen
-- Millie Chu 
-- Nina Schreiber 
-- Quentin Conkle 
+- Millie Chu
+- Nina Schreiber
+- Quentin Conkle
 
 ## Data Description
-This project integrates 13 datasets from various open sources that represent different factors constituting a good site for a nuclear reactor, such as population, energy consumption, seismic risks, etc. All of the original datasets are stored in `raw_data`, and all processed data go in `processed_data`.
+This project integrates 13 datasets from various open sources that represent different factors that make a county a good or bad candidate for a nuclear reactor, things like population, energy consumption, and seismic risk. All original datasets are in `raw_data`, and all processed data goes in `processed_data`.
 
 | Dataset | Source | Description |
 |---|---|---|
-| County boundaries | [U.S. Census Bureau TIGER/Line (2025)](https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/) | Geographic boundaries for all counties in the US, used for spatial joins |
-| US population in 2025 by county | [Census.gov](Census.gov) | Population of each county by the end of 2025 |
-| Housing units by county | [Census.gov](Census.gov) | Number of housing units and median household income in each county in 2024|
+| County boundaries | [U.S. Census Bureau TIGER/Line (2025)](https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/) | Geographic boundaries for all US counties, used for spatial joins |
+| US population in 2025 by county | [Census.gov](Census.gov) | Population of each county at the end of 2025 |
+| Housing units by county | [Census.gov](Census.gov) | Number of housing units and median household income in each county in 2024 |
 | Energy consumption by county | [Find Energy](https://findenergy.com/) | Total energy consumption of each county in 2024 |
-| Data centers in the US | [Office of Scientific and Technical Information](https://www.osti.gov/biblio/2550666) and [OpenStreetMap](https://www.openstreetmap.org/about) | All data centers in the US, used as a proxy for energy demand|
-| Flood hazard | [National Flood Hazard Layer (NFHL) Database](https://msc.fema.gov/portal/advanceSearch) | **Regions** with high risk of flood by state|
+| Data centers in the US | [Office of Scientific and Technical Information](https://www.osti.gov/biblio/2550666) and [OpenStreetMap](https://www.openstreetmap.org/about) | All data centers in the US, used as a proxy for energy demand |
+| Flood hazard | [National Flood Hazard Layer (NFHL) Database](https://msc.fema.gov/portal/advanceSearch) | Regions with high risk of flooding, by state |
 | Lakes in the US | [HydroSHEDS](https://www.hydrosheds.org/products/hydrolakes) | All lakes in the US |
-| Rivers | [ArcGIS](https://hub.arcgis.com/datasets/esri::usa-rivers-and-streams/explore?location=44.592478%2C-119.086063%2C3) and [National Weather Service](https://www.weather.gov/gis/Rivers)| All rivers and streams in the US |
-| Military areas | [U.S. Department of Transportation](https://geodata.bts.gov/datasets/usdot::military-bases/explore?location=42.326716%2C3.071733%2C1) | Military installations across the US|
-| Existing nuclear plants in the US | [U.S. Nuclear Regulatory Commission](https://www.nrc.gov/) | All nuclear power plants currently existing in the US (including ones not in-service) |
+| Rivers | [ArcGIS](https://hub.arcgis.com/datasets/esri::usa-rivers-and-streams/explore?location=44.592478%2C-119.086063%2C3) and [National Weather Service](https://www.weather.gov/gis/Rivers) | All rivers and streams in the US |
+| Military areas | [U.S. Department of Transportation](https://geodata.bts.gov/datasets/usdot::military-bases/explore?location=42.326716%2C3.071733%2C1) | Military installations across the US |
+| Existing nuclear plants in the US | [U.S. Nuclear Regulatory Commission](https://www.nrc.gov/) | All nuclear power plants currently in the US, including ones no longer in service |
 | Seismic hazard by county | [United States Geological Survey (USGS)](https://www.usgs.gov/programs/earthquake-hazards/hazards) | County-level seismic hazard |
-| Transmission lines in the US | [ArcGIS](https://www.arcgis.com/home/item.html?id=d4090758322c4d32a4cd002ffaa0aa12) | All transmission lines in the US, each represented by a **point**|
+| Transmission lines in the US | [ArcGIS](https://www.arcgis.com/home/item.html?id=d4090758322c4d32a4cd002ffaa0aa12) | All transmission lines in the US, each represented as a point |
 | Wetlands in the US | [U.S. Fish & Wildlife Service](https://www.fws.gov/program/national-wetlands-inventory/data-download) | Wetland areas in the US (mangrove, mud, marsh, etc.) |
 
-### Data Cleaning/Preprocessing
+### Data Cleaning and Preprocessing
 
-Some of the major cleaning and preprocessing steps taken: 
-- Drop inaccurate/invalid observations in some datasets: 
+Some of the major cleaning and preprocessing steps:
+
+- Drop inaccurate or invalid observations in some datasets:
     - Military installations not currently in service
     - Transmission lines not in service or with invalid voltage values
-    - Intermittent streams or rivers (they cannot support nuclear cooling due to being seasonal)
-- Spatial join datasets not originally in county unit using the county boundaries data as a backbone
-
-- For some datasets we used `geopandas.overlay()` to find the specific areas intersecting with the county (e.g. for the military dataset, we found the area of the installations intersecting with the county, not the whole military base)
-
-- Drop unused variables in the original datasets. We kept about 2 - 4 variables for each that might contribute meaningfully to our scoring framework later on
-
-- Feature engineering: we created new variables based on the existing ones, such as **number of nuclear plants in each county**, **proportion of a county that has high flood risks**, etc.
-
-- Merging all datasets into a final one that contains all necessary variables on a county level. All of our merging steps go in `notebooks/merge.ipynb`.
-
+    - Intermittent streams or rivers (they cannot support nuclear cooling because they run dry seasonally)
+- Spatial join datasets not originally organized at the county level, using county boundaries as a backbone
+- For some datasets we used `geopandas.overlay()` to find the specific area intersecting with each county (for example, with military data we used the actual overlapping area rather than the full base footprint)
+- Drop unused variables from the original datasets, keeping 2 to 4 per source that are likely to matter for scoring
+- Feature engineering: we created new variables from existing ones, like the number of nuclear plants in each county and the proportion of a county that has high flood risk
+- Merge all datasets into a single county-level file. All merging steps are in `notebooks/cleaning/merge.ipynb`
 
 ### Key Variables
-Our final dataset `processed_data/final_dataset.csv` has **28 columns** and **3235 observations** corresponding to 3235 counties named by [Census.gov](Census.gov). Some key variables (not all of them): 
+Our final dataset `processed_data/final_dataset.csv` has **34 columns** and **3,235 observations**, one per county. Some key variables:
 
 | Variable Name | Description | Unit |
 | :-- | :-- | :-- |
 | `population` | County population in 2025 | people |
-| `total_energy_consumption_mwh` | County total consumption in 2024 | $MWh$ |
-| `pct_sfha` | Proportion of the county marked as severe flood hazard area |
-| `total_lake_area` | Total lake areas in the county | ${km^2}$ |
-| `dist_to_lakes_km` | Distance to the county's centroid to the nearest lake | $km$ |
-| `dist_to_rivers_km` | Distance to the county's centroid to the nearest river | $km$ |
-| `pct_military` | Proportion of the county with military installations |
-| `pga_max` | Maximum peak ground acceleration of the county (seismic risk indicator) | $g$ (fraction of gravitational acceleration, 9.8 $m/s^2$)
-| `max_voltage` |  Maximum voltage of a transmission line in the county | $kV$ |
+| `total_energy_consumption_mwh` | County total energy consumption in 2024 | MWh |
+| `pct_sfha` | Proportion of the county marked as a severe flood hazard area | |
+| `total_lake_area` | Total lake area in the county | km² |
+| `dist_to_lakes_km` | Distance from the county centroid to the nearest lake | km |
+| `dist_to_rivers_km` | Distance from the county centroid to the nearest river | km |
+| `pct_military` | Proportion of the county covered by military installations | |
+| `pga_max` | Maximum peak ground acceleration in the county (seismic risk indicator) | g (fraction of gravitational acceleration, 9.8 m/s²) |
+| `max_voltage` | Maximum voltage of a transmission line in the county | kV |
 
 
-## Methodology 
+## Methodology
+
 ### Exploratory Data Analysis
-Our main notebook for EDA is `notebooks/eda/eda.ipynb`. Some of the EDA techniques we used were: 
-- Explore the correlation between all numerical variables with a correlation heatmap. We found high correlation between 
+Our main EDA notebook is `notebooks/eda/eda.ipynb`. Some of the techniques we used:
+
+- Correlation heatmap across all numerical variables. We found high correlation between:
     - `housing_units` and `median_household_income`
     - `distance_to_lines_km` and `distance_to_rivers_km`
     - `total_rivers_mile` and `rivers_count`
     - `total_energy_consumption_mwh` and `population`
 
-- Explore the distributions of some numerical variables using boxplots
+- Boxplots to explore distributions of key numerical variables
 
-- Compare counties with and without a nuclear reactor to see the differences. Some key findings: 
-    - Counties with nuclear plants consistently have lower seismic and flood risk, stronger access to rivers and water bodies
-    - Counties with plants tend to cluster around lower population density but consume more energy in general compared to counties without one.
-    - Counties with plants have an average maximum voltage around 300 - 500kV with a moderate number of lines, which suggests that higher-voltage grid access is preferred rather than dense grid with lower voltage. 
+- Comparison of counties with and without an existing nuclear reactor. Key findings:
+    - Counties with nuclear plants consistently have lower seismic and flood risk, and stronger access to rivers and water bodies
+    - Plant counties tend to cluster around lower population density but consume more energy overall compared to counties without a plant
+    - Plant counties average a maximum voltage around 300 to 500 kV with a moderate number of lines, suggesting that higher-voltage grid access is preferred over a dense but lower-voltage grid
 
 ### Modeling
-Our modeling notebooks go in `notebooks/modeling`. The modeling process follows this order:
+All modeling notebooks are in `notebooks/modeling`. The process runs in this order:
+
 1. `mask.ipynb`
 2. `scoring.ipynb`
 3. `logistic_regression.ipynb`
 4. `validation.ipynb`
-5. `moo.ipynb`
-### Step 1: Masking - `mask.ipynb`
-We start by hard-excluding any counties that do not meet the minimum safety regulations to be a nuclear reactor site. We exclude a county if:
-- `pga_max` exceeds 0.3 
-- `pct_sfha` exceeds 0.2 
-- `pct_military` exceeds 0.1 
-- `pct_protected` exceeds 0.1 
+5. `random_forest.ipynb`
+6. `moo.ipynb`
 
-All of these thresholds are based on regulatory guidelines of the [Nuclear Regulatory Commission](https://www.nrc.gov/docs/ml1218/ml12188a053.pdf), [Next Generation Nuclear Plant (NGNP)](https://inldigitallibrary.inl.gov/sites/sti/sti/5144360.pdf), and [Executive Orders from the Office of the Federal Register](https://www.archives.gov/federal-register/codification/executive-order/11988.html)
+### Step 1: Masking
 
-Our dataset was reduced from 3235 to **2161 counties** after this hard exclusion.
-### Step 2: Scoring - `scoring.ipynb`
-Our scoring framework uses the [Multi-Criteria Decision Analysis (MCDA)](https://www.1000minds.com/decision-making/what-is-mcdm-mcda) technique, assigning weights to 12 variables to compute a suitability score per county.
+We start by hard-excluding any counties that don't meet the minimum safety requirements for a nuclear reactor site. A county is excluded if:
 
-Since most existing plants were built in the 70-80s under outdated criteria, we want to define a modern framework driven by expert knowledge and the NRC guidelines. We talked with professor [Caleb Brooks](https://npre.illinois.edu/people/profile/csbrooks) from Grainger Engineering to figure out the variables' importance
+- `pga_max` exceeds 0.3
+- `pct_sfha` exceeds 0.2
+- `pct_military` exceeds 0.1
+- `pct_protected` exceeds 0.1
 
-We ranked our variables by importance - top 3 being `pga_max`, `pct_sfha`, and `population_density` (all safety criteria), and applied the [Rank Order Centroid (ROC)](https://www.nature.com/articles/s41598-024-61945-z) method to convert our discrete ranking into weights. 
+These thresholds are based on regulatory guidelines from the [Nuclear Regulatory Commission](https://www.nrc.gov/docs/ml1218/ml12188a053.pdf), the [Next Generation Nuclear Plant (NGNP)](https://inldigitallibrary.inl.gov/sites/sti/sti/5144360.pdf), and [Executive Orders from the Office of the Federal Register](https://www.archives.gov/federal-register/codification/executive-order/11988.html).
 
-To validate robustness, we ran a **sensitivity analysis** with random ±20% weight perturbations across 1,000 simulations to see if our ranking remains stable. On average, **18.8 counties** in the top 20 remain the same, with a **95% CI of [18.744, 18.847]**. 
+After masking, the dataset went from 3,235 counties down to **2,161 candidates**.
 
-This confirms that our recommendations are reliable even if the weights aren't perfect. 
+### Step 2: Scoring
+
+Our scoring framework uses [Multi-Criteria Decision Analysis (MCDA)](https://www.1000minds.com/decision-making/what-is-mcdm-mcda), assigning weights to 12 variables to compute a suitability score per county.
+
+Because most existing plants were built in the 1970s and 80s under older criteria, we defined a modern framework driven by expert knowledge and NRC guidelines. We consulted with professor [Caleb Brooks](https://npre.illinois.edu/people/profile/csbrooks) from Grainger Engineering to figure out which variables matter most.
+
+We ranked variables by importance, with the top three being `pga_max`, `pct_sfha`, and `population_density` (all safety criteria), then applied the [Rank Order Centroid (ROC)](https://www.nature.com/articles/s41598-024-61945-z) method to convert that ranking into weights.
+
+To check robustness, we ran a sensitivity analysis with random +/-20% weight perturbations across 1,000 simulations. On average, **18.8 counties** in the top 20 remained the same, with a **95% CI of [18.744, 18.847]**. This confirms that the recommendations hold up even if the weights aren't perfect.
 
 ### Step 3: Validation and Comparison
-When ranking our MCDA scores, the highest-scoring counties are ones that currently don't have any nuclear reactors. We expected this to happen, as the old criteria might not match our modern frameworks
 
-We investigate this difference to see how policies have changed, by fitting **supervised ML models** on our dataset (which consist of "old" plants) and extracting feature importance to see priorities in the past. 
+The top-scoring counties from our MCDA framework mostly don't have existing nuclear plants. We expected this, since older siting criteria don't necessarily match our modern framework.
+
+To understand the difference, we fit supervised ML models on the dataset (which includes a flag for historical plant locations) and extracted feature importance to see what priorities actually drove siting in the past. The logistic regression work is in `logistic_regression.ipynb`, and the tree-based models and SHAP analysis are in `validation.ipynb`.
 
 **Key results:**
 
-- Models used: Logistic Regression, Decision Tree, XGBoost
+- Models used: Logistic Regression, Decision Tree, XGBoost (with class imbalance handling via SMOTE, `scale_pos_weight`, and `class_weight='balanced'`)
 
-- Because of heavy class imbalance (41:2000), we applied several class imbalance technique (SMOTE, `scale_pos_weight`, RandomOverSampler). However, minority class F1 remains low across all models:
-    - Logistic Regression: 0.12
-    - Decision Tree: 0.08 - 0.15
-    - XGBoost: 0.1 - 0.18
+- Because of heavy class imbalance (41 counties with plants vs. about 2,100 without), minority class F1 stayed low across all models:
+    - Logistic Regression: 0.11
+    - Decision Tree: 0.08 to 0.15
+    - XGBoost: 0.10 to 0.18
 
-- This suggests that predictive difficulty isn't only because of class imbalance, but possibly from historical siting decisions being influenced by factors outside our dataset (politics, public consent, economics, etc.)
-- Despite limited predictive performance, feature importance ranks are quite consistent across all models (reinforced by SHAP analysis): `total_energy_consumption_mwh`, `max_voltage`, and `max_voltage` rank highest. This partly supports a shift from infrastructure- and demand-driven to safety-first nuclear siting.
+- This suggests the difficulty isn't just class imbalance. Historical siting decisions were probably shaped by things our dataset doesn't capture, like politics, public consent, and economics.
 
-### Step 4: Recommendations - `moo.ipynb`
+- Despite the low predictive performance, feature importance was pretty consistent across all models (and confirmed by SHAP analysis): `total_energy_consumption_mwh`, `max_voltage`, and `data_centers_count` rank highest. This partly supports a shift from infrastructure- and demand-driven siting toward a safety-first framework.
+
+We also ran a Random Forest in `random_forest.ipynb` as an additional check. With `class_weight='balanced'`, it achieved 98% accuracy overall but predicted zero plant counties correctly, which reflects how severe the class imbalance is and reinforces the same interpretation above.
+
+### Step 4: Recommendations
 
 We used non-dominated sorting (`pymoo`'s `NonDominatedSorting`) across 6 key objectives.
 
-We run MOO twice — on the **full dataset** and on the **MCDA top 10%** — to quantify how much our weights narrow the candidate space. Each MOO returns a pareto front - a subset of counties that are not dominated by other counties in any criteria.
+We ran MOO twice: once on the full dataset and once on the MCDA top 10%, to see how much our weights narrow the candidate space. Each run returns a Pareto front, a subset of counties that no other county dominates on all criteria simultaneously.
 
 Counties are assigned to tiers based on their Pareto front membership:
 
 - **Tier 1** (175 counties): appear on both fronts
-- **Tier 2** (1 county): MCDA Pareto only 
+- **Tier 2** (1 county): MCDA Pareto only
 - **Tier 3** (569 counties): global Pareto only
 
-**Key metrics**:
-- Our MCDA scoring excludes candidates quite aggressively, as it overlooked 569 non-dominated counties
-- **Hypervolume ratio**: MCDA top 10% captures **91.6%** of the global Pareto front's trade-off coverage
-- Top 20 candidates return by MCDA alone and MOO have 18 in common, confirming the consistency of our framework.
+**Key metrics:**
 
-Most optimal counties are in the Great Lakes area, e.g. Michigan or Wisconsin.
+- Our MCDA scoring is fairly aggressive: it overlooked 569 non-dominated counties that the global Pareto front found
+- **Hypervolume ratio**: the MCDA top 10% still captures **91.6%** of the global Pareto front's trade-off coverage
+- The top 20 candidates from MCDA alone and from MOO have 18 in common, confirming the consistency of our framework
+
+Most optimal counties are in the Great Lakes region, particularly Michigan and Wisconsin.
