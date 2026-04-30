@@ -146,3 +146,72 @@ Counties are assigned to tiers based on their Pareto front membership:
 - Top 20 candidates return by MCDA alone and MOO have 18 in common, confirming the consistency of our framework.
 
 Most optimal counties are in the Great Lakes area, e.g. Michigan or Wisconsin.
+
+
+## Key Findings
+- Counties with nuclear plants tend to have lower flood and seismic risks, lower population (density), closer water access, and higher-voltage grid access, compared to counties without
+- Policies for siting a nuclear reactor have shifted over time: the past prioritized energy demand and other factors (politics, economy, etc.) while today's criteria (from the [Nuclear Regulatory Commission](https://www.nrc.gov/docs/ml1218/ml12188a053.pdf) and our framework) focuses more on safety. 
+- Most of the most suitable counties to have a nuclear reactor are in the Great Lakes Area (Wisconsin, Michigan, etc.) - found by both **Multi-objective Optimization** and our **MCDA scoring framework**.
+
+
+## Installation and Setup
+
+Instructions for setting up the project environment:
+### 1. Clone the repository
+```bash
+git clone https://github.com/UIUC-DSC/team-nuclear-family.git
+cd team-nuclear-family
+```
+### 2. Installations
+```bash
+pip install -r requirements.txt
+```
+### 3. Run the pipeline
+Notebooks in `notebooks` should be run in the following order: 
+1. `notebooks/cleaning` ←  data cleaning/preprocessing
+2. `notebooks/eda` ←  exploratory data analysis
+3. `notebooks/modeling` ←  modeling
+
+
+## Project Structure
+```
+team-nuclear-family/
+├── notebooks/
+│   ├── cleaning/            # data cleaning and feature engineering
+│   ├── eda/                 # exploratory data analysis 
+│   └── modeling/
+│       ├── mask.ipynb       # hard exclusion
+│       ├── scoring.ipynb    # MCDA scoring 
+│       ├── logistic_regression.ipynb    # supervised ML validation
+│       ├── validation.ipynb # supervised ML validation
+│       └── moo.ipynb        # multi-objective optimization
+│
+├── processed_data/          # cleaned and merged datasets
+├── raw_data/                # original raw datasets
+├── results/                 # data visualizations
+├── requirements.txt         # package requirement
+└── README.md                # this file
+```
+
+## Future Work 
+- Include more variables (politics, economics, county policies, etc.) in the scoring framework to have a more comprehensive model
+- Apply more class imbalance handling methods (SMOTE, RandomOverSampler, etc.) in training supervised ML models
+- Apply sentiment analysis techniques to analyze residents' consensus of building a nuclear reactor in a region
+- Compare our results with existing models (e.g. [OR-SAGE](https://orsage.ornl.gov/)) used by the [Department of Energy](https://www.energy.gov/) to validate our results
+
+## Acknowledgement 
+- Professor [Caleb Brooks](https://npre.illinois.edu/people/profile/csbrooks) (UIUC Nuclear Engineering) - expert-driven feature rankings.
+- [Nuclear Regulatory Committee (NRC) Guidelines](https://www.ecfr.gov/current/title-10/chapter-I/part-100) on nuclear sites criteria
+- **Erdem et al. (2025)** — methodological reference for multi-objective nuclear siting ([paper](https://www.sciencedirect.com/science/article/pii/S2590174525000558))
+- **Data Sources**: US Census Bureau (TIGER/ACS), FEMA NFHL, HIFLD, USGS, EIA, NRC, HydroLAKES, NOAA, FWS NWI, OpenStreetMap (see **Data Description** above)
+- **Tools**: pandas, GeoPandas, sklearn, pymoo, XGBoost, SHAP, Matplotlib, seaborn
+- **Project Lead**: Grant Magnabosco
+
+## Contact Information
+
+We can be contacted for questions and collaboration via email:
+- Brian: brianl11@illinois.edu
+- Khue: khueln2@illinois.edu
+- Millie: milliec2@illinois.edu
+- Nina: ninass2@illinois.edu
+- Quentin: qconkle2@illinois.edu
