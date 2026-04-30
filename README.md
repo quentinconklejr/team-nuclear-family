@@ -185,20 +185,20 @@ Notebooks in `notebooks` should be run in the following order:
 ```
 team-nuclear-family/
 ├── notebooks/
-│   ├── cleaning/            # data cleaning and feature engineering
-│   ├── eda/                 # exploratory data analysis 
+│   ├── cleaning/                        # data cleaning and feature engineering
+│   ├── eda/                             # exploratory data analysis 
 │   └── modeling/
-│       ├── mask.ipynb       # hard exclusion
-│       ├── scoring.ipynb    # MCDA scoring 
+│       ├── mask.ipynb                   # hard exclusion
+│       ├── scoring.ipynb                # MCDA scoring 
 │       ├── logistic_regression.ipynb    # supervised ML validation
-│       ├── validation.ipynb # supervised ML validation
-│       └── moo.ipynb        # multi-objective optimization
+│       ├── validation.ipynb             # supervised ML validation
+│       └── moo.ipynb                    # multi-objective optimization
 │
-├── processed_data/          # cleaned and merged datasets
-├── raw_data/                # original raw datasets
-├── results/                 # data visualizations
-├── requirements.txt         # package requirement
-└── README.md                # this file
+├── processed_data/                      # cleaned and merged datasets
+├── raw_data/                            # original raw datasets
+├── results/                             # data visualizations
+├── requirements.txt                     # package requirement
+└── README.md                            # this file
 ```
 
 ## Future Work 
