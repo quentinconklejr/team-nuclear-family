@@ -1,5 +1,9 @@
 # Team Nuclear Family - Nuclear Reactor Siting in the United States
 
+**First place winner, IDSC Data Dive Spring 2026.**
+
+The full presentation deck is available [here](nuclear_siting_presentation.pdf).
+
 ## Project Overview
 AI data centers are consuming more electricity than ever, and demand keeps climbing as new ones come online. Nuclear is one of the few clean energy sources that can actually keep up. But where should new reactors go?
 
