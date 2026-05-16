@@ -27,6 +27,18 @@ _FIPS_TO_STATE = {
 }
 
 
+# ── Counties excluded from map background display ────────────────────────────
+# These are removed from the choropleth background layer only — scores are preserved.
+# Criteria: TIGER water area >> land area AND boundary visually overlaps a Great Lake
+# or the county is a remote island territory far off the continental map.
+_DISPLAY_EXCLUDED_GEOIDS = {
+    "26083",  # Keweenaw County, MI  — 91% Lake Superior water; peninsula extends deep into lake
+    "25019",  # Nantucket County, MA — 85% water; offshore island, distorts Atlantic shelf
+    "25007",  # Dukes County, MA     — 79% water; Martha's Vineyard + islands
+    "15005",  # Kalawao County, HI   — 77% water; tiny Molokai peninsula island
+}
+
+
 # ── Theme definitions ─────────────────────────────────────────────────────────
 
 _THEMES = {
@@ -355,7 +367,9 @@ def load_pareto():
 
 @st.cache_data
 def load_geojson():
-    with open("processed_data/county_boundaries.geojson") as f:
+    # Plotly cartographic GeoJSON: boundaries clipped to shoreline (fixes IL east border
+    # and Great Lakes overlap vs TIGER which extends county polygons into the water)
+    with open("processed_data/plotly_counties.geojson") as f:
         return json.load(f)
 
 
@@ -389,12 +403,13 @@ def build_state_lines(_geojson):
 def build_geo_lookup(_geojson):
     result = {}
     for feat in _geojson["features"]:
+        # Plotly GeoJSON uses feature.id (5-digit FIPS string), not properties.geoid
+        fid = str(feat.get("id", ""))
+        state_abbr = _FIPS_TO_STATE.get(fid[:2], "")
         p = feat["properties"]
-        # Always derive from state_fips — GeoJSON state_abbr field is systematically corrupted
-        state_abbr = _FIPS_TO_STATE.get(p.get("state_fips", ""), "")
-        result[p["geoid"]] = {
+        result[fid] = {
             "state_abbr": state_abbr,
-            "county_name_full": p["county_name_full"],
+            "county_name_full": p.get("NAME", "") + " " + p.get("LSAD", ""),
         }
     return result
 
@@ -407,7 +422,11 @@ geo_lookup = build_geo_lookup(geojson)
 state_geojson = load_state_geojson()
 state_lats, state_lons = build_state_lines(state_geojson)
 
-all_geoids = [f["properties"]["geoid"] for f in geojson["features"]]
+# Plotly GeoJSON uses feature.id (not properties.geoid); exclude water-dominant counties
+all_geoids = [
+    str(f["id"]) for f in geojson["features"]
+    if str(f["id"]) not in _DISPLAY_EXCLUDED_GEOIDS
+]
 
 df = candidates.merge(
     pareto[["geoid", "on_nsga2_pareto", "on_both_fronts"]],
@@ -604,7 +623,7 @@ fig.add_trace(go.Choroplethmap(
     geojson=geojson,
     locations=all_geoids,
     z=[0.0] * len(all_geoids),
-    featureidkey="properties.geoid",
+    featureidkey="id",
     colorscale=[[0, tc["county_fill"]], [1, tc["county_fill"]]],
     showscale=False,
     marker=dict(opacity=0.20, line=dict(width=0.2, color=tc["county_border"])),
@@ -630,7 +649,7 @@ if len(filtered_df) > 0:
         geojson=geojson,
         locations=filtered_df["geoid"].tolist(),
         z=filtered_df["mcda_score"].tolist(),
-        featureidkey="properties.geoid",
+        featureidkey="id",
         colorscale=tc["colorscale"],
         zmin=_score_min,
         zmax=_score_max,
@@ -655,7 +674,7 @@ if len(filtered_df) > 0:
             geojson=geojson,
             locations=pareto_geoids,
             z=[1.0] * len(pareto_geoids),
-            featureidkey="properties.geoid",
+            featureidkey="id",
             colorscale=[[0, "rgba(0,0,0,0)"], [1, "rgba(0,0,0,0)"]],
             showscale=False,
             marker=dict(line=dict(width=2.5, color=tc["pareto_border"])),
