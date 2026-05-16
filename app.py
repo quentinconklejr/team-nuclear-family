@@ -360,9 +360,10 @@ def load_geojson():
 
 
 @st.cache_data
-def load_state_geojson():
-    with open("processed_data/state_boundaries.geojson") as f:
-        return json.load(f)
+def load_state_borders():
+    with open("processed_data/state_borders_coords.json") as f:
+        d = json.load(f)
+    return d["lats"], d["lons"]
 
 
 @st.cache_data
@@ -379,33 +380,12 @@ def build_geo_lookup(_geojson):
     return result
 
 
-@st.cache_data
-def build_state_lines(_state_geojson):
-    """Return flat lat/lon arrays (with None breaks) tracing every state exterior ring."""
-    lats: list = []
-    lons: list = []
-    for feat in _state_geojson["features"]:
-        geom = feat["geometry"]
-        if geom["type"] == "Polygon":
-            rings = [geom["coordinates"][0]]
-        elif geom["type"] == "MultiPolygon":
-            rings = [poly[0] for poly in geom["coordinates"]]
-        else:
-            continue
-        for ring in rings:
-            lons.extend(pt[0] for pt in ring)
-            lats.extend(pt[1] for pt in ring)
-            lons.append(None)
-            lats.append(None)
-    return lats, lons
 
-
-candidates    = load_candidates()
-pareto        = load_pareto()
-geojson       = load_geojson()
-state_geojson = load_state_geojson()
-geo_lookup    = build_geo_lookup(geojson)
-state_lats, state_lons = build_state_lines(state_geojson)
+candidates = load_candidates()
+pareto     = load_pareto()
+geojson    = load_geojson()
+geo_lookup = build_geo_lookup(geojson)
+state_lats, state_lons = load_state_borders()
 
 all_geoids = [f["properties"]["geoid"] for f in geojson["features"]]
 
@@ -455,43 +435,67 @@ with st.sidebar:
 
     st.divider()
     st.markdown("## Filters")
-    st.caption("Narrow the map and table to counties matching your thresholds.")
+    st.caption("Narrow the map and table to counties that meet all three safety thresholds below.")
     st.divider()
 
-    st.markdown("**Seismic Risk — max pga_max**")
-    st.caption("Peak ground acceleration in g. Regulatory limit: 0.30 g")
+    st.markdown("**Earthquake Risk**")
+    st.caption(
+        "Maximum ground shaking strength (g-force). "
+        "The NRC requires sites to stay below 0.30 g. "
+        "Lower = safer. Move the slider left to be more strict."
+    )
     pga_filter = st.slider(
-        "pga_max", 0.0, 0.30, 0.30, 0.01,
+        "Earthquake risk cutoff (g)",
+        0.0, 0.30, 0.30, 0.01,
         format="%.2f g",
-        label_visibility="collapsed",
-        help="Filter to counties with peak ground acceleration at or below this value.",
+        help=(
+            "Peak Ground Acceleration (PGA): how strongly the ground shakes during an earthquake. "
+            "0.05 g = barely felt; 0.30 g = NRC regulatory threshold for reactor siting."
+        ),
     )
 
-    st.markdown("**Flood Risk — max pct_sfha**")
-    st.caption("Fraction of county in severe flood hazard area. Limit: 0.20")
+    st.markdown("**Flood Risk**")
+    st.caption(
+        "Percent of the county in a FEMA high-risk flood zone. "
+        "Reactors need dry, stable ground. "
+        "Lower = safer. Move the slider left to exclude flood-prone counties."
+    )
     sfha_filter = st.slider(
-        "pct_sfha", 0.0, 0.20, 0.20, 0.01,
-        format="%.2f",
-        label_visibility="collapsed",
-        help="Filter to counties with special flood hazard area fraction at or below this value.",
+        "Flood zone coverage cutoff (%)",
+        0.0, 20.0, 20.0, 1.0,
+        format="%.0f%%",
+        help=(
+            "Special Flood Hazard Area (SFHA): the percentage of the county inside FEMA's "
+            "100-year flood boundary. 0% = no flood risk; 20% = very flood-prone."
+        ),
     )
+    sfha_filter = sfha_filter / 100.0  # convert back to fraction for filtering
 
-    st.markdown("**Max Population Density**")
-    st.caption("People per km²")
+    st.markdown("**Population Density**")
+    st.caption(
+        "How many people live per square kilometer. "
+        "Reactors need large exclusion zones with few nearby residents. "
+        "Lower = easier to site safely."
+    )
     pop_filter = st.slider(
-        "pop_density", 0, 10000, 10000, 50,
+        "Max residents per km²",
+        0, 10000, 10000, 50,
         format="%d / km²",
-        label_visibility="collapsed",
-        help="Filter to counties with population density at or below this value.",
+        help=(
+            "Population density of the county. "
+            "Under 10/km² = very rural (ideal). "
+            "Over 100/km² = suburban or urban (challenging for NRC exclusion zones)."
+        ),
     )
 
     st.divider()
     pareto_only = st.toggle(
-        "Pareto-optimal counties only",
+        "Show only top-tier sites (Pareto-optimal)",
         value=False,
         help=(
-            "Show only the 111 counties on the NSGA-II multi-objective Pareto front "
-            "(non-dominated across all 6 optimization criteria)."
+            "A Pareto-optimal county is one where you can't improve any single criterion "
+            "(e.g., earthquake safety) without making another worse (e.g., water access). "
+            "These 111 counties represent the best achievable trade-offs across all 6 factors."
         ),
     )
 
@@ -574,7 +578,8 @@ if accessible:
 tc = _THEMES[theme]
 fig = go.Figure()
 
-# Layer 1: all counties — neutral background
+# Layer 1: all counties — neutral background (opacity<1 lets base tiles show through,
+# making water bodies like Lake Michigan visible underneath)
 fig.add_trace(go.Choroplethmap(
     geojson=geojson,
     locations=all_geoids,
@@ -582,7 +587,7 @@ fig.add_trace(go.Choroplethmap(
     featureidkey="properties.geoid",
     colorscale=[[0, tc["county_fill"]], [1, tc["county_fill"]]],
     showscale=False,
-    marker=dict(line=dict(width=0.2, color=tc["county_border"])),
+    marker=dict(opacity=0.70, line=dict(width=0.2, color=tc["county_border"])),
     hoverinfo="skip",
     name="",
 ))
@@ -617,7 +622,7 @@ if len(filtered_df) > 0:
             tickformat=".2f",
             tickfont=dict(color=tc["font_color"]),
         ),
-        marker=dict(line=dict(width=0.2, color=tc["county_border"])),
+        marker=dict(opacity=0.82, line=dict(width=0.2, color=tc["county_border"])),
         text=hover_text.tolist(),
         hovertemplate="%{text}<extra></extra>",
         name="Candidates",
