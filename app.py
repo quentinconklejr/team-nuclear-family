@@ -31,37 +31,42 @@ _FIPS_TO_STATE = {
 
 _THEMES = {
     "Light": {
-        "map_style": "carto-positron",
-        "paper_bg": "white",
-        "font_color": "#1a2e4a",
-        "colorscale": "YlGn",
-        "county_fill": "#d6dae0",
-        "county_border": "#b0b8c4",
-        "cand_border": "#4a5568",
-        "pareto_border": "#b45309",  # amber — visible non-color indicator
+        "map_style":      "carto-positron",
+        "paper_bg":       "white",
+        "font_color":     "#1a2e4a",
+        "colorscale":     "YlGn",
+        "county_fill":    "#d6dae0",
+        "county_border":  "#b0b8c4",
+        "cand_border":    "#4a5568",
+        "pareto_border":  "#b45309",
+        "state_border":   "#3a4a5c",
     },
     "Dark": {
-        "map_style": "carto-darkmatter",
-        "paper_bg": "#0e1117",
-        "font_color": "#e2e8f0",
-        "colorscale": "YlGn",
-        "county_fill": "#2d3748",
-        "county_border": "#4a5568",
-        "cand_border": "#a0aec0",
-        "pareto_border": "#f6ad55",  # amber on dark
+        "map_style":      "carto-darkmatter",
+        "paper_bg":       "#0e1117",
+        "font_color":     "#e2e8f0",
+        "colorscale":     "YlGn",
+        "county_fill":    "#2d3748",
+        "county_border":  "#4a5568",
+        "cand_border":    "#a0aec0",
+        "pareto_border":  "#f6ad55",
+        "state_border":   "#a0aec0",
     },
     "High Contrast": {
-        "map_style": "carto-darkmatter",
-        "paper_bg": "#000000",
-        "font_color": "#ffffff",
-        "colorscale": [[0, "#003300"], [0.33, "#006600"], [0.66, "#00aa00"], [1, "#00ff44"]],
-        "county_fill": "#222222",
-        "county_border": "#555555",
-        "cand_border": "#ffffff",
-        "pareto_border": "#ffff00",
+        "map_style":      "carto-darkmatter",
+        "paper_bg":       "#000000",
+        "font_color":     "#ffffff",
+        "colorscale":     [[0, "#003300"], [0.33, "#006600"], [0.66, "#00aa00"], [1, "#00ff44"]],
+        "county_fill":    "#222222",
+        "county_border":  "#555555",
+        "cand_border":    "#ffffff",
+        "pareto_border":  "#ffff00",
+        "state_border":   "#ffffff",
     },
 }
 
+
+# ── CSS builders ──────────────────────────────────────────────────────────────
 
 def _build_css(theme: str, accessible: bool) -> str:
     fs_title  = "2.3rem"  if accessible else "1.9rem"
@@ -105,8 +110,91 @@ div[data-testid="metric-container"] > div:first-child {{ font-size: {fs_metric};
 
     if theme == "Dark":
         return f"""<style>
+/* ── Layout ── */
 .stApp {{ background-color: #0e1117 !important; }}
-section[data-testid="stSidebar"] {{ background-color: #1a2035 !important; }}
+.stApp > header {{ background-color: #0e1117 !important; }}
+.block-container {{ background-color: #0e1117 !important; }}
+
+/* ── Sidebar shell ── */
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] > div:first-child {{
+    background-color: #1a2035 !important;
+}}
+
+/* ── Sidebar text — labels, markdown, captions ── */
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] small,
+section[data-testid="stSidebar"] .stMarkdown,
+section[data-testid="stSidebar"] [data-testid="stText"],
+section[data-testid="stSidebar"] [data-testid="stCaption"] p {{
+    color: #e2e8f0 !important;
+}}
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] h4 {{
+    color: #93c5fd !important;
+}}
+section[data-testid="stSidebar"] hr {{ border-color: #334155 !important; }}
+
+/* ── Selectbox ── */
+[data-baseweb="select"] > div {{
+    background-color: #253050 !important;
+    border-color: #4a5568 !important;
+}}
+[data-baseweb="select"] div[class*="ValueContainer"],
+[data-baseweb="select"] div[class*="singleValue"],
+[data-baseweb="select"] div[class*="placeholder"],
+[data-baseweb="select"] input {{
+    color: #e2e8f0 !important;
+    background-color: transparent !important;
+}}
+[data-baseweb="select"] svg {{ fill: #94a3b8 !important; }}
+
+/* Dropdown popup (renders outside sidebar DOM) */
+[data-baseweb="popover"] > div {{
+    background-color: #253050 !important;
+    border-color: #4a5568 !important;
+}}
+[data-baseweb="menu"] li,
+[data-baseweb="list"] li {{
+    background-color: #253050 !important;
+    color: #e2e8f0 !important;
+}}
+[data-baseweb="option"]:hover {{
+    background-color: #334155 !important;
+}}
+
+/* ── Toggle ── */
+[data-testid="stToggle"] label {{ color: #e2e8f0 !important; }}
+[data-testid="stToggle"] p {{ color: #e2e8f0 !important; }}
+
+/* ── Slider ── */
+[data-testid="stSlider"] label,
+[data-testid="stSlider"] p {{ color: #e2e8f0 !important; }}
+
+/* ── Metrics ── */
+[data-testid="stMetricLabel"] p,
+[data-testid="stMetricValue"],
+[data-testid="stMetricDelta"] {{ color: #e2e8f0 !important; }}
+
+/* ── Alerts ── */
+[data-testid="stAlert"],
+div[class*="stAlert"] {{
+    background-color: #1e2535 !important;
+    border-color: #334155 !important;
+}}
+[data-testid="stAlert"] p,
+div[class*="stAlert"] p {{ color: #e2e8f0 !important; }}
+div[data-testid="stInfo"] {{ background-color: #0f2844 !important; border-color: #1e4976 !important; }}
+div[data-testid="stSuccess"] {{ background-color: #0f2d1a !important; border-color: #166534 !important; }}
+div[data-testid="stWarning"] {{ background-color: #2d2205 !important; border-color: #713f12 !important; }}
+
+/* ── Dataframe ── */
+[data-testid="stDataFrame"] {{ background-color: #1e2535 !important; }}
+
+/* ── Our custom classes ── */
 .main-title {{
     font-size: {fs_title}; font-weight: 700; color: #93c5fd; margin-bottom: 0.15rem;
 }}
@@ -129,9 +217,100 @@ section[data-testid="stSidebar"] {{ background-color: #1a2035 !important; }}
 
     # High Contrast
     return f"""<style>
+/* ── Layout ── */
 .stApp {{ background-color: #000000 !important; }}
-section[data-testid="stSidebar"] {{ background-color: #111111 !important; }}
-p, span, div, h1, h2, h3, li {{ color: #ffffff !important; }}
+.stApp > header {{ background-color: #000000 !important; }}
+.block-container {{ background-color: #000000 !important; }}
+
+/* ── Sidebar shell ── */
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] > div:first-child {{
+    background-color: #111111 !important;
+}}
+
+/* ── Sidebar text ── */
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] small,
+section[data-testid="stSidebar"] .stMarkdown,
+section[data-testid="stSidebar"] [data-testid="stText"],
+section[data-testid="stSidebar"] [data-testid="stCaption"] p {{
+    color: #ffffff !important;
+}}
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] h4 {{
+    color: #ffff00 !important;
+}}
+section[data-testid="stSidebar"] hr {{ border-color: #555555 !important; }}
+
+/* ── Selectbox ── */
+[data-baseweb="select"] > div {{
+    background-color: #222222 !important;
+    border-color: #ffffff !important;
+    border-width: 2px !important;
+}}
+[data-baseweb="select"] div[class*="ValueContainer"],
+[data-baseweb="select"] div[class*="singleValue"],
+[data-baseweb="select"] div[class*="placeholder"],
+[data-baseweb="select"] input {{
+    color: #ffffff !important;
+    background-color: transparent !important;
+}}
+[data-baseweb="select"] svg {{ fill: #ffffff !important; }}
+
+/* Dropdown popup */
+[data-baseweb="popover"] > div {{
+    background-color: #222222 !important;
+    border: 2px solid #ffff00 !important;
+}}
+[data-baseweb="menu"] li,
+[data-baseweb="list"] li {{
+    background-color: #222222 !important;
+    color: #ffffff !important;
+}}
+[data-baseweb="option"]:hover {{
+    background-color: #333300 !important;
+    color: #ffff00 !important;
+}}
+
+/* ── Toggle ── */
+[data-testid="stToggle"] label,
+[data-testid="stToggle"] p {{ color: #ffffff !important; }}
+
+/* ── Slider ── */
+[data-testid="stSlider"] label,
+[data-testid="stSlider"] p {{ color: #ffffff !important; }}
+
+/* ── Metrics ── */
+[data-testid="stMetricLabel"] p,
+[data-testid="stMetricValue"],
+[data-testid="stMetricDelta"] {{ color: #ffffff !important; }}
+
+/* ── Alerts ── */
+[data-testid="stAlert"],
+div[class*="stAlert"] {{
+    background-color: #111111 !important;
+    border: 2px solid #ffffff !important;
+}}
+[data-testid="stAlert"] p,
+div[class*="stAlert"] p {{ color: #ffffff !important; }}
+div[data-testid="stSuccess"] {{ border-color: #00ff00 !important; }}
+div[data-testid="stWarning"] {{ border-color: #ffff00 !important; }}
+div[data-testid="stInfo"] {{ border-color: #00ffff !important; }}
+
+/* ── Focus rings for keyboard nav ── */
+a:focus, button:focus, [tabindex]:focus,
+[data-baseweb="select"]:focus-within {{
+    outline: 3px solid #ffff00 !important;
+    outline-offset: 2px !important;
+}}
+
+/* ── Dataframe ── */
+[data-testid="stDataFrame"] {{ background-color: #111111 !important; }}
+
+/* ── Our custom classes ── */
 .main-title {{
     font-size: {fs_title}; font-weight: 700; color: #ffff00 !important; margin-bottom: 0.15rem;
 }}
@@ -149,9 +328,6 @@ p, span, div, h1, h2, h3, li {{ color: #ffffff !important; }}
     vertical-align: middle; margin-left: 6px; border: 2px solid #00ff00;
 }}
 .detail-metric {{ margin-bottom: 0.15rem; }}
-a:focus, button:focus, [tabindex]:focus {{
-    outline: 3px solid #ffff00 !important; outline-offset: 2px !important;
-}}
 {shared}
 </style>"""
 
@@ -184,11 +360,17 @@ def load_geojson():
 
 
 @st.cache_data
+def load_state_geojson():
+    with open("processed_data/state_boundaries.geojson") as f:
+        return json.load(f)
+
+
+@st.cache_data
 def build_geo_lookup(_geojson):
     result = {}
     for feat in _geojson["features"]:
         p = feat["properties"]
-        # Always derive from state_fips — GeoJSON state_abbr is systematically corrupted
+        # Always derive from state_fips — GeoJSON state_abbr field is systematically corrupted
         state_abbr = _FIPS_TO_STATE.get(p.get("state_fips", ""), "")
         result[p["geoid"]] = {
             "state_abbr": state_abbr,
@@ -197,10 +379,33 @@ def build_geo_lookup(_geojson):
     return result
 
 
-candidates = load_candidates()
-pareto     = load_pareto()
-geojson    = load_geojson()
-geo_lookup = build_geo_lookup(geojson)
+@st.cache_data
+def build_state_lines(_state_geojson):
+    """Return flat lat/lon arrays (with None breaks) tracing every state exterior ring."""
+    lats: list = []
+    lons: list = []
+    for feat in _state_geojson["features"]:
+        geom = feat["geometry"]
+        if geom["type"] == "Polygon":
+            rings = [geom["coordinates"][0]]
+        elif geom["type"] == "MultiPolygon":
+            rings = [poly[0] for poly in geom["coordinates"]]
+        else:
+            continue
+        for ring in rings:
+            lons.extend(pt[0] for pt in ring)
+            lats.extend(pt[1] for pt in ring)
+            lons.append(None)
+            lats.append(None)
+    return lats, lons
+
+
+candidates    = load_candidates()
+pareto        = load_pareto()
+geojson       = load_geojson()
+state_geojson = load_state_geojson()
+geo_lookup    = build_geo_lookup(geojson)
+state_lats, state_lons = build_state_lines(state_geojson)
 
 all_geoids = [f["properties"]["geoid"] for f in geojson["features"]]
 
@@ -230,28 +435,25 @@ _score_max = df["mcda_score"].max()
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 
 with st.sidebar:
-    # Display settings
     st.markdown("## Display")
 
     theme = st.selectbox(
         "Theme",
         list(_THEMES.keys()),
         index=0,
-        help="Switch between Light, Dark, and High Contrast color schemes.",
+        help="Choose a color scheme. High Contrast meets WCAG AAA requirements.",
     )
 
     accessible = st.toggle(
         "Enhanced Accessibility",
         value=False,
         help=(
-            "Enables larger text sizes and adds descriptive labels for screen readers "
-            "(WCAG 2.1 AA). Pair with High Contrast theme for maximum readability."
+            "Scales up all text sizes and adds visible map descriptions "
+            "for low-vision users (WCAG 2.1 AA)."
         ),
     )
 
     st.divider()
-
-    # Filters
     st.markdown("## Filters")
     st.caption("Narrow the map and table to counties matching your thresholds.")
     st.divider()
@@ -259,8 +461,7 @@ with st.sidebar:
     st.markdown("**Seismic Risk — max pga_max**")
     st.caption("Peak ground acceleration in g. Regulatory limit: 0.30 g")
     pga_filter = st.slider(
-        "pga_max",
-        0.0, 0.30, 0.30, 0.01,
+        "pga_max", 0.0, 0.30, 0.30, 0.01,
         format="%.2f g",
         label_visibility="collapsed",
         help="Filter to counties with peak ground acceleration at or below this value.",
@@ -269,8 +470,7 @@ with st.sidebar:
     st.markdown("**Flood Risk — max pct_sfha**")
     st.caption("Fraction of county in severe flood hazard area. Limit: 0.20")
     sfha_filter = st.slider(
-        "pct_sfha",
-        0.0, 0.20, 0.20, 0.01,
+        "pct_sfha", 0.0, 0.20, 0.20, 0.01,
         format="%.2f",
         label_visibility="collapsed",
         help="Filter to counties with special flood hazard area fraction at or below this value.",
@@ -279,8 +479,7 @@ with st.sidebar:
     st.markdown("**Max Population Density**")
     st.caption("People per km²")
     pop_filter = st.slider(
-        "pop_density",
-        0, 10000, 10000, 50,
+        "pop_density", 0, 10000, 10000, 50,
         format="%d / km²",
         label_visibility="collapsed",
         help="Filter to counties with population density at or below this value.",
@@ -320,7 +519,7 @@ mask = (
 if pareto_only:
     mask &= df["on_nsga2_pareto"]
 
-filtered_df   = df[mask].copy()
+filtered_df     = df[mask].copy()
 filtered_geoids = set(filtered_df["geoid"])
 
 
@@ -352,15 +551,14 @@ m4.metric("Highest Rank Shown", f"#{int(_best_rank)}" if pd.notna(_best_rank) el
 
 st.markdown('<div class="section-header">County Suitability Map</div>', unsafe_allow_html=True)
 
-# Screen-reader description (hidden visually; read by assistive technology)
+# Screen-reader description (hidden visually)
 st.markdown(
     '<p class="sr-only" role="img">'
     "Choropleth map of the United States showing nuclear reactor siting suitability "
-    "scores by county. Darker green indicates higher MCDA suitability. Pareto-optimal "
-    "counties — non-dominated across all six optimization criteria — are additionally "
-    "outlined in amber. Gray counties did not pass safety screening. "
-    "Click any highlighted county to load its full profile in the detail panel below. "
-    "The Top 20 Candidates table provides a keyboard-accessible tabular alternative."
+    "scores by county. Darker green indicates higher MCDA suitability. State borders "
+    "are drawn as distinct outlines. Pareto-optimal counties are additionally outlined "
+    "in amber. Click any highlighted county to load its full profile. "
+    "The Top 20 Candidates table below is a keyboard-accessible tabular alternative."
     "</p>",
     unsafe_allow_html=True,
 )
@@ -368,8 +566,9 @@ st.markdown(
 if accessible:
     st.caption(
         "Map: counties colored green by MCDA suitability score (darker = higher). "
+        "State boundaries shown as distinct outlines. "
         "Pareto-optimal counties have an amber outline and ★ in the tooltip. "
-        "Click a county to see its full profile. Use the table below for keyboard access."
+        "Click a county to load its full profile, or use the table below."
     )
 
 tc = _THEMES[theme]
@@ -383,7 +582,7 @@ fig.add_trace(go.Choroplethmap(
     featureidkey="properties.geoid",
     colorscale=[[0, tc["county_fill"]], [1, tc["county_fill"]]],
     showscale=False,
-    marker=dict(line=dict(width=0.3, color=tc["county_border"])),
+    marker=dict(line=dict(width=0.2, color=tc["county_border"])),
     hoverinfo="skip",
     name="",
 ))
@@ -418,7 +617,7 @@ if len(filtered_df) > 0:
             tickformat=".2f",
             tickfont=dict(color=tc["font_color"]),
         ),
-        marker=dict(line=dict(width=0.5, color=tc["cand_border"])),
+        marker=dict(line=dict(width=0.2, color=tc["county_border"])),
         text=hover_text.tolist(),
         hovertemplate="%{text}<extra></extra>",
         name="Candidates",
@@ -438,6 +637,17 @@ if len(filtered_df) > 0:
             hoverinfo="skip",
             name="★ Pareto-Optimal",
         ))
+
+# Layer 4: state boundaries — drawn on top of all county fills
+fig.add_trace(go.Scattermap(
+    lat=state_lats,
+    lon=state_lons,
+    mode="lines",
+    line=dict(width=1.5, color=tc["state_border"]),
+    hoverinfo="skip",
+    showlegend=False,
+    name="State Boundaries",
+))
 
 fig.update_layout(
     map=dict(
@@ -509,7 +719,8 @@ with table_col:
             hide_index=True,
             column_config={
                 "Rank":       st.column_config.TextColumn(width="small"),
-                "Pareto":     st.column_config.TextColumn("★", width="small",
+                "Pareto":     st.column_config.TextColumn(
+                                  "★", width="small",
                                   help="★ = county is on the NSGA-II Pareto front"),
                 "MCDA Score": st.column_config.TextColumn(width="small"),
             },
@@ -535,7 +746,8 @@ with detail_col:
         is_pareto  = bool(row.get("on_nsga2_pareto", False))
 
         badge = (
-            ' <span class="pareto-badge" aria-label="Pareto Tier 1 — non-dominated across all optimization criteria">'
+            ' <span class="pareto-badge"'
+            ' aria-label="Pareto Tier 1 — non-dominated across all optimization criteria">'
             "★ Pareto Tier 1</span>"
             if is_pareto else ""
         )
@@ -565,55 +777,44 @@ with detail_col:
             rc1.metric("Overall Rank", "N/A", "Masked — insufficient data")
             rc2.metric("MCDA Score", "N/A")
 
-        not_in_filter = selected_geoid not in filtered_geoids
-        if not_in_filter:
+        if selected_geoid not in filtered_geoids:
             st.warning("This county is outside the current filter settings.")
 
         st.divider()
-
-        # Safety criteria
         st.markdown("**Safety Criteria**")
 
         pga = row["pga_max"]
-        if pga < 0.05:
-            seismic_txt = "Minimal seismic hazard — ideal"
-        elif pga < 0.10:
-            seismic_txt = "Low seismic hazard"
-        elif pga < 0.15:
-            seismic_txt = "Moderate seismic hazard"
-        elif pga < 0.20:
-            seismic_txt = "Elevated — approach NRC review threshold"
-        else:
-            seismic_txt = "High — near regulatory limit of 0.30 g"
+        seismic_txt = (
+            "Minimal seismic hazard — ideal" if pga < 0.05 else
+            "Low seismic hazard" if pga < 0.10 else
+            "Moderate seismic hazard" if pga < 0.15 else
+            "Elevated — approach NRC review threshold" if pga < 0.20 else
+            "High — near regulatory limit of 0.30 g"
+        )
         st.markdown(f"- **Seismic Risk:** {pga:.3f} g — {seismic_txt}")
 
         sfha = row["pct_sfha"]
-        if sfha < 0.03:
-            flood_txt = "Negligible flood hazard area"
-        elif sfha < 0.08:
-            flood_txt = "Low flood exposure"
-        elif sfha < 0.14:
-            flood_txt = "Moderate flood exposure"
-        else:
-            flood_txt = "High flood exposure — near 0.20 limit"
+        flood_txt = (
+            "Negligible flood hazard area" if sfha < 0.03 else
+            "Low flood exposure" if sfha < 0.08 else
+            "Moderate flood exposure" if sfha < 0.14 else
+            "High flood exposure — near 0.20 limit"
+        )
         st.markdown(f"- **Flood Risk:** {sfha:.1%} SFHA — {flood_txt}")
 
         pop_d = row["population_density"]
-        if pop_d < 10:
-            pop_txt = "Very sparse — ideal NRC exclusion zone"
-        elif pop_d < 30:
-            pop_txt = "Low density — good buffer zone"
-        elif pop_d < 100:
-            pop_txt = "Moderate density"
-        else:
-            pop_txt = "Dense — proximity review recommended"
+        pop_txt = (
+            "Very sparse — ideal NRC exclusion zone" if pop_d < 10 else
+            "Low density — good buffer zone" if pop_d < 30 else
+            "Moderate density" if pop_d < 100 else
+            "Dense — proximity review recommended"
+        )
         st.markdown(f"- **Population Density:** {pop_d:.1f} / km² — {pop_txt}")
 
         mil = row.get("pct_military", 0.0)
         if pd.notna(mil) and mil > 0:
             st.markdown(f"- **Military Coverage:** {mil:.1%} of county")
 
-        # Infrastructure & demand
         st.divider()
         st.markdown("**Infrastructure & Demand**")
 
@@ -622,37 +823,34 @@ with detail_col:
         if pd.notna(lake_d) and pd.notna(river_d):
             nearest_water = min(lake_d, river_d)
             water_src     = "lake" if lake_d <= river_d else "river"
-            if nearest_water < 5:
-                water_txt = f"Excellent cooling access (nearest {water_src})"
-            elif nearest_water < 15:
-                water_txt = f"Good water access (nearest {water_src})"
-            elif nearest_water < 30:
-                water_txt = f"Adequate access (nearest {water_src})"
-            else:
-                water_txt = "Limited water — cooling infrastructure needed"
+            water_txt = (
+                f"Excellent cooling access (nearest {water_src})" if nearest_water < 5 else
+                f"Good water access (nearest {water_src})" if nearest_water < 15 else
+                f"Adequate access (nearest {water_src})" if nearest_water < 30 else
+                "Limited water — cooling infrastructure needed"
+            )
             st.markdown(f"- **Nearest Water Body:** {nearest_water:.1f} km — {water_txt}")
 
         voltage = row.get("max_voltage", np.nan)
         if pd.notna(voltage) and voltage > 0:
-            if voltage >= 345:
-                grid_txt = "High-voltage transmission ready (345+ kV)"
-            elif voltage >= 230:
-                grid_txt = "Strong grid connectivity"
-            elif voltage >= 138:
-                grid_txt = "Moderate grid access"
-            else:
-                grid_txt = "Low voltage — grid upgrade required"
+            grid_txt = (
+                "High-voltage transmission ready (345+ kV)" if voltage >= 345 else
+                "Strong grid connectivity" if voltage >= 230 else
+                "Moderate grid access" if voltage >= 138 else
+                "Low voltage — grid upgrade required"
+            )
             st.markdown(f"- **Max Transmission Line:** {voltage:.0f} kV — {grid_txt}")
 
         energy     = row.get("total_energy_consumption_mwh", np.nan)
         energy_pct = row.get("total_energy_consumption_mwh_pct", np.nan)
         if pd.notna(energy):
-            if pd.notna(energy_pct) and energy_pct >= 0.75:
-                energy_txt = "High local demand — strong market for output"
-            elif pd.notna(energy_pct) and energy_pct >= 0.5:
-                energy_txt = "Moderate local demand"
-            else:
-                energy_txt = "Lower local demand — export to grid likely"
+            energy_txt = (
+                "High local demand — strong market for output"
+                if pd.notna(energy_pct) and energy_pct >= 0.75 else
+                "Moderate local demand"
+                if pd.notna(energy_pct) and energy_pct >= 0.5 else
+                "Lower local demand — export to grid likely"
+            )
             st.markdown(f"- **Energy Consumption:** {energy:,.0f} MWh — {energy_txt}")
 
         dc = row.get("data_centers_count", 0)
@@ -678,5 +876,6 @@ with detail_col:
         st.caption(
             "Tip: darker green = higher MCDA suitability score. "
             "Gray counties did not pass the safety masking step. "
-            "Amber-outlined counties are Pareto-optimal (★)."
+            "Amber-outlined counties are Pareto-optimal (★). "
+            "State borders are shown as distinct outlines."
         )
