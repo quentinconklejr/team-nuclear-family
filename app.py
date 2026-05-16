@@ -1,4 +1,5 @@
 import json
+import urllib.request
 
 import numpy as np
 import pandas as pd
@@ -367,10 +368,9 @@ def load_pareto():
 
 @st.cache_data
 def load_geojson():
-    # Plotly cartographic GeoJSON: boundaries clipped to shoreline (fixes IL east border
-    # and Great Lakes overlap vs TIGER which extends county polygons into the water)
-    with open("processed_data/plotly_counties.geojson") as f:
-        return json.load(f)
+    url = "https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json"
+    with urllib.request.urlopen(url) as r:
+        return json.load(r)
 
 
 @st.cache_data
