@@ -375,7 +375,8 @@ def load_geojson():
 
 @st.cache_data
 def load_state_geojson():
-    with open("processed_data/state_boundaries.geojson") as f:
+    # Cartographic state polygons dissolved from Plotly counties — shoreline-clipped
+    with open("processed_data/state_boundaries_cartographic.geojson") as f:
         return json.load(f)
 
 
@@ -460,61 +461,58 @@ with st.sidebar:
         "Theme",
         list(_THEMES.keys()),
         index=0,
-        help="Choose a color scheme. High Contrast meets WCAG AAA requirements.",
+        help="Choose a color scheme. High Contrast meets WCAG AAA.",
     )
 
     accessible = st.toggle(
         "Enhanced Accessibility",
         value=False,
-        help=(
-            "Scales up all text sizes and adds visible map descriptions "
-            "for low-vision users (WCAG 2.1 AA)."
-        ),
+        help="Increases text sizes and adds visible map descriptions for low-vision users (WCAG 2.1 AA).",
     )
 
     st.divider()
     st.markdown("## Filters")
-    st.caption("Narrow the map and table to counties that meet all three safety thresholds below.")
+    st.caption("Adjust the sliders below to limit the map and table to counties meeting all three thresholds.")
     st.divider()
 
     st.markdown("**Earthquake Risk**")
     st.caption(
-        "Maximum ground shaking strength (g-force). "
-        "The NRC requires sites to stay below 0.30 g. "
-        "Lower = safer. Move the slider left to be more strict."
+        "Peak ground shaking intensity in g-force. "
+        "The NRC caps reactor sites at 0.30 g. "
+        "Slide left for a stricter cutoff."
     )
     pga_filter = st.slider(
         "Earthquake risk cutoff (g)",
         0.0, 0.30, 0.30, 0.01,
         format="%.2f g",
         help=(
-            "Peak Ground Acceleration (PGA): how strongly the ground shakes during an earthquake. "
-            "0.05 g = barely felt; 0.30 g = NRC regulatory threshold for reactor siting."
+            "Peak Ground Acceleration (PGA) measures how hard the ground shakes in an earthquake. "
+            "0.05 g is barely perceptible; 0.30 g is the NRC regulatory limit for reactor siting."
         ),
     )
 
     st.markdown("**Flood Risk**")
     st.caption(
-        "Percent of the county in a FEMA high-risk flood zone. "
-        "Reactors need dry, stable ground. "
-        "Lower = safer. Move the slider left to exclude flood-prone counties."
+        "Share of the county inside FEMA's 100-year flood zone. "
+        "Reactor sites require stable, dry ground. "
+        "Slide left to filter out flood-prone areas."
     )
     sfha_filter = st.slider(
         "Flood zone coverage cutoff (%)",
         0.0, 20.0, 20.0, 1.0,
         format="%.0f%%",
         help=(
-            "Special Flood Hazard Area (SFHA): the percentage of the county inside FEMA's "
-            "100-year flood boundary. 0% = no flood risk; 20% = very flood-prone."
+            "Special Flood Hazard Area (SFHA): the percentage of the county within FEMA's "
+            "100-year flood boundary. 0% means no flood exposure; 20% is highly flood-prone."
         ),
     )
     sfha_filter = sfha_filter / 100.0  # convert back to fraction for filtering
 
     st.markdown("**Population Density**")
     st.caption(
-        "How many people live per square kilometer. "
-        "Reactors need large exclusion zones with few nearby residents. "
-        "Lower = easier to site safely."
+        "Residents per square kilometer. "
+        "The NRC requires large, low-population exclusion zones around reactor sites. "
+        "Rural counties are generally easier to permit."
     )
     pop_filter = st.slider(
         "Max residents per km²",
@@ -522,8 +520,8 @@ with st.sidebar:
         format="%d / km²",
         help=(
             "Population density of the county. "
-            "Under 10/km² = very rural (ideal). "
-            "Over 100/km² = suburban or urban (challenging for NRC exclusion zones)."
+            "Under 10/km² is very rural and ideal for siting. "
+            "Above 100/km² is suburban or urban, making NRC exclusion zone requirements difficult to meet."
         ),
     )
 
@@ -532,18 +530,18 @@ with st.sidebar:
         "Show only top-tier sites (Pareto-optimal)",
         value=False,
         help=(
-            "A Pareto-optimal county is one where you can't improve any single criterion "
-            "(e.g., earthquake safety) without making another worse (e.g., water access). "
-            "These 111 counties represent the best achievable trade-offs across all 6 factors."
+            "Pareto-optimal counties are those where improving one criterion (e.g., lower seismic risk) "
+            "would require giving up ground on another (e.g., water access). "
+            "These 111 sites represent the best possible trade-offs across all 6 scoring factors."
         ),
     )
 
     st.divider()
     st.markdown("**About**")
     st.caption(
-        "Team Nuclear Family — IDSC Data Dive Spring 2026 \U0001f947  \n"
-        "MCDA scores reflect NRC-guided safety-first weighting with "
-        "Rank Order Centroid method. Sensitivity CI: 18.8 / 20 top counties stable."
+        "Team Nuclear Family | IDSC Data Dive Spring 2026 \U0001f947  \n"
+        "Scores use NRC-guided, safety-first weighting via the Rank Order Centroid method. "
+        "18 of the top 20 counties held their ranking across all sensitivity tests."
     )
 
 
@@ -571,10 +569,10 @@ filtered_geoids = set(filtered_df["geoid"])
 st.markdown('<div class="main-title">Nuclear Reactor Siting Explorer</div>', unsafe_allow_html=True)
 st.markdown(
     '<div class="subtitle">'
-    "Interactive explorer of 2,161 candidate US counties scored under our MCDA siting framework. "
-    "Counties are colored by overall suitability score — darker green indicates higher suitability. "
-    "Pareto-optimal counties are additionally outlined in amber. "
-    "Use the sidebar to filter by safety thresholds, then click any county for a full profile."
+    "Explore 2,161 US counties scored through our MCDA siting framework. "
+    "Darker green means higher suitability. "
+    "Amber outlines mark Pareto-optimal sites. "
+    "Filter by safety thresholds in the sidebar, then click any county for a full breakdown."
     "</div>",
     unsafe_allow_html=True,
 )
@@ -597,21 +595,21 @@ st.markdown('<div class="section-header">County Suitability Map</div>', unsafe_a
 # Screen-reader description (hidden visually)
 st.markdown(
     '<p class="sr-only" role="img">'
-    "Choropleth map of the United States showing nuclear reactor siting suitability "
-    "scores by county. Darker green indicates higher MCDA suitability. State borders "
-    "are drawn as distinct outlines. Pareto-optimal counties are additionally outlined "
-    "in amber. Click any highlighted county to load its full profile. "
-    "The Top 20 Candidates table below is a keyboard-accessible tabular alternative."
+    "Map of the United States showing nuclear reactor siting scores by county. "
+    "Darker green indicates higher suitability. State borders are shown as distinct lines. "
+    "Pareto-optimal counties have an amber outline. "
+    "Click a county to see its full profile. "
+    "The Top 20 Candidates table below provides the same data in a keyboard-accessible format."
     "</p>",
     unsafe_allow_html=True,
 )
 
 if accessible:
     st.caption(
-        "Map: counties colored green by MCDA suitability score (darker = higher). "
-        "State boundaries shown as distinct outlines. "
-        "Pareto-optimal counties have an amber outline and ★ in the tooltip. "
-        "Click a county to load its full profile, or use the table below."
+        "Counties are shaded green by suitability score (darker = higher). "
+        "State lines are shown as distinct borders. "
+        "Pareto-optimal counties have an amber outline and a star in the tooltip. "
+        "Click a county or use the table below."
     )
 
 tc = _THEMES[theme]
@@ -770,9 +768,9 @@ with table_col:
             },
         )
         st.caption(
-            f"★ = on NSGA-II Pareto front ({int(df['on_nsga2_pareto'].sum())} counties total). "
-            "Pareto counties also appear with an amber outline on the map. "
-            "Click a county on the map to see its full profile."
+            f"★ marks the {int(df['on_nsga2_pareto'].sum())} counties on the NSGA-II Pareto front. "
+            "These sites also appear with an amber outline on the map. "
+            "Click any county on the map to view its full profile."
         )
 
 
@@ -791,7 +789,7 @@ with detail_col:
 
         badge = (
             ' <span class="pareto-badge"'
-            ' aria-label="Pareto Tier 1 — non-dominated across all optimization criteria">'
+            ' aria-label="Pareto Tier 1: non-dominated across all 6 optimization criteria">'
             "★ Pareto Tier 1</span>"
             if is_pareto else ""
         )
@@ -808,17 +806,17 @@ with detail_col:
             rank   = int(rank_raw)
             pctile = round(100 * (1 - rank / _rank_max))
             if rank <= 50:
-                rank_interp = "Top 50 nationally — elite candidate"
+                rank_interp = "Top 50 nationally"
             elif rank <= 200:
-                rank_interp = f"Top {pctile}% — strong candidate"
+                rank_interp = f"Top {pctile}%, strong site"
             elif rank <= 600:
-                rank_interp = f"Top {pctile}% — competitive candidate"
+                rank_interp = f"Top {pctile}%"
             else:
-                rank_interp = f"Ranked #{rank} of {_rank_max}"
+                rank_interp = f"#{rank} of {_rank_max}"
             rc1.metric("Overall Rank", f"#{rank}", rank_interp)
             rc2.metric("MCDA Score", f"{score:.4f}")
         else:
-            rc1.metric("Overall Rank", "N/A", "Masked — insufficient data")
+            rc1.metric("Overall Rank", "N/A", "Masked due to insufficient data")
             rc2.metric("MCDA Score", "N/A")
 
         if selected_geoid not in filtered_geoids:
@@ -829,31 +827,31 @@ with detail_col:
 
         pga = row["pga_max"]
         seismic_txt = (
-            "Minimal seismic hazard — ideal" if pga < 0.05 else
-            "Low seismic hazard" if pga < 0.10 else
-            "Moderate seismic hazard" if pga < 0.15 else
-            "Elevated — approach NRC review threshold" if pga < 0.20 else
-            "High — near regulatory limit of 0.30 g"
+            "minimal seismic hazard" if pga < 0.05 else
+            "low seismic hazard" if pga < 0.10 else
+            "moderate seismic hazard" if pga < 0.15 else
+            "elevated, approaching NRC review threshold" if pga < 0.20 else
+            "high, near the 0.30 g regulatory limit"
         )
-        st.markdown(f"- **Seismic Risk:** {pga:.3f} g — {seismic_txt}")
+        st.markdown(f"- **Seismic Risk:** {pga:.3f} g ({seismic_txt})")
 
         sfha = row["pct_sfha"]
         flood_txt = (
-            "Negligible flood hazard area" if sfha < 0.03 else
-            "Low flood exposure" if sfha < 0.08 else
-            "Moderate flood exposure" if sfha < 0.14 else
-            "High flood exposure — near 0.20 limit"
+            "negligible flood hazard" if sfha < 0.03 else
+            "low flood exposure" if sfha < 0.08 else
+            "moderate flood exposure" if sfha < 0.14 else
+            "high flood exposure, near the 0.20 threshold"
         )
-        st.markdown(f"- **Flood Risk:** {sfha:.1%} SFHA — {flood_txt}")
+        st.markdown(f"- **Flood Risk:** {sfha:.1%} SFHA ({flood_txt})")
 
         pop_d = row["population_density"]
         pop_txt = (
-            "Very sparse — ideal NRC exclusion zone" if pop_d < 10 else
-            "Low density — good buffer zone" if pop_d < 30 else
-            "Moderate density" if pop_d < 100 else
-            "Dense — proximity review recommended"
+            "very sparse, well-suited for NRC exclusion zones" if pop_d < 10 else
+            "low density, good buffer potential" if pop_d < 30 else
+            "moderate density" if pop_d < 100 else
+            "dense, proximity review likely required"
         )
-        st.markdown(f"- **Population Density:** {pop_d:.1f} / km² — {pop_txt}")
+        st.markdown(f"- **Population Density:** {pop_d:.1f} / km² ({pop_txt})")
 
         mil = row.get("pct_military", 0.0)
         if pd.notna(mil) and mil > 0:
@@ -868,38 +866,38 @@ with detail_col:
             nearest_water = min(lake_d, river_d)
             water_src     = "lake" if lake_d <= river_d else "river"
             water_txt = (
-                f"Excellent cooling access (nearest {water_src})" if nearest_water < 5 else
-                f"Good water access (nearest {water_src})" if nearest_water < 15 else
-                f"Adequate access (nearest {water_src})" if nearest_water < 30 else
-                "Limited water — cooling infrastructure needed"
+                f"excellent cooling access via nearby {water_src}" if nearest_water < 5 else
+                f"good water access, nearest {water_src} within range" if nearest_water < 15 else
+                f"adequate water access from {water_src}" if nearest_water < 30 else
+                "limited water access, cooling infrastructure would be required"
             )
-            st.markdown(f"- **Nearest Water Body:** {nearest_water:.1f} km — {water_txt}")
+            st.markdown(f"- **Nearest Water Body:** {nearest_water:.1f} km ({water_txt})")
 
         voltage = row.get("max_voltage", np.nan)
         if pd.notna(voltage) and voltage > 0:
             grid_txt = (
-                "High-voltage transmission ready (345+ kV)" if voltage >= 345 else
-                "Strong grid connectivity" if voltage >= 230 else
-                "Moderate grid access" if voltage >= 138 else
-                "Low voltage — grid upgrade required"
+                "high-voltage transmission line present (345+ kV)" if voltage >= 345 else
+                "strong grid connectivity" if voltage >= 230 else
+                "moderate grid access" if voltage >= 138 else
+                "low voltage, grid upgrade would be required"
             )
-            st.markdown(f"- **Max Transmission Line:** {voltage:.0f} kV — {grid_txt}")
+            st.markdown(f"- **Max Transmission Line:** {voltage:.0f} kV ({grid_txt})")
 
         energy     = row.get("total_energy_consumption_mwh", np.nan)
         energy_pct = row.get("total_energy_consumption_mwh_pct", np.nan)
         if pd.notna(energy):
             energy_txt = (
-                "High local demand — strong market for output"
+                "high local demand, strong market for reactor output"
                 if pd.notna(energy_pct) and energy_pct >= 0.75 else
-                "Moderate local demand"
+                "moderate local demand"
                 if pd.notna(energy_pct) and energy_pct >= 0.5 else
-                "Lower local demand — export to grid likely"
+                "low local demand, output would likely be exported to the regional grid"
             )
-            st.markdown(f"- **Energy Consumption:** {energy:,.0f} MWh — {energy_txt}")
+            st.markdown(f"- **Energy Consumption:** {energy:,.0f} MWh ({energy_txt})")
 
         dc = row.get("data_centers_count", 0)
         if pd.notna(dc) and dc > 0:
-            st.markdown(f"- **Data Centers:** {int(dc)} — high baseload demand proxy")
+            st.markdown(f"- **Data Centers:** {int(dc)} (indicative of high baseload electricity demand)")
 
         if row.get("has_plant", False):
             st.info("This county hosts or hosted a nuclear plant in NRC records.")
@@ -907,19 +905,16 @@ with detail_col:
         if is_pareto:
             st.divider()
             st.success(
-                "★ This county is **non-dominated** across all 6 multi-objective optimization "
-                "criteria (seismic risk, flood risk, population density, water access, grid "
-                "connectivity, energy demand) — it is on the NSGA-II Pareto front."
+                "★ This county is on the NSGA-II Pareto front. It scores well enough across all "
+                "6 criteria (seismic risk, flood risk, population density, water access, grid "
+                "connectivity, and energy demand) that no other county strictly outperforms it "
+                "on every dimension."
             )
 
     else:
-        st.info(
-            "Click any highlighted county on the map to see its full scoring profile "
-            "and a plain-English interpretation of why it ranked where it did."
-        )
+        st.info("Click a highlighted county on the map to view its full scoring profile.")
         st.caption(
-            "Tip: darker green = higher MCDA suitability score. "
-            "Gray counties did not pass the safety masking step. "
-            "Amber-outlined counties are Pareto-optimal (★). "
-            "State borders are shown as distinct outlines."
+            "Darker green means higher suitability. "
+            "Gray counties did not pass the safety filters. "
+            "Amber outlines mark Pareto-optimal counties (★)."
         )
