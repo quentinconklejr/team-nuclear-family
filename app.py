@@ -208,8 +208,8 @@ a:focus, button:focus, [tabindex]:focus, input:focus,
 .stSlider > label {{ font-weight: 600; font-size: {fs_lbl}; }}
 div[data-testid="metric-container"] > div:first-child {{ font-size: {fs_metric}; }}
 #MainMenu {{ visibility: hidden; height: 0; }}
-[data-testid="stToolbar"] {{ visibility: hidden; height: 0; }}
 [data-testid="stDeployButton"] {{ display: none; }}
+[data-testid="stToolbar"] [data-testid="stMainMenu"] {{ display: none; }}
 [data-testid="stSlider"] [role="slider"] {{
     background-color: #1B4F8A !important;
     border-color: #1B4F8A !important;
