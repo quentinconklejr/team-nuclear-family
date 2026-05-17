@@ -108,6 +108,7 @@ _THEMES = {
         "county_border":  "#b0b8c4",
         "cand_border":    "#4a5568",
         "pareto_border":  "#b45309",
+        "coal_border":    "#7c3aed",
         "state_border":   "#3a4a5c",
     },
     "Dark": {
@@ -119,6 +120,7 @@ _THEMES = {
         "county_border":  "#4a5568",
         "cand_border":    "#a0aec0",
         "pareto_border":  "#f6ad55",
+        "coal_border":    "#a78bfa",
         "state_border":   "#a0aec0",
     },
     "High Contrast": {
@@ -130,6 +132,7 @@ _THEMES = {
         "county_border":  "#555555",
         "cand_border":    "#ffffff",
         "pareto_border":  "#ffff00",
+        "coal_border":    "#ff00ff",
         "state_border":   "#ffffff",
     },
 }
@@ -436,6 +439,14 @@ def load_state_geojson():
         return json.load(f)
 
 
+@st.cache_data
+def load_coal_counties():
+    """EIA 860 2022 coal plant counties (operating + retired). Returns geoid → dict."""
+    coal = pd.read_csv("processed_data/coal_counties.csv", dtype={"geoid": str})
+    coal["geoid"] = coal["geoid"].str.zfill(5)
+    return coal.set_index("geoid").to_dict(orient="index")
+
+
 
 @st.cache_data
 def build_geo_lookup(_geojson):
@@ -453,11 +464,12 @@ def build_geo_lookup(_geojson):
 
 
 
-candidates = load_candidates()
-pareto     = load_pareto()
-geojson    = load_geojson()
-geo_lookup = build_geo_lookup(geojson)
+candidates    = load_candidates()
+pareto        = load_pareto()
+geojson       = load_geojson()
+geo_lookup    = build_geo_lookup(geojson)
 state_geojson = load_state_geojson()
+coal_lookup   = load_coal_counties()
 
 # Plotly GeoJSON uses feature.id (not properties.geoid); exclude water-dominant counties
 all_geoids = [
@@ -472,7 +484,14 @@ df = candidates.merge(
 )
 df["on_nsga2_pareto"] = df["on_nsga2_pareto"].fillna(False).astype(bool)
 df["on_both_fronts"]  = df["on_both_fronts"].fillna(False).astype(bool)
-df["state"] = df["geoid"].map(lambda g: geo_lookup.get(g, {}).get("state_abbr", ""))
+df["state"]           = df["geoid"].map(lambda g: geo_lookup.get(g, {}).get("state_abbr", ""))
+
+# Coal-to-Nuclear: flag candidate counties that contain coal plant infrastructure
+df["has_coal_plant"]  = df["geoid"].isin(coal_lookup).astype(bool)
+df["coal_capacity_mw"] = df["geoid"].map(lambda g: coal_lookup.get(g, {}).get("coal_capacity_mw", 0.0))
+
+# Geoids of ALL coal counties (for full-map overlay, not just candidates)
+_all_coal_geoids = [g for g in coal_lookup if g in set(all_geoids)]
 
 _pct_cols = [
     "pga_max", "pct_sfha", "population_density",
@@ -616,12 +635,49 @@ with st.sidebar:
         )
 
     st.divider()
+    show_coal = st.toggle(
+        "Coal-to-Nuclear Opportunity layer",
+        value=False,
+        help=(
+            "Highlights counties that contain retired or operating coal power plants "
+            "(EIA Form 860, 2022). These sites already have transmission infrastructure, "
+            "grid interconnections, and a workforce familiar with large power generation — "
+            "making them stronger candidates for nuclear conversion. "
+            "Enabling this layer adds a +0.05 bonus to the displayed score for coal counties "
+            "and draws a purple outline on the map."
+        ),
+    )
+
+    st.divider()
     st.markdown("**About**")
     st.caption(
         "Team Nuclear Family | IDSC Data Dive Spring 2026 \U0001f947  \n"
         "Scores use NRC-guided, safety-first weighting via the Rank Order Centroid method. "
         "18 of the top 20 counties held their ranking across all sensitivity tests."
     )
+
+    st.divider()
+    with st.expander("How We Compare to OR-SAGE"):
+        st.markdown(
+            "**OR-SAGE** (Oak Ridge Siting Analysis for Power Generation Expansion) "
+            "is the NRC-sponsored benchmark for nuclear plant siting in the US. "
+            "Here is how our approach differs:\n\n"
+            "- **Spatial resolution.** OR-SAGE evaluates 100-meter grid cells across the "
+            "continental US. We aggregate to the county level, which is coarser but aligns "
+            "directly with the regulatory, census, and energy datasets that report at county "
+            "boundaries.\n\n"
+            "- **Reactor scope.** OR-SAGE was built for large Light Water Reactors. We extend "
+            "the framework with dedicated SMR scoring modes — NuScale VOYGR and a general "
+            "advanced reactor profile — each with thresholds tuned to their design basis.\n\n"
+            "- **SMR-specific criteria.** OR-SAGE does not include an SMR scoring mode with "
+            "NRC Regulatory Guide 4.7 Rev. 4 Appendix A criteria. Our SMR modes apply "
+            "current NRC guidance for Emergency Planning Zone size, grid access, and water "
+            "proximity for advanced reactor designs.\n\n"
+            "- **Coal-to-Nuclear transition.** We explicitly reward counties with existing "
+            "coal plant infrastructure as higher-opportunity sites for nuclear conversion, "
+            "reflecting DOE and NRC transition planning guidance. OR-SAGE does not include "
+            "this criterion."
+        )
 
 
 # ── Apply theme CSS ───────────────────────────────────────────────────────────
@@ -648,14 +704,25 @@ if reactor_mode != "LWR":
     active_df    = filtered_df[filtered_df["smr_score"].notna()].copy()
     _score_col   = "smr_score"
     _score_label = "SMR Score"
-    _active_min  = float(active_df["smr_score"].min()) if len(active_df) else 0.0
-    _active_max  = float(active_df["smr_score"].max()) if len(active_df) else 1.0
 else:
     active_df    = filtered_df
     _score_col   = "mcda_score"
     _score_label = "MCDA Score"
-    _active_min  = _score_min
-    _active_max  = _score_max
+
+# ── Coal-to-Nuclear score bonus (+0.05 for counties with coal infrastructure) ──
+_disp_col = _score_col   # column actually used for map coloring and ranking
+if show_coal and len(active_df) > 0:
+    active_df  = active_df.copy()
+    _disp_col  = f"_disp_{_score_col}"
+    active_df[_disp_col] = active_df[_score_col].copy()
+    _coal_mask = active_df["has_coal_plant"].fillna(False)
+    active_df.loc[_coal_mask, _disp_col] = (
+        active_df.loc[_coal_mask, _score_col] + 0.05
+    ).clip(upper=1.0)
+    _score_label = _score_label + " (+coal bonus)"
+
+_active_min = float(active_df[_disp_col].min()) if len(active_df) else 0.0
+_active_max = float(active_df[_disp_col].max()) if len(active_df) else 1.0
 
 
 # ── Header ────────────────────────────────────────────────────────────────────
@@ -758,6 +825,10 @@ if len(active_df) > 0:
         _rank_str  = active_df["rank"].apply(lambda x: f"#{int(x)}" if pd.notna(x) else "unranked")
         _score_str = active_df["mcda_score"].apply(lambda x: f"{x:.3f}" if pd.notna(x) else "N/A")
         _pareto_str = active_df["on_nsga2_pareto"].map({True: "<br><b>★ Pareto-Optimal</b>", False: ""})
+        _coal_hover = active_df.apply(
+            lambda r: f"<br>Coal capacity: {r['coal_capacity_mw']:.0f} MW" if r.get("has_coal_plant") else "",
+            axis=1,
+        )
         hover_text = (
             "<b>" + active_df["county_name"] + ", " + active_df["state"].fillna("") + "</b><br>"
             + "Rank: " + _rank_str + "<br>"
@@ -766,9 +837,14 @@ if len(active_df) > 0:
             + "Flood: " + (active_df["pct_sfha"] * 100).map("{:.1f}".format) + "% SFHA<br>"
             + "Pop Density: " + active_df["population_density"].map("{:.1f}".format) + " / km²"
             + _pareto_str
+            + _coal_hover
         )
     else:
         _score_str = active_df["smr_score"].apply(lambda x: f"{x:.3f}" if pd.notna(x) else "N/A")
+        _coal_hover = active_df.apply(
+            lambda r: f"<br>Coal capacity: {r['coal_capacity_mw']:.0f} MW" if r.get("has_coal_plant") else "",
+            axis=1,
+        )
         hover_text = (
             "<b>" + active_df["county_name"] + ", " + active_df["state"].fillna("") + "</b><br>"
             + "SMR Score: " + _score_str + "<br>"
@@ -776,12 +852,13 @@ if len(active_df) > 0:
             + "Flood: " + (active_df["pct_sfha"] * 100).map("{:.1f}".format) + "% SFHA<br>"
             + "Pop Density: " + active_df["population_density"].map("{:.1f}".format) + " / km²<br>"
             + "Grid: " + active_df["max_voltage"].fillna(0).map("{:.0f}".format) + " kV"
+            + _coal_hover
         )
 
     fig.add_trace(go.Choroplethmap(
         geojson=geojson,
         locations=active_df["geoid"].tolist(),
-        z=active_df[_score_col].tolist(),
+        z=active_df[_disp_col].tolist(),
         featureidkey="id",
         colorscale=tc["colorscale"],
         zmin=_active_min,
@@ -815,6 +892,20 @@ if len(active_df) > 0:
                 hoverinfo="skip",
                 name="★ Pareto-Optimal",
             ))
+
+    # Layer 4: Coal-to-Nuclear overlay — purple border on all coal counties
+    if show_coal and _all_coal_geoids:
+        fig.add_trace(go.Choroplethmap(
+            geojson=geojson,
+            locations=_all_coal_geoids,
+            z=[1.0] * len(_all_coal_geoids),
+            featureidkey="id",
+            colorscale=[[0, "rgba(0,0,0,0)"], [1, "rgba(0,0,0,0)"]],
+            showscale=False,
+            marker=dict(opacity=0.0, line=dict(width=2.0, color=tc["coal_border"])),
+            hoverinfo="skip",
+            name="Coal Infrastructure",
+        ))
 
 fig.update_layout(
     map=dict(
@@ -867,26 +958,35 @@ with table_col:
     if len(active_df) == 0:
         st.info("No counties match the current filters.")
     elif reactor_mode == "LWR":
-        top20 = active_df.dropna(subset=["rank"]).nsmallest(20, "rank")[[
-            "rank", "county_name", "state", "mcda_score",
-            "pga_max", "pct_sfha", "population_density",
-            "max_voltage", "total_energy_consumption_mwh", "on_nsga2_pareto",
-        ]].copy()
+        _lwr_cols = ["rank", "county_name", "state", _disp_col,
+                     "pga_max", "pct_sfha", "population_density",
+                     "max_voltage", "total_energy_consumption_mwh", "on_nsga2_pareto"]
+        if show_coal:
+            _lwr_cols.append("coal_capacity_mw")
+        _sort_lwr = _disp_col if _disp_col != _score_col else "rank"
+        if _sort_lwr == "rank":
+            top20 = active_df.dropna(subset=["rank"]).nsmallest(20, "rank")[_lwr_cols].copy()
+        else:
+            top20 = active_df.nlargest(20, _disp_col)[_lwr_cols].copy()
 
-        top20["rank"]       = top20["rank"].astype(int)
-        top20["mcda_score"] = top20["mcda_score"].map("{:.3f}".format)
+        if "rank" in top20.columns:
+            top20["rank"] = top20["rank"].astype(int)
+        top20[_disp_col] = top20[_disp_col].map("{:.3f}".format)
         top20["pga_max"]    = top20["pga_max"].map("{:.3f}".format)
         top20["pct_sfha"]   = top20["pct_sfha"].map("{:.1%}".format)
         top20["population_density"] = top20["population_density"].map("{:.1f}".format)
         top20["max_voltage"] = top20["max_voltage"].fillna(0).map("{:.0f}".format)
         top20["total_energy_consumption_mwh"] = top20["total_energy_consumption_mwh"].map("{:,.0f}".format)
         top20["on_nsga2_pareto"] = top20["on_nsga2_pareto"].map({True: "★", False: ""})
+        if show_coal:
+            top20["coal_capacity_mw"] = top20["coal_capacity_mw"].fillna(0).map("{:.0f}".format)
 
-        top20.columns = [
-            "Rank", "County", "State", "MCDA Score",
-            "Seismic (g)", "Flood Risk", "Pop / km²",
-            "Max kV", "Energy (MWh)", "Pareto",
-        ]
+        _lwr_display_cols = ["Rank", "County", "State", _score_label,
+                             "Seismic (g)", "Flood Risk", "Pop / km²",
+                             "Max kV", "Energy (MWh)", "Pareto"]
+        if show_coal:
+            _lwr_display_cols.append("Coal MW")
+        top20.columns = _lwr_display_cols
 
         st.dataframe(
             top20,
@@ -897,7 +997,7 @@ with table_col:
                 "Pareto":     st.column_config.TextColumn(
                                   "★", width="small",
                                   help="★ = county is on the NSGA-II Pareto front"),
-                "MCDA Score": st.column_config.TextColumn(width="small"),
+                _score_label: st.column_config.TextColumn(width="small"),
             },
         )
         st.caption(
@@ -906,23 +1006,26 @@ with table_col:
             "Click any county on the map to view its full profile."
         )
     else:
-        # SMR mode: rank by smr_score descending, add SMR-relevant columns
-        top20 = active_df.nlargest(20, "smr_score")[[
-            "county_name", "state", "smr_score",
-            "pga_max", "pct_sfha", "population_density",
-            "max_voltage",
-        ]].copy()
+        # SMR mode: rank by _disp_col descending
+        _smr_cols = ["county_name", "state", _disp_col,
+                     "pga_max", "pct_sfha", "population_density", "max_voltage"]
+        if show_coal:
+            _smr_cols.append("coal_capacity_mw")
+        top20 = active_df.nlargest(20, _disp_col)[_smr_cols].copy()
 
-        top20["smr_score"] = top20["smr_score"].map("{:.3f}".format)
+        top20[_disp_col] = top20[_disp_col].map("{:.3f}".format)
         top20["pga_max"]   = top20["pga_max"].map("{:.3f}".format)
         top20["pct_sfha"]  = top20["pct_sfha"].map("{:.1%}".format)
         top20["population_density"] = top20["population_density"].map("{:.1f}".format)
         top20["max_voltage"] = top20["max_voltage"].fillna(0).map("{:.0f}".format)
+        if show_coal:
+            top20["coal_capacity_mw"] = top20["coal_capacity_mw"].fillna(0).map("{:.0f}".format)
 
-        top20.columns = [
-            "County", "State", "SMR Score",
-            "Seismic (g)", "Flood Risk", "Pop / km²", "Max kV",
-        ]
+        _smr_display_cols = ["County", "State", _score_label,
+                             "Seismic (g)", "Flood Risk", "Pop / km²", "Max kV"]
+        if show_coal:
+            _smr_display_cols.append("Coal MW")
+        top20.columns = _smr_display_cols
 
         st.dataframe(
             top20,
@@ -1079,6 +1182,22 @@ with detail_col:
 
         if row.get("has_plant", False):
             st.info("This county hosts or hosted a nuclear plant in NRC records.")
+
+        if row.get("has_coal_plant", False):
+            coal_mw = row.get("coal_capacity_mw", 0.0) or 0.0
+            coal_detail = coal_lookup.get(row["geoid"], {})
+            coal_status = []
+            if coal_detail.get("has_operating_coal"):
+                coal_status.append("operating")
+            if coal_detail.get("has_retired_coal"):
+                coal_status.append("retired")
+            status_str = " and ".join(coal_status) if coal_status else "existing"
+            st.info(
+                f"This county has {status_str} coal plant infrastructure "
+                f"({coal_mw:.0f} MW capacity). Coal-to-nuclear conversion may be "
+                "feasible here, with potential benefits for workforce continuity and "
+                "transmission interconnection."
+            )
 
         if is_pareto:
             st.divider()
