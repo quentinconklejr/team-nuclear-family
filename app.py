@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 st.set_page_config(
-    page_title="US Nuclear Reactor Siting Analysis",
+    page_title="PRISM — Pareto Reactor Infrastructure Siting Model",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -748,7 +748,7 @@ _active_max = float(active_df[_disp_col].max()) if len(active_df) else 1.0
 
 # ── Header ────────────────────────────────────────────────────────────────────
 
-st.markdown('<div class="main-title">US Nuclear Reactor Siting Analysis</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">PRISM <span style="font-weight:400;font-size:0.55em;opacity:0.75">Pareto Reactor Infrastructure Siting Model</span></div>', unsafe_allow_html=True)
 st.markdown(
     '<div class="subtitle">'
     "Scored 2,161 US counties across six siting criteria under NRC Regulatory Guide 4.7: "
