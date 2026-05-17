@@ -436,25 +436,6 @@ def load_state_geojson():
         return json.load(f)
 
 
-@st.cache_data
-def build_state_lines(_geojson):
-    """Flatten dissolved state polygon exterior rings into lat/lon arrays for Scattermap."""
-    lats: list = []
-    lons: list = []
-    for feat in _geojson["features"]:
-        geom = feat["geometry"]
-        rings = (
-            [geom["coordinates"][0]]
-            if geom["type"] == "Polygon"
-            else [p[0] for p in geom["coordinates"]]
-        )
-        for ring in rings:
-            lons.extend(pt[0] for pt in ring)
-            lats.extend(pt[1] for pt in ring)
-            lons.append(None)
-            lats.append(None)
-    return lats, lons
-
 
 @st.cache_data
 def build_geo_lookup(_geojson):
@@ -477,7 +458,6 @@ pareto     = load_pareto()
 geojson    = load_geojson()
 geo_lookup = build_geo_lookup(geojson)
 state_geojson = load_state_geojson()
-state_lats, state_lons = build_state_lines(state_geojson)
 
 # Plotly GeoJSON uses feature.id (not properties.geoid); exclude water-dominant counties
 all_geoids = [
@@ -836,22 +816,18 @@ if len(active_df) > 0:
                 name="★ Pareto-Optimal",
             ))
 
-# Layer 4: state boundaries — drawn on top of all county fills
-fig.add_trace(go.Scattermap(
-    lat=state_lats,
-    lon=state_lons,
-    mode="lines",
-    line=dict(width=2.0, color=tc["state_border"]),
-    hoverinfo="skip",
-    showlegend=False,
-    name="State Boundaries",
-))
-
 fig.update_layout(
     map=dict(
         style=tc["map_style"],
         center={"lat": 39.5, "lon": -96},
         zoom=3.5,
+        layers=[{
+            "source": state_geojson,
+            "type": "line",
+            "color": tc["state_border"],
+            "line": {"width": 1},
+            "opacity": 0.8,
+        }],
     ),
     margin=dict(r=0, t=0, l=0, b=0),
     height=560,
