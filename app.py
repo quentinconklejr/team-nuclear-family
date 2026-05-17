@@ -40,6 +40,62 @@ _DISPLAY_EXCLUDED_GEOIDS = {
 }
 
 
+# ── SMR scoring engine ───────────────────────────────────────────────────────
+# Thresholds per NRC/IAEA guidance. Population density converted from /mi² to /km²
+# (1 mi² = 2.590 km²): 200/mi²=77.2/km², 500/mi²=193.1/km², 1000/mi²=386.1/km²
+
+def compute_smr_scores(df: pd.DataFrame, mode: str) -> pd.DataFrame:
+    """Return df copy with 'smr_score' column (NaN = disqualified by mode rules)."""
+    df = df.copy()
+    pga = df["pga_max"].fillna(0.0)
+    dens = df["population_density"].fillna(0.0)
+    volt = df["max_voltage"].fillna(0.0)
+    lake_d  = df["dist_to_lakes_km"].fillna(999.0)  if "dist_to_lakes_km"      in df.columns else pd.Series(999.0, index=df.index)
+    river_d = df["distance_to_rivers_km"].fillna(999.0) if "distance_to_rivers_km" in df.columns else pd.Series(999.0, index=df.index)
+    nearest = np.minimum(lake_d, river_d)
+
+    # Seismic — identical across all modes
+    s_seis = np.where(pga > 0.50, np.nan,
+             np.where(pga > 0.30, 0.25,
+             np.where(pga > 0.10, 0.65, 1.0)))
+
+    # Population density
+    if mode == "LWR":
+        s_pop = np.where(dens > 193.1, np.nan,
+                np.where(dens > 77.2,  0.35, 1.0))
+    else:
+        s_pop = np.where(dens > 386.1, np.nan,
+                np.where(dens > 193.1, 0.25,
+                np.where(dens > 77.2,  0.65, 1.0)))
+
+    # Grid / transmission
+    if mode == "LWR":
+        s_tx = np.where(volt >= 345, 1.0,
+               np.where(volt >= 230, 0.75,
+               np.where(volt >= 138, 0.50, 0.25)))
+    elif mode == "SMR - NuScale VOYGR":
+        s_tx = np.where(volt >= 115, 1.0, 0.50)   # licensed for islanded operation
+    else:  # SMR - General
+        s_tx = np.where(volt >= 230, 1.0,
+               np.where(volt >= 115, 0.65, 0.35))
+
+    # Water proximity  (LWR base tiers: <5→1.0, <15→0.75, <30→0.50, else→0.25)
+    if mode == "LWR":
+        s_wat = np.where(nearest < 5,  1.0,
+                np.where(nearest < 15, 0.75,
+                np.where(nearest < 30, 0.50, 0.25)))
+    elif mode == "SMR - NuScale VOYGR":        # 2-tier reduction (dry cooling)
+        s_wat = np.where(nearest < 30, 1.0, 0.75)
+    else:                                       # SMR - General, 1-tier reduction
+        s_wat = np.where(nearest < 5,  1.0,
+                np.where(nearest < 15, 1.0,
+                np.where(nearest < 30, 0.75, 0.50)))
+
+    disq = np.isnan(s_seis) | np.isnan(s_pop)
+    df["smr_score"] = np.where(disq, np.nan, (s_seis + s_pop + s_tx + s_wat) / 4.0)
+    return df
+
+
 # ── Theme definitions ─────────────────────────────────────────────────────────
 
 _THEMES = {
@@ -471,23 +527,58 @@ with st.sidebar:
     )
 
     st.divider()
+    st.markdown("## Reactor Mode")
+
+    reactor_mode = st.selectbox(
+        "Select reactor type",
+        ["LWR", "SMR - NuScale VOYGR", "SMR - General"],
+        index=0,
+        help=(
+            "Changes scoring thresholds based on each reactor type's regulatory profile. "
+            "LWR uses the standard NRC framework. SMR modes apply relaxed population, "
+            "grid, and water thresholds reflecting smaller footprints and advanced safety features."
+        ),
+    )
+
+    if reactor_mode != "LWR":
+        st.info(
+            "**Why SMR thresholds differ from LWR:**\n\n"
+            "**Smaller exclusion zone:** SMRs have significantly smaller Emergency Planning Zones. "
+            "NuScale VOYGR has an NRC-approved site-boundary EPZ of roughly 400m, versus the "
+            "10-mile standard for LWRs (NRC approval ML22287A155). This allows siting in areas "
+            "with higher population density.\n\n"
+            "**Dry cooling capability:** NuScale and many SMR designs can operate without a "
+            "large nearby water source, reducing water proximity requirements.\n\n"
+            "**Smaller footprint:** SMRs require less land and infrastructure, making them "
+            "viable in locations that would be impractical for a full-scale LWR."
+        )
+
+    st.divider()
     st.markdown("## Filters")
     st.caption("Adjust the sliders below to limit the map and table to counties meeting all three thresholds.")
     st.divider()
 
     st.markdown("**Earthquake Risk**")
+    # SMR mode extends the allowable seismic range to 0.50g (vs 0.30g for LWR)
+    _pga_max = 0.50 if reactor_mode != "LWR" else 0.30
     st.caption(
+        f"Peak ground shaking intensity in g-force. "
+        f"SMR designs tolerate up to 0.50 g; LWR sites are capped at 0.30 g by the NRC. "
+        f"Slide left for a stricter cutoff."
+        if reactor_mode != "LWR" else
         "Peak ground shaking intensity in g-force. "
         "The NRC caps reactor sites at 0.30 g. "
         "Slide left for a stricter cutoff."
     )
     pga_filter = st.slider(
         "Earthquake risk cutoff (g)",
-        0.0, 0.30, 0.30, 0.01,
+        0.0, _pga_max, _pga_max, 0.01,
         format="%.2f g",
+        key=f"pga_slider_{reactor_mode}",
         help=(
             "Peak Ground Acceleration (PGA) measures how hard the ground shakes in an earthquake. "
-            "0.05 g is barely perceptible; 0.30 g is the NRC regulatory limit for reactor siting."
+            "0.05 g is barely perceptible; 0.30 g is the NRC limit for LWR siting; "
+            "SMR designs can tolerate up to 0.50 g before disqualification."
         ),
     )
 
@@ -509,6 +600,7 @@ with st.sidebar:
     sfha_filter = sfha_filter / 100.0  # convert back to fraction for filtering
 
     st.markdown("**Population Density**")
+    _pop_cap = 10000
     st.caption(
         "Residents per square kilometer. "
         "The NRC requires large, low-population exclusion zones around reactor sites. "
@@ -516,7 +608,7 @@ with st.sidebar:
     )
     pop_filter = st.slider(
         "Max residents per km²",
-        0, 10000, 10000, 50,
+        0, _pop_cap, _pop_cap, 50,
         format="%d / km²",
         help=(
             "Population density of the county. "
@@ -526,15 +618,22 @@ with st.sidebar:
     )
 
     st.divider()
-    pareto_only = st.toggle(
-        "Show only top-tier sites (Pareto-optimal)",
-        value=False,
-        help=(
-            "Pareto-optimal counties are those where improving one criterion (e.g., lower seismic risk) "
-            "would require giving up ground on another (e.g., water access). "
-            "These 111 sites represent the best possible trade-offs across all 6 scoring factors."
-        ),
-    )
+    if reactor_mode == "LWR":
+        pareto_only = st.toggle(
+            "Show only top-tier sites (Pareto-optimal)",
+            value=False,
+            help=(
+                "Pareto-optimal counties are those where improving one criterion (e.g., lower seismic risk) "
+                "would require giving up ground on another (e.g., water access). "
+                "These 111 sites represent the best possible trade-offs across all 6 scoring factors."
+            ),
+        )
+    else:
+        pareto_only = False
+        st.caption(
+            "Pareto-optimal filtering is not available in SMR mode. "
+            "The Pareto front was computed under LWR weights and does not apply to SMR scoring."
+        )
 
     st.divider()
     st.markdown("**About**")
@@ -563,6 +662,21 @@ if pareto_only:
 filtered_df     = df[mask].copy()
 filtered_geoids = set(filtered_df["geoid"])
 
+# ── Reactor-mode scoring ──────────────────────────────────────────────────────
+if reactor_mode != "LWR":
+    filtered_df  = compute_smr_scores(filtered_df, reactor_mode)
+    active_df    = filtered_df[filtered_df["smr_score"].notna()].copy()
+    _score_col   = "smr_score"
+    _score_label = "SMR Score"
+    _active_min  = float(active_df["smr_score"].min()) if len(active_df) else 0.0
+    _active_max  = float(active_df["smr_score"].max()) if len(active_df) else 1.0
+else:
+    active_df    = filtered_df
+    _score_col   = "mcda_score"
+    _score_label = "MCDA Score"
+    _active_min  = _score_min
+    _active_max  = _score_max
+
 
 # ── Header ────────────────────────────────────────────────────────────────────
 
@@ -578,19 +692,48 @@ st.markdown(
 )
 
 m1, m2, m3, m4 = st.columns(4)
-m1.metric("Showing", f"{len(filtered_df):,}", f"of 2,161 candidates")
-m2.metric("Pareto-Optimal Shown", f"{int(filtered_df['on_nsga2_pareto'].sum()):,}", "NSGA-II front")
-m3.metric(
-    "Best MCDA Score",
-    f"{filtered_df['mcda_score'].max():.3f}" if len(filtered_df) else "—",
-)
-_best_rank = filtered_df["rank"].min()
-m4.metric("Highest Rank Shown", f"#{int(_best_rank)}" if pd.notna(_best_rank) else "—")
+m1.metric("Showing", f"{len(active_df):,}", f"of 2,161 candidates")
+if reactor_mode == "LWR":
+    m2.metric("Pareto-Optimal Shown", f"{int(active_df['on_nsga2_pareto'].sum()):,}", "NSGA-II front")
+    m3.metric(
+        "Best MCDA Score",
+        f"{active_df['mcda_score'].max():.3f}" if len(active_df) else "—",
+    )
+    _best_rank = active_df["rank"].min()
+    m4.metric("Highest Rank Shown", f"#{int(_best_rank)}" if pd.notna(_best_rank) else "—")
+else:
+    smr_mode_short = "NuScale VOYGR" if "NuScale" in reactor_mode else "General SMR"
+    m2.metric("Mode", smr_mode_short)
+    m3.metric(
+        "Best SMR Score",
+        f"{active_df['smr_score'].max():.3f}" if len(active_df) else "—",
+    )
+    m4.metric("Qualifying Counties", f"{len(active_df):,}", "passed SMR criteria")
 
 
 # ── Map ───────────────────────────────────────────────────────────────────────
 
-st.markdown('<div class="section-header">County Suitability Map</div>', unsafe_allow_html=True)
+_map_title = {
+    "LWR":                "County Suitability Map",
+    "SMR - NuScale VOYGR": "County Suitability Map — SMR NuScale VOYGR Mode",
+    "SMR - General":       "County Suitability Map — SMR General Mode",
+}[reactor_mode]
+st.markdown(f'<div class="section-header">{_map_title}</div>', unsafe_allow_html=True)
+
+if reactor_mode == "SMR - NuScale VOYGR":
+    st.info(
+        "**NuScale VOYGR mode active.** Scoring reflects NRC-approved thresholds for the VOYGR design: "
+        "site-boundary EPZ (~400m per ML22287A155), islanded grid operation viable at 115 kV+, "
+        "and dry cooling support reduces water proximity requirements. "
+        "Population disqualification raised to 1,000/mi². Seismic tolerance extended to 0.50 g."
+    )
+elif reactor_mode == "SMR - General":
+    st.info(
+        "**SMR General mode active** (covers designs including Xe-100 and KP-FHR). "
+        "Scoring uses relaxed population thresholds (disqualification at 1,000/mi²), "
+        "reduced grid requirements (230 kV for full score), "
+        "and improved water proximity scoring. Seismic tolerance extended to 0.50 g."
+    )
 
 # Screen-reader description (hidden visually)
 st.markdown(
@@ -629,30 +772,42 @@ fig.add_trace(go.Choroplethmap(
     name="",
 ))
 
-# Layer 2: filtered candidates — colored by MCDA score
-if len(filtered_df) > 0:
-    _rank_str  = filtered_df["rank"].apply(lambda x: f"#{int(x)}" if pd.notna(x) else "unranked")
-    _score_str = filtered_df["mcda_score"].apply(lambda x: f"{x:.3f}" if pd.notna(x) else "N/A")
-    hover_text = (
-        "<b>" + filtered_df["county_name"] + ", " + filtered_df["state"].fillna("") + "</b><br>"
-        + "Rank: " + _rank_str + "<br>"
-        + "MCDA Score: " + _score_str + "<br>"
-        + "Seismic: " + filtered_df["pga_max"].map("{:.3f}".format) + " g<br>"
-        + "Flood: " + (filtered_df["pct_sfha"] * 100).map("{:.1f}".format) + "% SFHA<br>"
-        + "Pop Density: " + filtered_df["population_density"].map("{:.1f}".format) + " / km²"
-        + filtered_df["on_nsga2_pareto"].map({True: "<br><b>★ Pareto-Optimal</b>", False: ""})
-    )
+# Layer 2: qualifying candidates — colored by MCDA or SMR score
+if len(active_df) > 0:
+    if reactor_mode == "LWR":
+        _rank_str  = active_df["rank"].apply(lambda x: f"#{int(x)}" if pd.notna(x) else "unranked")
+        _score_str = active_df["mcda_score"].apply(lambda x: f"{x:.3f}" if pd.notna(x) else "N/A")
+        _pareto_str = active_df["on_nsga2_pareto"].map({True: "<br><b>★ Pareto-Optimal</b>", False: ""})
+        hover_text = (
+            "<b>" + active_df["county_name"] + ", " + active_df["state"].fillna("") + "</b><br>"
+            + "Rank: " + _rank_str + "<br>"
+            + "MCDA Score: " + _score_str + "<br>"
+            + "Seismic: " + active_df["pga_max"].map("{:.3f}".format) + " g<br>"
+            + "Flood: " + (active_df["pct_sfha"] * 100).map("{:.1f}".format) + "% SFHA<br>"
+            + "Pop Density: " + active_df["population_density"].map("{:.1f}".format) + " / km²"
+            + _pareto_str
+        )
+    else:
+        _score_str = active_df["smr_score"].apply(lambda x: f"{x:.3f}" if pd.notna(x) else "N/A")
+        hover_text = (
+            "<b>" + active_df["county_name"] + ", " + active_df["state"].fillna("") + "</b><br>"
+            + "SMR Score: " + _score_str + "<br>"
+            + "Seismic: " + active_df["pga_max"].map("{:.3f}".format) + " g<br>"
+            + "Flood: " + (active_df["pct_sfha"] * 100).map("{:.1f}".format) + "% SFHA<br>"
+            + "Pop Density: " + active_df["population_density"].map("{:.1f}".format) + " / km²<br>"
+            + "Grid: " + active_df["max_voltage"].fillna(0).map("{:.0f}".format) + " kV"
+        )
 
     fig.add_trace(go.Choroplethmap(
         geojson=geojson,
-        locations=filtered_df["geoid"].tolist(),
-        z=filtered_df["mcda_score"].tolist(),
+        locations=active_df["geoid"].tolist(),
+        z=active_df[_score_col].tolist(),
         featureidkey="id",
         colorscale=tc["colorscale"],
-        zmin=_score_min,
-        zmax=_score_max,
+        zmin=_active_min,
+        zmax=_active_max,
         colorbar=dict(
-            title=dict(text="MCDA Score", font=dict(size=12, color=tc["font_color"])),
+            title=dict(text=_score_label, font=dict(size=12, color=tc["font_color"])),
             thickness=14,
             len=0.55,
             x=1.01,
@@ -665,20 +820,21 @@ if len(filtered_df) > 0:
         name="Candidates",
     ))
 
-    # Layer 3: Pareto counties — amber outline as non-color visual indicator
-    pareto_geoids = filtered_df.loc[filtered_df["on_nsga2_pareto"], "geoid"].tolist()
-    if pareto_geoids:
-        fig.add_trace(go.Choroplethmap(
-            geojson=geojson,
-            locations=pareto_geoids,
-            z=[1.0] * len(pareto_geoids),
-            featureidkey="id",
-            colorscale=[[0, "rgba(0,0,0,0)"], [1, "rgba(0,0,0,0)"]],
-            showscale=False,
-            marker=dict(line=dict(width=2.5, color=tc["pareto_border"])),
-            hoverinfo="skip",
-            name="★ Pareto-Optimal",
-        ))
+    # Layer 3: Pareto outline — LWR mode only
+    if reactor_mode == "LWR":
+        pareto_geoids = active_df.loc[active_df["on_nsga2_pareto"], "geoid"].tolist()
+        if pareto_geoids:
+            fig.add_trace(go.Choroplethmap(
+                geojson=geojson,
+                locations=pareto_geoids,
+                z=[1.0] * len(pareto_geoids),
+                featureidkey="id",
+                colorscale=[[0, "rgba(0,0,0,0)"], [1, "rgba(0,0,0,0)"]],
+                showscale=False,
+                marker=dict(line=dict(width=2.5, color=tc["pareto_border"])),
+                hoverinfo="skip",
+                name="★ Pareto-Optimal",
+            ))
 
 # Layer 4: state boundaries — drawn on top of all county fills
 fig.add_trace(go.Scattermap(
@@ -712,10 +868,11 @@ selection = st.plotly_chart(
 )
 
 # Resolve click → session state
+_active_geoids = set(active_df["geoid"])
 if selection and hasattr(selection, "selection") and selection.selection.points:
     pt  = selection.selection.points[0]
     loc = pt.get("location")
-    if loc and loc in filtered_geoids:
+    if loc and loc in _active_geoids:
         st.session_state["selected_geoid"] = loc
     elif loc:
         st.session_state.pop("selected_geoid", None)
@@ -731,10 +888,10 @@ table_col, detail_col = st.columns([3, 2], gap="large")
 with table_col:
     st.markdown('<div class="section-header">Top 20 Candidates</div>', unsafe_allow_html=True)
 
-    if len(filtered_df) == 0:
+    if len(active_df) == 0:
         st.info("No counties match the current filters.")
-    else:
-        top20 = filtered_df.dropna(subset=["rank"]).nsmallest(20, "rank")[[
+    elif reactor_mode == "LWR":
+        top20 = active_df.dropna(subset=["rank"]).nsmallest(20, "rank")[[
             "rank", "county_name", "state", "mcda_score",
             "pga_max", "pct_sfha", "population_density",
             "max_voltage", "total_energy_consumption_mwh", "on_nsga2_pareto",
@@ -745,7 +902,7 @@ with table_col:
         top20["pga_max"]    = top20["pga_max"].map("{:.3f}".format)
         top20["pct_sfha"]   = top20["pct_sfha"].map("{:.1%}".format)
         top20["population_density"] = top20["population_density"].map("{:.1f}".format)
-        top20["max_voltage"] = top20["max_voltage"].map("{:.0f}".format)
+        top20["max_voltage"] = top20["max_voltage"].fillna(0).map("{:.0f}".format)
         top20["total_energy_consumption_mwh"] = top20["total_energy_consumption_mwh"].map("{:,.0f}".format)
         top20["on_nsga2_pareto"] = top20["on_nsga2_pareto"].map({True: "★", False: ""})
 
@@ -772,6 +929,39 @@ with table_col:
             "These sites also appear with an amber outline on the map. "
             "Click any county on the map to view its full profile."
         )
+    else:
+        # SMR mode: rank by smr_score descending, add SMR-relevant columns
+        top20 = active_df.nlargest(20, "smr_score")[[
+            "county_name", "state", "smr_score",
+            "pga_max", "pct_sfha", "population_density",
+            "max_voltage",
+        ]].copy()
+
+        top20["smr_score"] = top20["smr_score"].map("{:.3f}".format)
+        top20["pga_max"]   = top20["pga_max"].map("{:.3f}".format)
+        top20["pct_sfha"]  = top20["pct_sfha"].map("{:.1%}".format)
+        top20["population_density"] = top20["population_density"].map("{:.1f}".format)
+        top20["max_voltage"] = top20["max_voltage"].fillna(0).map("{:.0f}".format)
+
+        top20.columns = [
+            "County", "State", "SMR Score",
+            "Seismic (g)", "Flood Risk", "Pop / km²", "Max kV",
+        ]
+
+        st.dataframe(
+            top20,
+            width="stretch",
+            hide_index=True,
+            column_config={
+                "SMR Score": st.column_config.TextColumn(width="small"),
+            },
+        )
+        mode_label = "NuScale VOYGR" if "NuScale" in reactor_mode else "General SMR"
+        st.caption(
+            f"Ranked by composite SMR score under {mode_label} thresholds. "
+            "Counties disqualified by seismic or population criteria are excluded. "
+            "Click any county on the map to view its full profile."
+        )
 
 
 # ── County detail panel ────────────────────────────────────────────────────────
@@ -780,12 +970,15 @@ with detail_col:
     st.markdown('<div class="section-header">County Detail</div>', unsafe_allow_html=True)
 
     selected_geoid = st.session_state.get("selected_geoid")
-    row_matches    = df[df["geoid"] == selected_geoid] if selected_geoid else pd.DataFrame()
+    # Look up in active_df so SMR-scored row is available; fall back to full df for context
+    row_matches    = active_df[active_df["geoid"] == selected_geoid] if selected_geoid else pd.DataFrame()
+    if len(row_matches) == 0 and selected_geoid:
+        row_matches = df[df["geoid"] == selected_geoid]
 
     if selected_geoid and len(row_matches) > 0:
         row        = row_matches.iloc[0]
         state_abbr = geo_lookup.get(selected_geoid, {}).get("state_abbr", "")
-        is_pareto  = bool(row.get("on_nsga2_pareto", False))
+        is_pareto  = bool(row.get("on_nsga2_pareto", False)) if reactor_mode == "LWR" else False
 
         badge = (
             ' <span class="pareto-badge"'
@@ -798,29 +991,38 @@ with detail_col:
             unsafe_allow_html=True,
         )
 
-        rank_raw = row["rank"]
-        score    = row["mcda_score"]
-
         rc1, rc2 = st.columns(2)
-        if pd.notna(rank_raw) and pd.notna(score):
-            rank   = int(rank_raw)
-            pctile = round(100 * (1 - rank / _rank_max))
-            if rank <= 50:
-                rank_interp = "Top 50 nationally"
-            elif rank <= 200:
-                rank_interp = f"Top {pctile}%, strong site"
-            elif rank <= 600:
-                rank_interp = f"Top {pctile}%"
+        if reactor_mode == "LWR":
+            rank_raw = row["rank"]
+            score    = row["mcda_score"]
+            if pd.notna(rank_raw) and pd.notna(score):
+                rank   = int(rank_raw)
+                pctile = round(100 * (1 - rank / _rank_max))
+                if rank <= 50:
+                    rank_interp = "Top 50 nationally"
+                elif rank <= 200:
+                    rank_interp = f"Top {pctile}%, strong site"
+                elif rank <= 600:
+                    rank_interp = f"Top {pctile}%"
+                else:
+                    rank_interp = f"#{rank} of {_rank_max}"
+                rc1.metric("LWR Rank", f"#{rank}", rank_interp)
+                rc2.metric("MCDA Score", f"{score:.4f}")
             else:
-                rank_interp = f"#{rank} of {_rank_max}"
-            rc1.metric("Overall Rank", f"#{rank}", rank_interp)
-            rc2.metric("MCDA Score", f"{score:.4f}")
+                rc1.metric("LWR Rank", "N/A", "Masked due to insufficient data")
+                rc2.metric("MCDA Score", "N/A")
         else:
-            rc1.metric("Overall Rank", "N/A", "Masked due to insufficient data")
-            rc2.metric("MCDA Score", "N/A")
+            smr_score = row.get("smr_score", np.nan)
+            mode_label = "NuScale VOYGR" if "NuScale" in reactor_mode else "General SMR"
+            if pd.notna(smr_score):
+                rc1.metric("SMR Score", f"{smr_score:.4f}")
+                rc2.metric("Mode", mode_label)
+            else:
+                rc1.metric("SMR Score", "Disqualified")
+                rc2.metric("Mode", mode_label)
 
-        if selected_geoid not in filtered_geoids:
-            st.warning("This county is outside the current filter settings.")
+        if selected_geoid not in _active_geoids:
+            st.warning("This county is outside the current filter settings or disqualified under the active reactor mode.")
 
         st.divider()
         st.markdown("**Safety Criteria**")
