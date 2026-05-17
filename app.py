@@ -524,7 +524,7 @@ with st.sidebar:
     accessible = st.toggle(
         "Enhanced Accessibility",
         value=False,
-        help="Increases text sizes and adds visible map descriptions for low-vision users (WCAG 2.1 AA).",
+        help="Larger text and visible map descriptions for low-vision users (WCAG 2.1 AA).",
     )
 
     with st.expander("Display Options", expanded=False):
@@ -532,7 +532,7 @@ with st.sidebar:
             "Color Theme",
             list(_THEMES.keys()),
             index=0,
-            help="Choose a color scheme. High Contrast meets WCAG AAA.",
+            help="High Contrast meets WCAG AAA.",
         )
 
     st.divider()
@@ -543,22 +543,22 @@ with st.sidebar:
         ["LWR", "SMR - NuScale VOYGR", "SMR - General"],
         index=0,
         help=(
-            "Changes scoring thresholds based on each reactor type's regulatory profile. "
-            "LWR uses the standard NRC framework. SMR modes apply relaxed population, "
-            "grid, and water thresholds reflecting smaller footprints and advanced safety features."
+            "Switches the scoring model to match each reactor type's NRC regulatory basis. "
+            "LWR uses standard siting criteria. The two SMR modes use looser population and "
+            "grid thresholds that reflect smaller EPZs and reduced cooling requirements."
         ),
     )
 
     st.divider()
     st.markdown("## Site Filters")
-    st.caption("Narrow results to counties meeting all three thresholds.")
+    st.caption("Any county exceeding a threshold is removed from the map and table.")
 
     _pga_max = 0.50 if reactor_mode != "LWR" else 0.30
     st.caption(
-        "Peak Ground Acceleration (PGA) in g-force. "
-        + ("SMR designs tolerate up to 0.50 g; LWR sites are capped at 0.30 g per NRC guidance."
+        "PGA in g-force. "
+        + ("The NRC limits LWR sites to 0.30 g; SMR designs accept up to 0.50 g."
            if reactor_mode != "LWR" else
-           "The NRC caps LWR sites at 0.30 g. Slide left for a stricter cutoff.")
+           "The NRC limits LWR sites to 0.30 g.")
     )
     pga_filter = st.slider(
         "Seismic cutoff (g)",
@@ -566,36 +566,32 @@ with st.sidebar:
         format="%.2f g",
         key=f"pga_slider_{reactor_mode}",
         help=(
-            "Peak Ground Acceleration (PGA) — a standard measure of seismic intensity. "
-            "0.05 g is barely perceptible; 0.30 g is the NRC limit for LWR sites; "
-            "SMR designs can tolerate up to 0.50 g."
+            "Peak Ground Acceleration. 0.05 g is barely perceptible; "
+            "0.30 g is the NRC cutoff for LWR sites."
         ),
     )
 
     st.caption(
-        "Share of county area inside FEMA's 100-year Special Flood Hazard Area (SFHA). "
-        "Reactor sites require stable, dry ground."
+        "Percent of county area in FEMA's 100-year flood zone (SFHA). "
+        "Reactor sites need to be on stable, dry ground."
     )
     sfha_filter = st.slider(
         "Flood zone coverage cutoff (%)",
         0.0, 20.0, 20.0, 1.0,
         format="%.0f%%",
-        help="0% = no flood exposure; 20% = highly flood-prone.",
+        help="0% = no flood exposure. 20% = heavily flood-prone.",
     )
     sfha_filter = sfha_filter / 100.0
 
     st.caption(
-        "Residents per square kilometer. "
-        "The NRC requires low-population exclusion zones around reactor sites."
+        "Residents per km². "
+        "The NRC requires an exclusion zone with minimal population around any reactor site."
     )
     pop_filter = st.slider(
         "Max population density (/ km²)",
         0, 10000, 10000, 50,
         format="%d / km²",
-        help=(
-            "Under 10/km² is very rural, ideal for siting. "
-            "Above 100/km² is suburban or urban."
-        ),
+        help="Under 10/km² is rural and good for siting. Above 100/km² is suburban or urban.",
     )
 
     st.divider()
@@ -604,15 +600,15 @@ with st.sidebar:
             "Show only top-tier sites (Pareto-optimal)",
             value=False,
             help=(
-                "Pareto-optimal counties cannot be improved on any single criterion without "
-                "sacrificing performance on another. These 111 sites represent the best "
-                "attainable trade-offs across all 6 scoring factors."
+                "These 111 sites are non-dominated: no other county in the dataset beats "
+                "them on all six criteria at once. They sit at the frontier of what's "
+                "achievable given real geographic constraints."
             ),
         )
     else:
         pareto_only = False
         st.caption(
-            "Pareto-optimal filtering applies to LWR mode only. "
+            "Pareto-optimal filtering is only available in LWR mode. "
             "The Pareto front was computed under LWR criteria."
         )
 
@@ -621,39 +617,35 @@ with st.sidebar:
         "Coal-to-Nuclear Opportunity layer",
         value=False,
         help=(
-            "Highlights counties with retired or operating coal plants (EIA Form 860, 2022). "
-            "These sites already have transmission infrastructure and an energy workforce. "
-            "Adds a +0.05 score bonus and purple border on the map."
+            "Counties with coal plants (EIA Form 860, 2022) often have existing grid "
+            "connections and workers with large-plant experience. Adds a +0.05 score "
+            "bump and draws a purple border around those counties on the map."
         ),
     )
 
     st.divider()
     st.markdown("**About**")
     st.caption(
-        "Multi-criteria siting analysis under NRC Regulatory Guide 4.7. "
-        "NSGA-II optimization identifies non-dominated sites across 6 safety and "
-        "infrastructure criteria. 18 of the top 20 counties held their ranking "
-        "across all sensitivity tests."
+        "County-level siting analysis built on NRC Regulatory Guide 4.7. "
+        "NSGA-II was used to find the Pareto front across all six criteria. "
+        "18 of the top 20 sites held their ranking when criterion weights were varied."
     )
 
     st.divider()
     with st.expander("Methodology & OR-SAGE Comparison"):
         st.markdown(
-            "**OR-SAGE** (Oak Ridge Siting Analysis for Power Generation Expansion) "
-            "is the NRC-sponsored benchmark for US nuclear plant siting. "
-            "How this analysis differs:\n\n"
-            "- **Spatial resolution.** OR-SAGE evaluates 100-meter grid cells. "
-            "This analysis aggregates to county level for alignment with regulatory, "
-            "census, and energy datasets.\n\n"
-            "- **Reactor scope.** OR-SAGE was built for large Light Water Reactors. "
-            "This framework extends to SMR scoring modes — NuScale VOYGR and a general "
-            "advanced reactor profile — each calibrated to their design basis.\n\n"
-            "- **SMR-specific criteria.** OR-SAGE does not include an SMR mode with "
-            "NRC RG 4.7 Rev. 4 Appendix A criteria. SMR modes here apply current NRC "
-            "guidance for EPZ size, grid access, and water proximity.\n\n"
-            "- **Coal-to-Nuclear transition.** This analysis rewards counties with existing "
-            "coal infrastructure, reflecting DOE and NRC transition planning guidance. "
-            "OR-SAGE does not include this criterion."
+            "OR-SAGE (Oak Ridge Siting Analysis for Power Generation Expansion) is the "
+            "NRC-funded benchmark for nuclear plant siting in the US. Four differences:\n\n"
+            "**Resolution.** OR-SAGE works at 100-meter grid cells. We work at county "
+            "level because the regulatory, census, and energy data are all reported by county.\n\n"
+            "**Reactor types.** OR-SAGE was designed for large LWRs. We added two SMR "
+            "modes (NuScale VOYGR and a general advanced reactor profile) with criteria "
+            "tuned to each design's NRC regulatory basis.\n\n"
+            "**SMR criteria.** OR-SAGE has no SMR scoring mode. Our SMR modes use current "
+            "NRC guidance on EPZ size, grid interconnection, and cooling water requirements "
+            "from RG 4.7 Rev. 4.\n\n"
+            "**Coal transition.** We score coal plant counties higher because they come with "
+            "transmission infrastructure already in place. OR-SAGE doesn't account for this."
         )
 
 
@@ -707,10 +699,10 @@ _active_max = float(active_df[_disp_col].max()) if len(active_df) else 1.0
 st.markdown('<div class="main-title">US Nuclear Reactor Siting Analysis</div>', unsafe_allow_html=True)
 st.markdown(
     '<div class="subtitle">'
-    "Multi-criteria analysis of 2,161 US counties under NRC siting guidance. "
-    "Scores reflect six criteria: seismic hazard, flood exposure, population density, "
-    "water proximity, grid connectivity, and energy demand. "
-    "Apply filters in the sidebar and click any county for a detailed breakdown."
+    "Scored 2,161 US counties across six siting criteria under NRC Regulatory Guide 4.7: "
+    "seismic hazard, flood exposure, population density, water proximity, grid access, "
+    "and energy demand. Use the sidebar filters to narrow the map, then click any county "
+    "to review its profile."
     "</div>",
     unsafe_allow_html=True,
 )
@@ -720,64 +712,65 @@ m1.metric(
     "Counties Shown",
     f"{len(active_df):,}",
     f"of {len(df):,} scored",
-    help="Number of counties visible under the current filter and mode settings.",
+    help="Counties passing the current filter and mode thresholds.",
 )
 if reactor_mode == "LWR":
     m2.metric(
         "Pareto-Optimal Sites",
         f"{int(active_df['on_nsga2_pareto'].sum()):,}",
         "non-dominated across 6 criteria",
-        help="Counties where no other site outperforms them on every criterion simultaneously.",
+        help="No other county in the dataset scores better on all six criteria at once.",
     )
     m3.metric(
         "Top MCDA Score",
         f"{active_df['mcda_score'].max():.3f}" if len(active_df) else "—",
-        help="Highest composite MCDA score among counties currently shown.",
+        help="Best score among the counties currently visible.",
     )
     _best_rank = active_df["rank"].min()
     m4.metric(
         "Highest-Ranked Site",
         f"#{int(_best_rank)}" if pd.notna(_best_rank) else "—",
         f"of {_rank_max:,} ranked",
-        help="Best national rank among counties currently shown.",
+        help="Best national rank among the counties currently shown.",
     )
 else:
     smr_mode_short = "NuScale VOYGR" if "NuScale" in reactor_mode else "General SMR"
     m2.metric(
         "Reactor Mode",
         smr_mode_short,
-        help="Active SMR scoring profile. Thresholds differ from LWR based on design basis.",
+        help="The active SMR scoring profile.",
     )
     m3.metric(
         "Top SMR Score",
         f"{active_df['smr_score'].max():.3f}" if len(active_df) else "—",
-        help="Highest composite SMR score among qualifying counties.",
+        help="Best score among counties that pass the mode's criteria.",
     )
     m4.metric(
         "Qualifying Sites",
         f"{len(active_df):,}",
         "meet mode criteria",
-        help="Counties that pass all disqualification thresholds for the active reactor mode.",
+        help="Counties that pass all cutoffs for the active SMR mode.",
     )
 
 with st.expander("Methodology and Data Sources", expanded=False):
     st.markdown(
-        "**Scoring** — Six criteria weighted by the Rank Order Centroid (ROC) method, "
-        "prioritizing safety: seismic hazard (USGS NSHM 2018, 2% in 50-year PGA), "
-        "flood exposure (FEMA NFHL SFHA coverage), and population density (ACS 2020) "
-        "receive higher weight than grid connectivity (EIA Form 411), water proximity "
-        "(NHD Plus hydrography), and energy demand (EIA Form 861).\n\n"
-        "**Pareto Optimization** — NSGA-II multi-objective optimization identifies "
-        "non-dominated counties across all 6 criteria simultaneously (LWR mode).\n\n"
-        "**SMR Modes** — NuScale VOYGR thresholds from NRC approval ML22287A155. "
-        "General SMR thresholds based on NRC RG 4.7 Rev. 4 advanced reactor guidance.\n\n"
-        "**Coal-to-Nuclear** — EIA Form 860 (2022) coal plant inventory. Counties with "
-        "operating or retired coal capacity receive a +0.05 score adjustment reflecting "
-        "existing grid infrastructure and workforce per DOE transition planning guidance.\n\n"
-        "**Comparison to OR-SAGE** — OR-SAGE (ORNL/NRC) evaluates 100-meter grid cells "
-        "for LWR siting. This analysis operates at county resolution for regulatory and "
-        "census data alignment, extends to SMR reactor types, and adds coal-to-nuclear "
-        "transition scoring."
+        "**Scoring:** Criteria are weighted using the Rank Order Centroid (ROC) method, "
+        "with safety first. Seismic hazard (USGS NSHM 2018, 2%-in-50-year PGA), "
+        "flood exposure (FEMA NFHL), and population density (ACS 2020) outweigh "
+        "grid voltage (EIA Form 411), water distance (NHD Plus), and energy demand "
+        "(EIA Form 861).\n\n"
+        "**Pareto front:** In LWR mode, NSGA-II finds the counties you can't improve "
+        "on any single criterion without giving something up elsewhere. Those 111 counties "
+        "get the amber outline on the map.\n\n"
+        "**SMR modes** — NuScale VOYGR thresholds come from NRC approval ML22287A155 "
+        "(site-boundary EPZ ~400m). General SMR thresholds follow NRC RG 4.7 Rev. 4 "
+        "for advanced reactor designs.\n\n"
+        "**Coal-to-Nuclear** — Counties with operating or retired coal capacity "
+        "(EIA Form 860, 2022) get a +0.05 score bump. The logic: they already have "
+        "grid connections and people who know how to run large generating plants.\n\n"
+        "**OR-SAGE comparison** — OR-SAGE (ORNL/NRC) works at 100-meter resolution "
+        "and covers LWR siting only. This analysis uses county-level data, adds SMR "
+        "modes, and factors in coal plant infrastructure."
     )
 
 
@@ -785,24 +778,25 @@ with st.expander("Methodology and Data Sources", expanded=False):
 
 _map_title = {
     "LWR":                "County Suitability Map",
-    "SMR - NuScale VOYGR": "County Suitability Map — SMR NuScale VOYGR Mode",
-    "SMR - General":       "County Suitability Map — SMR General Mode",
+    "SMR - NuScale VOYGR": "County Suitability Map: NuScale VOYGR Mode",
+    "SMR - General":       "County Suitability Map: SMR General Mode",
 }[reactor_mode]
 st.markdown(f'<div class="section-header">{_map_title}</div>', unsafe_allow_html=True)
 
 if reactor_mode == "SMR - NuScale VOYGR":
     st.info(
-        "**NuScale VOYGR mode active.** Scoring reflects NRC-approved thresholds for the VOYGR design: "
-        "site-boundary EPZ (~400m per ML22287A155), islanded grid operation viable at 115 kV+, "
-        "and dry cooling support reduces water proximity requirements. "
-        "Population disqualification raised to 1,000/mi². Seismic tolerance extended to 0.50 g."
+        "**NuScale VOYGR mode active.** The VOYGR has an NRC-approved site-boundary EPZ "
+        "of about 400m (ML22287A155), far smaller than the 10-mile LWR standard. This lets "
+        "us include counties with higher population density. The design also supports "
+        "islanded operation at 115 kV and can use dry cooling, so water proximity is "
+        "weighted less heavily. Seismic cutoff raised to 0.50 g."
     )
 elif reactor_mode == "SMR - General":
     st.info(
-        "**SMR General mode active** (covers designs including Xe-100 and KP-FHR). "
-        "Scoring uses relaxed population thresholds (disqualification at 1,000/mi²), "
-        "reduced grid requirements (230 kV for full score), "
-        "and improved water proximity scoring. Seismic tolerance extended to 0.50 g."
+        "**SMR General mode active.** Applies to designs like the Xe-100 and KP-FHR that "
+        "don't yet have an approved EPZ but are expected to need less exclusion zone than "
+        "an LWR. Population cutoff raised to 1,000/mi², full grid score at 230 kV, and "
+        "water proximity scoring is relaxed. Seismic cutoff at 0.50 g."
     )
 
 # Screen-reader description (hidden visually)
@@ -819,10 +813,10 @@ st.markdown(
 
 if accessible:
     st.caption(
-        "Counties are shaded green by suitability score (darker = higher). "
-        "State lines are shown as distinct borders. "
-        "Pareto-optimal counties have an amber outline and a star in the tooltip. "
-        "Click a county or use the table below."
+        "Counties are shaded green by score; darker means higher. "
+        "State borders are drawn as distinct lines. "
+        "Pareto-front counties have an amber outline and a star in the tooltip. "
+        "Click a county on the map or use the table below."
     )
 
 tc = _THEMES[theme]
@@ -1019,14 +1013,14 @@ with table_col:
                 "Rank":       st.column_config.TextColumn(width="small"),
                 "Pareto★":    st.column_config.TextColumn(
                                   width="small",
-                                  help="Counties on the NSGA-II Pareto front — non-dominated across all 6 criteria."),
+                                  help="Counties on the NSGA-II Pareto front. No other site in the dataset beats them on all six criteria at once."),
                 _score_label: st.column_config.TextColumn(width="small"),
             },
         )
         st.caption(
-            f"★ marks the {int(df['on_nsga2_pareto'].sum())} counties on the NSGA-II Pareto front — "
-            "sites where no other county outperforms them on every criterion simultaneously. "
-            "Amber outlines on the map correspond to these sites."
+            f"★ marks the {int(df['on_nsga2_pareto'].sum())} Pareto-front counties. "
+            "No other site in the dataset beats them on all six criteria at once. "
+            "These are also outlined in amber on the map."
         )
         st.download_button(
             "Download table as CSV",
@@ -1066,9 +1060,9 @@ with table_col:
         )
         mode_label = "NuScale VOYGR" if "NuScale" in reactor_mode else "General SMR"
         st.caption(
-            f"Ranked by composite SMR score under {mode_label} thresholds. "
-            "Counties disqualified by seismic or population criteria are excluded. "
-            "Click any county on the map to view its full profile."
+            f"Ranked by SMR score under {mode_label} thresholds. "
+            "Counties that fail seismic or population cutoffs are excluded. "
+            "Click any county on the map to see its full breakdown."
         )
         st.download_button(
             "Download table as CSV",
@@ -1115,7 +1109,7 @@ with detail_col:
                 if rank <= 50:
                     rank_interp = "Top 50 nationally"
                 elif rank <= 200:
-                    rank_interp = f"Top {pctile}%, strong site"
+                    rank_interp = f"Top {pctile}%"
                 elif rank <= 600:
                     rank_interp = f"Top {pctile}%"
                 else:
@@ -1136,7 +1130,7 @@ with detail_col:
                 rc2.metric("Mode", mode_label)
 
         if selected_geoid not in _active_geoids:
-            st.warning("This county is outside the current filter settings or disqualified under the active reactor mode.")
+            st.warning("This county falls outside the current filter range or fails a cutoff for the active reactor mode.")
 
         # Per-criterion score chart
         _nc = ["norm_seismic_risk", "norm_flood_risk", "norm_pop_density",
@@ -1185,29 +1179,29 @@ with detail_col:
 
         pga = row["pga_max"]
         seismic_txt = (
-            "minimal seismic hazard" if pga < 0.05 else
-            "low seismic hazard" if pga < 0.10 else
-            "moderate seismic hazard" if pga < 0.15 else
-            "elevated, approaching NRC review threshold" if pga < 0.20 else
-            "high, near the 0.30 g regulatory limit"
+            "minimal" if pga < 0.05 else
+            "low" if pga < 0.10 else
+            "moderate" if pga < 0.15 else
+            "elevated, near NRC review threshold" if pga < 0.20 else
+            "high, near the 0.30 g limit"
         )
         st.markdown(f"- **Seismic Risk:** {pga:.3f} g ({seismic_txt})")
 
         sfha = row["pct_sfha"]
         flood_txt = (
-            "negligible flood hazard" if sfha < 0.03 else
-            "low flood exposure" if sfha < 0.08 else
-            "moderate flood exposure" if sfha < 0.14 else
-            "high flood exposure, near the 0.20 threshold"
+            "negligible" if sfha < 0.03 else
+            "low" if sfha < 0.08 else
+            "moderate" if sfha < 0.14 else
+            "high, near the 20% filter threshold"
         )
         st.markdown(f"- **Flood Risk:** {sfha:.1%} SFHA ({flood_txt})")
 
         pop_d = row["population_density"]
         pop_txt = (
-            "very sparse, well-suited for NRC exclusion zones" if pop_d < 10 else
-            "low density, good buffer potential" if pop_d < 30 else
-            "moderate density" if pop_d < 100 else
-            "dense, proximity review likely required"
+            "very sparse, good for NRC exclusion zones" if pop_d < 10 else
+            "low density" if pop_d < 30 else
+            "moderate" if pop_d < 100 else
+            "dense; exclusion zone would need careful review"
         )
         st.markdown(f"- **Population Density:** {pop_d:.1f} / km² ({pop_txt})")
 
@@ -1223,20 +1217,20 @@ with detail_col:
             nearest_water = min(lake_d, river_d)
             water_src     = "lake" if lake_d <= river_d else "river"
             water_txt = (
-                f"excellent cooling access via nearby {water_src}" if nearest_water < 5 else
-                f"good water access, nearest {water_src} within range" if nearest_water < 15 else
-                f"adequate water access from {water_src}" if nearest_water < 30 else
-                "limited water access, cooling infrastructure would be required"
+                f"close; good for once-through cooling" if nearest_water < 5 else
+                f"workable for cooling intake" if nearest_water < 15 else
+                f"feasible with a pump station" if nearest_water < 30 else
+                "far enough that cooling logistics would need planning"
             )
-            st.markdown(f"- **Nearest Water Body:** {nearest_water:.1f} km ({water_txt})")
+            st.markdown(f"- **Nearest Water Body:** {nearest_water:.1f} km ({water_src}, {water_txt})")
 
         voltage = row.get("max_voltage", np.nan)
         if pd.notna(voltage) and voltage > 0:
             grid_txt = (
-                "high-voltage transmission line present (345+ kV)" if voltage >= 345 else
-                "strong grid connectivity" if voltage >= 230 else
-                "moderate grid access" if voltage >= 138 else
-                "low voltage, grid upgrade would be required"
+                "345+ kV line present" if voltage >= 345 else
+                "230 kV line nearby" if voltage >= 230 else
+                "138 kV, adequate for most SMR designs" if voltage >= 138 else
+                "below 138 kV; grid upgrade likely needed"
             )
             st.markdown(f"- **Max Transmission Line:** {voltage:.0f} kV ({grid_txt})")
 
@@ -1244,20 +1238,20 @@ with detail_col:
         energy_pct = row.get("total_energy_consumption_mwh_pct", np.nan)
         if pd.notna(energy):
             energy_txt = (
-                "high local demand, strong market for reactor output"
+                "above 75th percentile; strong local market"
                 if pd.notna(energy_pct) and energy_pct >= 0.75 else
-                "moderate local demand"
+                "mid-range local demand"
                 if pd.notna(energy_pct) and energy_pct >= 0.5 else
-                "low local demand, output would likely be exported to the regional grid"
+                "below median; output likely exports to the regional grid"
             )
             st.markdown(f"- **Energy Consumption:** {energy:,.0f} MWh ({energy_txt})")
 
         dc = row.get("data_centers_count", 0)
         if pd.notna(dc) and dc > 0:
-            st.markdown(f"- **Data Centers:** {int(dc)} (indicative of high baseload electricity demand)")
+            st.markdown(f"- **Data Centers:** {int(dc)} (high baseload demand)")
 
         if row.get("has_plant", False):
-            st.info("This county hosts or hosted a nuclear plant in NRC records.")
+            st.info("NRC records show a nuclear plant in this county.")
 
         if row.get("has_coal_plant", False):
             coal_mw = row.get("coal_capacity_mw", 0.0) or 0.0
@@ -1269,34 +1263,31 @@ with detail_col:
                 coal_status.append("retired")
             status_str = " and ".join(coal_status) if coal_status else "existing"
             st.info(
-                f"This county has {status_str} coal plant infrastructure "
-                f"({coal_mw:.0f} MW capacity). Coal-to-nuclear conversion may be "
-                "feasible here, with potential benefits for workforce continuity and "
-                "transmission interconnection."
+                f"This county has {status_str} coal capacity ({coal_mw:.0f} MW). "
+                "The existing grid interconnection and workforce make it a reasonable "
+                "conversion candidate."
             )
 
         if is_pareto:
             st.divider()
             st.success(
-                "★ This county is on the NSGA-II Pareto front. It scores well enough across all "
-                "6 criteria (seismic risk, flood risk, population density, water access, grid "
-                "connectivity, and energy demand) that no other county strictly outperforms it "
-                "on every dimension."
+                "★ Pareto-front site. No other county in the dataset scores better on "
+                "all six criteria at once. This one is at the frontier of what's achievable."
             )
 
     else:
-        st.info("Click a highlighted county on the map to view its full scoring profile.")
+        st.info("Click a county on the map to see its scoring breakdown.")
         st.caption(
-            "Darker green means higher suitability. "
-            "Gray counties did not pass the safety filters. "
-            "Amber outlines mark Pareto-optimal counties (★)."
+            "Darker green = higher score. "
+            "Gray counties didn't pass the filters. "
+            "Amber outlines are Pareto-front sites (★)."
         )
 
 st.markdown(
     '<p style="color:#888;font-size:0.78rem;text-align:center;margin-top:2.5rem;'
     'border-top:1px solid #e5e7eb;padding-top:0.75rem">'
-    "This tool is provided for planning and research purposes only and does not constitute "
-    "an NRC license application, DOE site approval, or formal suitability determination."
+    "For planning and research use only. "
+    "This is not an NRC license application or an official site suitability determination."
     "</p>",
     unsafe_allow_html=True,
 )
