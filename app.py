@@ -141,11 +141,63 @@ _THEMES = {
 # ── CSS builders ──────────────────────────────────────────────────────────────
 
 def _build_css(theme: str, accessible: bool) -> str:
-    fs_title  = "2.3rem"  if accessible else "1.9rem"
-    fs_sub    = "1.1rem"  if accessible else "0.95rem"
-    fs_hdr    = "1.2rem"  if accessible else "1.05rem"
-    fs_lbl    = "1rem"    if accessible else "0.9rem"
-    fs_metric = "1rem"    if accessible else "0.82rem"
+    # Standard sizes
+    fs_title  = "1.9rem"
+    fs_sub    = "0.95rem"
+    fs_hdr    = "1.05rem"
+    fs_lbl    = "0.9rem"
+    fs_metric = "0.82rem"
+
+    # Accessible sizes — large enough to be immediately obvious
+    if accessible:
+        fs_title  = "2.7rem"
+        fs_sub    = "1.2rem"
+        fs_hdr    = "1.45rem"
+        fs_lbl    = "1.1rem"
+        fs_metric = "1.1rem"
+
+    # Accessible-only block: bumps ALL readable text, not just custom classes
+    _focus_color = "#ffff00" if theme == "High Contrast" else "#1B4F8A"
+    accessible_extra = f"""
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] li,
+[data-testid="stText"] p,
+[data-testid="stAlert"] p,
+div[class*="stAlert"] p {{
+    font-size: 1.1rem !important;
+    line-height: 1.85 !important;
+}}
+[data-testid="stCaption"] p {{
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+}}
+[data-testid="stMetricValue"] {{ font-size: 1.9rem !important; }}
+[data-testid="stMetricLabel"] p {{ font-size: 1rem !important; }}
+[data-testid="stMetricDelta"] {{ font-size: 0.95rem !important; }}
+[data-testid="stToggle"] label,
+[data-testid="stToggle"] p {{ font-size: 1rem !important; }}
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] span {{
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+}}
+[data-testid="stButton"] button,
+[data-testid="stDownloadButton"] button {{
+    min-height: 44px !important;
+    font-size: 1rem !important;
+    padding: 0 1.25rem !important;
+}}
+[data-testid="stSlider"] [role="slider"] {{
+    width: 26px !important;
+    height: 26px !important;
+}}
+a:focus, button:focus, [tabindex]:focus, input:focus,
+[data-baseweb="select"]:focus-within, [role="slider"]:focus {{
+    outline: 3px solid {_focus_color} !important;
+    outline-offset: 3px !important;
+}}
+""" if accessible else ""
 
     shared = f"""
 .sr-only {{
@@ -162,7 +214,7 @@ div[data-testid="metric-container"] > div:first-child {{ font-size: {fs_metric};
     background-color: #1B4F8A !important;
     border-color: #1B4F8A !important;
 }}
-"""
+{accessible_extra}"""
 
     if theme == "Light":
         return f"""<style>
@@ -948,7 +1000,7 @@ selection = st.plotly_chart(
     width="stretch",
     on_select="rerun",
     key="county_map",
-    config={"displayModeBar": True, "displaylogo": False, "scrollZoom": False},
+    config={"displayModeBar": True, "displaylogo": False, "scrollZoom": True},
 )
 
 # Resolve click → session state
